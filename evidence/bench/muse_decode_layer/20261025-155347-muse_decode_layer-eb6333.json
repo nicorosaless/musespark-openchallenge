@@ -1,0 +1,102 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-155347-muse_decode_layer-eb6333/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-155347-muse_decode_layer-eb6333/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-155347-muse_decode_layer-eb6333/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "verify 1 |",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-25T15:54:12+0100",
+ "submission_sha256": "f28694596fe7f0f61635a9d37ce0b7161b7c57bc3d3bb1319c1d71e4542d4bd9",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_decode_layer",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 0.29,
+  "base": 0.02
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 26.9,
+ "within_limit": true,
+ "graph_overhead_us": 3.856000257655978,
+ "shapes": [
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer sliding, page 1, q_len 8, dist soft",
+   "weight": 46,
+   "floor_us": 62.3,
+   "base_us": 376.4800012577325,
+   "sub_us": 277.0701127104219,
+   "speedup": 1.35878964921492,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.060166235666776036,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.424e-02 (worst row 7.295e-02) [bound 0.139]; attention input relative L2 error 3.431e-02 (worst row 4.747e-02) [bound 0.088]",
+   "profile": "   185.23 µs/rep  48.5%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 1, 8, 4, true\n    90.99 µs/rep  23.8%  x3   _proj_kernel\n    52.48 µs/rep  13.7%  x1   _router_fp32_kernel\n    13.00 µs/rep   3.4%  x1   nvjet_sm90_tst_64x8_64x16_2x1_v_bz_TNT\n     7.11 µs/rep   1.9%  x1   _attn_kernel\n     7.06 µs/rep   1.8%  x1   _combine_kernel\n     5.76 µs/rep   1.5%  x1   _ffn_boundary_kernel\n     5.05 µs/rep   1.3%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, false, true, false, true>(sglang::NormRes\n     3.94 µs/rep   1.0%  x1   _post_expert_norm_weighted_sum_kernel\n     3.54 µs/rep   0.9%  x1   _moe_align_small_numel_kernel\n     3.19 µs/rep   0.8%  x1   _pre_expert_kernel\n     2.92 µs/rep   0.8%  x1   void sglang::muse_spark::routing_kernel<sglang::muse_spark::RoutingTrait<8, 8, 0, 1>, true>(sglang::muse_spark\n     2.02 µs/rep   0.5%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer full, page 1, q_len 8, dist soft",
+   "weight": 16,
+   "floor_us": 66.4,
+   "base_us": 425.9039938915521,
+   "sub_us": 331.8039656394959,
+   "speedup": 1.2836012766474756,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.05266098176366052,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.083e-02 (worst row 6.947e-02) [bound 0.150]; attention input relative L2 error 3.867e-02 (worst row 4.657e-02) [bound 0.096]",
+   "profile": "   148.15 µs/rep  40.6%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 1, 8, 4, true\n    93.25 µs/rep  25.5%  x3   _proj_kernel\n    54.94 µs/rep  15.1%  x1   _router_fp32_kernel\n    24.44 µs/rep   6.7%  x1   _attn_kernel\n    13.59 µs/rep   3.7%  x1   nvjet_sm90_tst_64x8_64x16_2x1_v_bz_TNT\n     5.64 µs/rep   1.5%  x1   _ffn_boundary_kernel\n     5.10 µs/rep   1.4%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, false, true, false, true>(sglang::NormRes\n     4.94 µs/rep   1.4%  x1   _combine_kernel\n     3.56 µs/rep   1.0%  x1   _moe_align_small_numel_kernel\n     3.38 µs/rep   0.9%  x1   _post_expert_norm_weighted_sum_kernel\n     3.24 µs/rep   0.9%  x1   _pre_expert_kernel\n     2.77 µs/rep   0.8%  x1   void sglang::muse_spark::routing_kernel<sglang::muse_spark::RoutingTrait<8, 8, 0, 1>, true>(sglang::muse_spark\n     1.97 µs/rep   0.5%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl"
+  }
+ ],
+ "speedup": 1.3366802638519912,
+ "ci95": [
+  1.3114312319552917,
+  1.356730467809771
+ ],
+ "loads": [
+  {
+   "load": "verify 1",
+   "base_us": 24132.54396012053,
+   "sub_us": 18054.088634911343,
+   "speedup": 1.3366802638519912
+  }
+ ],
+ "step_base_us": 24132.54396012055,
+ "step_sub_us": 18054.088634911357,
+ "timing_checks_ok": true,
+ "complete": false,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 31,
+  "job": "48016569",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261025-155347-muse_decode_layer-eb6333",
+  "problem": "muse_decode_layer",
+  "submission": "‹tmp›/okc-dl/v8.py",
+  "cwd": "‹local›",
+  "git": "1cc8e40430eb7d8417e592ab248a08ced572a3b9",
+  "submitted": "2026-10-25T14:53:47.567737+00:00",
+  "ncu": null
+ }
+}

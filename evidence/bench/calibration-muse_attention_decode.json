@@ -1,0 +1,379 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-051426-muse_attention_decode-78dc2a/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-051426-muse_attention_decode-78dc2a/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-051426-muse_attention_decode-78dc2a/result.json",
+  "no_tests": false,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-25T05:14:31+0100",
+ "submission_sha256": "4710dccc7391b77d7a9e461c30546fcb994d0966029780d42197d69f1f313e38",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "problem",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 0.0,
+  "base": 0.0
+ },
+ "tests": [
+  {
+   "shape": "batch 1, ctx 10, heads tp8, layer sliding",
+   "ok": true,
+   "msg": "relative L2 error 5.504e-02 (worst row 5.504e-02) [bound 0.129: 2.5 x the reference's 0.045 with FP8 E4M3 queries + 0.015]",
+   "s": 22.55
+  },
+  {
+   "shape": "batch 3, ctx 2047, heads tp8, layer sliding",
+   "ok": true,
+   "msg": "relative L2 error 7.627e-02 (worst row 9.436e-02) [bound 0.150: 2.5 x the reference's 0.088 with FP8 E4M3 queries + 0.015]",
+   "s": 0.03
+  },
+  {
+   "shape": "batch 5, ctx 5000, heads tp8, layer sliding, q_len 8, spread mixed, page 1",
+   "ok": true,
+   "msg": "relative L2 error 8.054e-02 (worst row 1.102e-01) [bound 0.150: 2.5 x the reference's 0.077 with FP8 E4M3 queries + 0.015]",
+   "s": 0.15
+  },
+  {
+   "shape": "batch 4, ctx 3000, heads tp8, layer full",
+   "ok": true,
+   "msg": "relative L2 error 7.241e-02 (worst row 8.377e-02) [bound 0.150: 2.5 x the reference's 0.069 with FP8 E4M3 queries + 0.015]",
+   "s": 0.12
+  },
+  {
+   "shape": "batch 8, ctx 8192, heads dp, layer full, spread mixed",
+   "ok": true,
+   "msg": "relative L2 error 8.483e-02 (worst row 9.282e-02) [bound 0.150: 2.5 x the reference's 0.085 with FP8 E4M3 queries + 0.015]",
+   "s": 4.91
+  },
+  {
+   "shape": "batch 2, ctx 100000, heads tp8, layer full, q_len 8, page 1",
+   "ok": true,
+   "msg": "relative L2 error 9.042e-02 (worst row 1.177e-01) [bound 0.150: 2.5 x the reference's 0.088 with FP8 E4M3 queries + 0.015]",
+   "s": 0.27
+  },
+  {
+   "shape": "batch 4, ctx 6000, heads tp8, layer sliding, dist edges, page 1",
+   "ok": true,
+   "msg": "relative L2 error 8.708e-02 (worst row 1.054e-01) [bound 0.150: 2.5 x the reference's 0.081 with FP8 E4M3 queries + 0.015]",
+   "s": 0.01
+  },
+  {
+   "shape": "batch 4, ctx 6000, heads tp8, layer full, q_len 8, dist edges",
+   "ok": true,
+   "msg": "relative L2 error 7.807e-02 (worst row 1.072e-01) [bound 0.150: 2.5 x the reference's 0.077 with FP8 E4M3 queries + 0.015]",
+   "s": 0.02
+  },
+  {
+   "shape": "batch 1, ctx 1048576, heads tp8, layer full, q_len 8",
+   "ok": true,
+   "msg": "relative L2 error 9.012e-02 (worst row 1.067e-01) [bound 0.150: 2.5 x the reference's 0.094 with FP8 E4M3 queries + 0.015]",
+   "s": 0.84
+  },
+  {
+   "shape": "batch 3, ctx 4000, heads tp8, layer sliding, q_len 8, page 1, kv_scale 0.015625",
+   "ok": true,
+   "msg": "relative L2 error 8.774e-02 (worst row 1.225e-01) [bound 0.150: 2.5 x the reference's 0.088 with FP8 E4M3 queries + 0.015]",
+   "s": 0.01
+  },
+  {
+   "shape": "batch 2, ctx 9000, heads tp8, layer full, kv_scale 0.015625",
+   "ok": true,
+   "msg": "relative L2 error 9.019e-02 (worst row 9.358e-02) [bound 0.150: 2.5 x the reference's 0.076 with FP8 E4M3 queries + 0.015]",
+   "s": 0.01
+  },
+  {
+   "shape": "batch 4, ctx 80000, heads tp8, layer full, spread mixed, dist soft",
+   "ok": true,
+   "msg": "relative L2 error 8.243e-02 (worst row 9.744e-02) [bound 0.150: 2.5 x the reference's 0.080 with FP8 E4M3 queries + 0.015]",
+   "s": 0.03
+  },
+  {
+   "shape": "batch 4, ctx 6000, heads tp8, layer sliding, q_len 8, dist soft, page 1",
+   "ok": true,
+   "msg": "relative L2 error 6.890e-02 (worst row 8.920e-02) [bound 0.150: 2.5 x the reference's 0.066 with FP8 E4M3 queries + 0.015]",
+   "s": 0.01
+  },
+  {
+   "shape": "batch 2, ctx 20000, heads dp, layer full, q_len 8, dist soft",
+   "ok": true,
+   "msg": "relative L2 error 7.010e-02 (worst row 7.976e-02) [bound 0.150: 2.5 x the reference's 0.071 with FP8 E4M3 queries + 0.015]",
+   "s": 0.05
+  },
+  {
+   "shape": "batch 4, ctx 80000, heads tp8, layer full, spread mixed, dist coherent, page 1",
+   "ok": true,
+   "msg": "relative L2 error 5.272e-02 (worst row 7.211e-02) [bound 0.145: 2.5 x the reference's 0.052 with FP8 E4M3 queries + 0.015]",
+   "s": 0.14
+  },
+  {
+   "shape": "batch 2, ctx 20000, heads dp, layer full, q_len 8, dist coherent",
+   "ok": true,
+   "msg": "relative L2 error 3.931e-02 (worst row 4.359e-02) [bound 0.108: 2.5 x the reference's 0.037 with FP8 E4M3 queries + 0.015]",
+   "s": 0.05
+  }
+ ],
+ "tests_ok": true,
+ "duration_s": 58.5,
+ "within_limit": true,
+ "graph_overhead_us": 3.6479998379945755,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, heads tp8, layer sliding, page 1, dist soft",
+   "weight": 46,
+   "floor_us": 0.1,
+   "base_us": 24.000000208616257,
+   "sub_us": 24.223701780586424,
+   "speedup": 0.9907651780889473,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.02540330800860835,
+   "check_ok": true,
+   "check_msg": "relative L2 error 6.206e-02 (worst row 6.206e-02) [bound 0.150: 2.5 x the reference's 0.083 with FP8 E4M3 queries + 0.015]",
+   "profile": "    10.16 µs/rep  41.9%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n     3.55 µs/rep  14.6%  x3   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n     3.20 µs/rep  13.2%  x1   void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<16>, cute::C<64> >, 4, 256, 1, fals\n     2.46 µs/rep  10.2%  x1   void flash::prepare_varlen_num_blocks_kernel<1, false>(int, int, int, int const*, int const*, int const*, int \n     1.77 µs/rep   7.3%  x1   _qk_rms_norm_fwd_kernel\n     1.71 µs/rep   7.0%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 8, 8, true, false, true, true, true, true>(sglang::NormGateP\n     1.41 µs/rep   5.8%  x1   void sglang::store_kvcache_kernel<128l, 128l, 32u, true, long>(sglang::StoreKVCacheParams)"
+  },
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, heads tp8, layer full, page 1, dist coherent",
+   "weight": 16,
+   "floor_us": 4.3,
+   "base_us": 39.72799889743328,
+   "sub_us": 39.98442702599576,
+   "speedup": 0.9935867999710046,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.01055244586823545,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.776e-02 (worst row 3.776e-02) [bound 0.122: 2.5 x the reference's 0.043 with FP8 E4M3 queries + 0.015]",
+   "profile": "    23.56 µs/rep  61.9%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n     6.42 µs/rep  16.9%  x1   void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<16>, cute::C<64> >, 6, 256, 1, fals\n     3.46 µs/rep   9.1%  x3   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n     1.67 µs/rep   4.4%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 8, 8, true, false, true, true, true, true>(sglang::NormGateP\n     1.63 µs/rep   4.3%  x1   _qk_rms_norm_fwd_kernel\n     1.34 µs/rep   3.5%  x1   void sglang::store_kvcache_kernel<128l, 128l, 32u, true, long>(sglang::StoreKVCacheParams)"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, heads tp8, layer sliding, page 1, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 1.6,
+   "base_us": 32.06400014460087,
+   "sub_us": 31.71094412760223,
+   "speedup": 1.011133570024846,
+   "reps": 60,
+   "copies": 6,
+   "ratio_iqr": 0.01218101951496764,
+   "check_ok": true,
+   "check_msg": "relative L2 error 6.724e-02 (worst row 8.539e-02) [bound 0.150: 2.5 x the reference's 0.065 with FP8 E4M3 queries + 0.015]",
+   "profile": "    15.98 µs/rep  51.1%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n     2.76 µs/rep   8.8%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::ConvertToFloat8E4M3\n     2.65 µs/rep   8.5%  x1   void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<16>, cute::C<64> >, 4, 256, 1, fals\n     2.36 µs/rep   7.5%  x1   void flash::prepare_varlen_num_blocks_kernel<1, false>(int, int, int, int const*, int const*, int const*, int \n     2.19 µs/rep   7.0%  x2   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n     2.00 µs/rep   6.4%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 8, 8, true, false, true, true, true, true>(sglang::NormGateP\n     1.97 µs/rep   6.3%  x1   _qk_rms_norm_fwd_kernel\n     1.37 µs/rep   4.4%  x1   void sglang::store_kvcache_kernel<128l, 128l, 32u, true, long>(sglang::StoreKVCacheParams)"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, heads tp8, layer full, page 1, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 63.2,
+   "base_us": 277.55200676620007,
+   "sub_us": 278.1179002005421,
+   "speedup": 0.9979652750364718,
+   "reps": 60,
+   "copies": 6,
+   "ratio_iqr": 0.009006227121773125,
+   "check_ok": true,
+   "check_msg": "relative L2 error 5.278e-02 (worst row 8.007e-02) [bound 0.121: 2.5 x the reference's 0.042 with FP8 E4M3 queries + 0.015]",
+   "profile": "   263.84 µs/rep  95.3%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n     3.01 µs/rep   1.1%  x1   void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<16>, cute::C<64> >, 5, 256, 1, fals\n     2.78 µs/rep   1.0%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::ConvertToFloat8E4M3\n     2.32 µs/rep   0.8%  x2   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n     1.90 µs/rep   0.7%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 8, 8, true, false, true, true, true, true>(sglang::NormGateP\n     1.79 µs/rep   0.6%  x1   _qk_rms_norm_fwd_kernel\n     1.30 µs/rep   0.5%  x1   void sglang::store_kvcache_kernel<128l, 128l, 32u, true, long>(sglang::StoreKVCacheParams)"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, heads tp8, layer sliding, page 1, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 3.3,
+   "base_us": 39.12000171840191,
+   "sub_us": 39.26431596650535,
+   "speedup": 0.9963245444482836,
+   "reps": 60,
+   "copies": 3,
+   "ratio_iqr": 0.018298666589056656,
+   "check_ok": true,
+   "check_msg": "relative L2 error 6.365e-02 (worst row 8.628e-02) [bound 0.150: 2.5 x the reference's 0.062 with FP8 E4M3 queries + 0.015]",
+   "profile": "    22.91 µs/rep  59.5%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n     2.95 µs/rep   7.7%  x1   void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<16>, cute::C<64> >, 4, 256, 1, fals\n     2.76 µs/rep   7.2%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::ConvertToFloat8E4M3\n     2.27 µs/rep   5.9%  x2   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n     2.27 µs/rep   5.9%  x1   void flash::prepare_varlen_num_blocks_kernel<2, false>(int, int, int, int const*, int const*, int const*, int \n     2.14 µs/rep   5.6%  x1   _qk_rms_norm_fwd_kernel\n     1.82 µs/rep   4.7%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 8, 8, true, false, true, true, true, true>(sglang::NormGateP\n     1.34 µs/rep   3.5%  x1   void sglang::store_kvcache_kernel<128l, 128l, 32u, true, long>(sglang::StoreKVCacheParams)"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, heads tp8, layer full, page 1, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 126.4,
+   "base_us": 537.1680092066526,
+   "sub_us": 537.956066118826,
+   "speedup": 0.998535090573736,
+   "reps": 60,
+   "copies": 3,
+   "ratio_iqr": 0.00761012655542026,
+   "check_ok": true,
+   "check_msg": "relative L2 error 5.743e-02 (worst row 8.322e-02) [bound 0.118: 2.5 x the reference's 0.041 with FP8 E4M3 queries + 0.015]",
+   "profile": "   523.21 µs/rep  97.5%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n     2.88 µs/rep   0.5%  x1   void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<16>, cute::C<64> >, 4, 256, 1, fals\n     2.88 µs/rep   0.5%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::ConvertToFloat8E4M3\n     2.34 µs/rep   0.4%  x2   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n     2.03 µs/rep   0.4%  x1   _qk_rms_norm_fwd_kernel\n     1.94 µs/rep   0.4%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 8, 8, true, false, true, true, true, true>(sglang::NormGateP\n     1.34 µs/rep   0.3%  x1   void sglang::store_kvcache_kernel<128l, 128l, 32u, true, long>(sglang::StoreKVCacheParams)"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, heads tp8, layer sliding, page 1, q_len 8, dist soft",
+   "weight": 46,
+   "floor_us": 0.1,
+   "base_us": 25.79200081527233,
+   "sub_us": 25.53866757581492,
+   "speedup": 1.0099195950104036,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.018994091575950223,
+   "check_ok": true,
+   "check_msg": "relative L2 error 6.589e-02 (worst row 8.327e-02) [bound 0.150: 2.5 x the reference's 0.066 with FP8 E4M3 queries + 0.015]",
+   "profile": "     9.48 µs/rep  38.0%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n     3.51 µs/rep  14.0%  x1   void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<16>, cute::C<64> >, 4, 256, 1, fals\n     2.75 µs/rep  11.0%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::ConvertToFloat8E4M3\n     2.19 µs/rep   8.8%  x1   void flash::prepare_varlen_num_blocks_kernel<1, false>(int, int, int, int const*, int const*, int const*, int \n     2.09 µs/rep   8.4%  x2   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n     1.92 µs/rep   7.7%  x1   _qk_rms_norm_fwd_kernel\n     1.76 µs/rep   7.0%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 8, 8, true, false, true, true, true, true>(sglang::NormGateP\n     1.28 µs/rep   5.1%  x1   void sglang::store_kvcache_kernel<128l, 128l, 32u, true, long>(sglang::StoreKVCacheParams)"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, heads tp8, layer full, page 1, q_len 8, dist coherent",
+   "weight": 16,
+   "floor_us": 4.3,
+   "base_us": 44.864000752568245,
+   "sub_us": 44.60485625556931,
+   "speedup": 1.0058097821348002,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.014753151775830475,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.429e-02 (worst row 3.677e-02) [bound 0.083: 2.5 x the reference's 0.027 with FP8 E4M3 queries + 0.015]",
+   "profile": "    25.11 µs/rep  55.7%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n     7.00 µs/rep  15.5%  x1   void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<16>, cute::C<64> >, 6, 256, 1, fals\n     3.21 µs/rep   7.1%  x1   void flash::prepare_varlen_num_blocks_kernel<1, true>(int, int, int, int const*, int const*, int const*, int c\n     2.75 µs/rep   6.1%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::ConvertToFloat8E4M3\n     2.15 µs/rep   4.8%  x2   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n     1.81 µs/rep   4.0%  x1   _qk_rms_norm_fwd_kernel\n     1.75 µs/rep   3.9%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 8, 8, true, false, true, true, true, true>(sglang::NormGateP\n     1.27 µs/rep   2.8%  x1   void sglang::store_kvcache_kernel<128l, 128l, 32u, true, long>(sglang::StoreKVCacheParams)"
+  },
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, heads tp8, layer sliding, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 1.9,
+   "base_us": 34.25600007176399,
+   "sub_us": 34.70674288200308,
+   "speedup": 0.987012817314159,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.01582652964285236,
+   "check_ok": true,
+   "check_msg": "relative L2 error 6.714e-02 (worst row 9.927e-02) [bound 0.150: 2.5 x the reference's 0.066 with FP8 E4M3 queries + 0.015]",
+   "profile": "    16.67 µs/rep  48.9%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n     3.65 µs/rep  10.7%  x1   void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<16>, cute::C<64> >, 4, 256, 1, fals\n     3.00 µs/rep   8.8%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::ConvertToFloat8E4M3\n     2.47 µs/rep   7.3%  x2   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n     2.41 µs/rep   7.1%  x1   void flash::prepare_varlen_num_blocks_kernel<1, false>(int, int, int, int const*, int const*, int const*, int \n     2.28 µs/rep   6.7%  x1   _qk_rms_norm_fwd_kernel\n     2.14 µs/rep   6.3%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 8, 8, true, false, true, true, true, true>(sglang::NormGateP\n     1.49 µs/rep   4.4%  x1   void sglang::store_kvcache_kernel<128l, 128l, 32u, true, long>(sglang::StoreKVCacheParams)"
+  },
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, heads tp8, layer full, page 1, q_len 8, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 63.4,
+   "base_us": 282.7679943293333,
+   "sub_us": 282.9122037055554,
+   "speedup": 0.999490268096133,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.008285322352129532,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.347e-02 (worst row 6.625e-02) [bound 0.089: 2.5 x the reference's 0.030 with FP8 E4M3 queries + 0.015]",
+   "profile": "   265.75 µs/rep  93.7%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n     3.51 µs/rep   1.2%  x1   void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<16>, cute::C<64> >, 4, 256, 1, fals\n     3.36 µs/rep   1.2%  x1   void flash::prepare_varlen_num_blocks_kernel<1, true>(int, int, int, int const*, int const*, int const*, int c\n     2.91 µs/rep   1.0%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::ConvertToFloat8E4M3\n     2.36 µs/rep   0.8%  x2   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n     2.12 µs/rep   0.7%  x1   _qk_rms_norm_fwd_kernel\n     2.10 µs/rep   0.7%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 8, 8, true, false, true, true, true, true>(sglang::NormGateP\n     1.43 µs/rep   0.5%  x1   void sglang::store_kvcache_kernel<128l, 128l, 32u, true, long>(sglang::StoreKVCacheParams)"
+  },
+  {
+   "load": "verify 32",
+   "shape": "batch 32, ctx 80000, heads tp8, layer sliding, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 3.7,
+   "base_us": 42.62399859726429,
+   "sub_us": 42.63984996265277,
+   "speedup": 0.9996282499726814,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.016546889382889396,
+   "check_ok": true,
+   "check_msg": "relative L2 error 6.765e-02 (worst row 1.073e-01) [bound 0.150: 2.5 x the reference's 0.066 with FP8 E4M3 queries + 0.015]",
+   "profile": "    23.98 µs/rep  56.8%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n     3.93 µs/rep   9.3%  x1   void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<16>, cute::C<64> >, 4, 256, 1, fals\n     3.05 µs/rep   7.2%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::ConvertToFloat8E4M3\n     2.56 µs/rep   6.1%  x1   _qk_rms_norm_fwd_kernel\n     2.50 µs/rep   5.9%  x2   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n     2.36 µs/rep   5.6%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 16, 4, true, false, true, true, true, true>(sglang::NormGate\n     2.36 µs/rep   5.6%  x1   void flash::prepare_varlen_num_blocks_kernel<2, false>(int, int, int, int const*, int const*, int const*, int \n     1.51 µs/rep   3.6%  x1   void sglang::store_kvcache_kernel<128l, 128l, 32u, true, long>(sglang::StoreKVCacheParams)"
+  },
+  {
+   "load": "verify 32",
+   "shape": "batch 32, ctx 80000, heads tp8, layer full, page 1, q_len 8, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 126.8,
+   "base_us": 545.5200206488371,
+   "sub_us": 545.1360514233658,
+   "speedup": 1.0007043548568633,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.007598676507780233,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.537e-02 (worst row 8.072e-02) [bound 0.086: 2.5 x the reference's 0.028 with FP8 E4M3 queries + 0.015]",
+   "profile": "   526.46 µs/rep  96.5%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n     3.78 µs/rep   0.7%  x1   void flash::prepare_varlen_num_blocks_kernel<2, true>(int, int, int, int const*, int const*, int const*, int c\n     3.65 µs/rep   0.7%  x1   void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<16>, cute::C<64> >, 4, 256, 1, fals\n     3.05 µs/rep   0.6%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::ConvertToFloat8E4M3\n     2.42 µs/rep   0.4%  x2   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n     2.35 µs/rep   0.4%  x1   _qk_rms_norm_fwd_kernel\n     2.30 µs/rep   0.4%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 16, 4, true, false, true, true, true, true>(sglang::NormGate\n     1.43 µs/rep   0.3%  x1   void sglang::store_kvcache_kernel<128l, 128l, 32u, true, long>(sglang::StoreKVCacheParams)"
+  }
+ ],
+ "speedup": 0.9993658807641175,
+ "ci95": [
+  0.9843753925526557,
+  1.0143563689755792
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 1739.6479919552803,
+   "sub_us": 1754.0411143229076,
+   "speedup": 0.9917943072998131
+  },
+  {
+   "load": "decode 16",
+   "base_us": 5915.776114910841,
+   "sub_us": 5908.589833078377,
+   "speedup": 1.001216243136769
+  },
+  {
+   "load": "decode 32",
+   "base_us": 10394.20822635293,
+   "sub_us": 10413.455592360462,
+   "speedup": 0.9981516830953164
+  },
+  {
+   "load": "verify 1",
+   "base_us": 1904.2560495436192,
+   "sub_us": 1888.456408576595,
+   "speedup": 1.008366431385585
+  },
+  {
+   "load": "verify 16",
+   "base_us": 6100.0639125704765,
+   "sub_us": 6123.105431861028,
+   "speedup": 0.9962369553248819
+  },
+  {
+   "load": "verify 32",
+   "base_us": 10689.02426585555,
+   "sub_us": 10683.609921055879,
+   "speedup": 1.0005067898247577
+  }
+ ],
+ "step_base_us": 4866.4289358366905,
+ "step_sub_us": 4869.516790102747,
+ "timing_checks_ok": true,
+ "complete": true,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 61,
+  "job": "47989388",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261025-051426-muse_attention_decode-78dc2a",
+  "problem": "muse_attention_decode",
+  "submission": "calibracion/muse_attention_decode/submission.py",
+  "cwd": "‹local›",
+  "git": "aa0652e951e1efdc053a27b771eb6eb78f7d7832",
+  "submitted": "2026-10-25T04:14:26.813623+00:00",
+  "ncu": null
+ }
+}

@@ -1,0 +1,229 @@
+okc run b0aa96470d83453d on muse_decode_layer
+submission  ‹tmp›/dl-178e1ed.py
+status      ok
+passed      true
+speedup     1.3163960388878975
+speedup_ci  [1.296650098304579 1.3361419794712157]
+score_us    17183.506582950387
+tests       13/13 passed
+
+scored shapes (µs; speed of light is the reference's bound)
+case                                                         sglang      yours  speedup        sol  
+batch=1 ctx=80000 dist=soft layer=sliding load=decode 1 page=1     172.66     113.55   1.520x      40.02  
+batch=1 ctx=80000 dist=soft layer=full load=decode 1 page=1     182.24     124.10   1.468x      44.18  
+batch=16 ctx=80000 dist=soft layer=sliding load=decode 16 page=1 spread=agentic     265.98     198.76   1.338x      76.72  
+batch=16 ctx=80000 dist=soft layer=full load=decode 16 page=1 spread=agentic     435.47     286.70   1.519x     137.46  
+batch=32 ctx=80000 dist=soft layer=sliding load=decode 32 page=1 spread=agentic     255.55     242.66   1.053x      84.51  
+batch=32 ctx=80000 dist=soft layer=full load=decode 32 page=1 spread=agentic     618.56     420.25   1.472x     208.10  
+batch=1 ctx=80000 dist=soft layer=sliding load=verify 1 page=1 q_len=8     272.85     165.52   1.648x      62.29  
+batch=1 ctx=80000 dist=soft layer=full load=verify 1 page=1 q_len=8     291.30     188.37   1.546x      66.44  
+batch=16 ctx=80000 dist=soft layer=sliding load=verify 16 page=1 q_len=8 spread=agentic     519.38     438.69   1.184x     126.61  
+batch=16 ctx=80000 dist=soft layer=full load=verify 16 page=1 q_len=8 spread=agentic     693.79     568.87   1.220x     188.68  
+batch=32 ctx=80000 dist=soft layer=sliding load=verify 32 page=1 q_len=8 spread=agentic     709.15     681.85   1.040x     143.81  
+batch=32 ctx=80000 dist=soft layer=full load=verify 32 page=1 q_len=8 spread=agentic    1053.57     972.40   1.083x     267.18  
+
+profile 0: batch=1 ctx=80000 dist=soft layer=sliding load=decode 1 page=1
+kernel                                                           GPU time  share  calls
+_proj_kernel                                                      43.5 µs  35.6%      4
+moe_gemm1                                                         23.8 µs  19.5%      1
+moe_gemm2                                                         14.3 µs  11.7%      1
+nvjet_sm90_tst_64x8_64x16_2x1_v_bz_TNT                             7.0 µs   5.7%      1
+_attn_kernel                                                       6.8 µs   5.6%      1
+_combine                                                           5.9 µs   4.8%      1
+_ffn_boundary_kernel                                               5.7 µs   4.6%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       3.7 µs   3.0%      1
+_pre_expert_kernel                                                 2.9 µs   2.4%      1
+void sglang::muse_spark::routing_kernel<sglang::muse_spar...       2.6 µs   2.1%      1
+_swiglu_reduce                                                     2.2 µs   1.8%      1
+_combine_kernel                                                    2.0 µs   1.7%      1
+... 1 more
+total                                                            122.1 µs
+
+profile 1: batch=1 ctx=80000 dist=soft layer=full load=decode 1 page=1
+kernel                                                           GPU time  share  calls
+_proj_kernel                                                      44.4 µs  33.4%      4
+moe_gemm1                                                         23.7 µs  17.8%      1
+full_fa2                                                          14.4 µs  10.8%      1
+moe_gemm2                                                         14.3 µs  10.8%      1
+nvjet_sm90_tst_64x8_64x16_2x1_v_bz_TNT                             6.6 µs   5.0%      1
+_combine                                                           5.9 µs   4.4%      1
+_ffn_boundary_kernel                                               5.4 µs   4.1%      1
+_combine_kernel                                                    4.7 µs   3.5%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       3.6 µs   2.7%      1
+_pre_expert_kernel                                                 3.2 µs   2.4%      1
+void sglang::muse_spark::routing_kernel<sglang::muse_spar...       2.8 µs   2.1%      1
+_swiglu_reduce                                                     2.2 µs   1.7%      1
+... 1 more
+total                                                            133.0 µs
+
+profile 2: batch=16 ctx=80000 dist=soft layer=sliding load=decode 16 page=1 spread=agentic
+kernel                                                           GPU time  share  calls
+moe_gemm1                                                         63.2 µs  32.0%      1
+_proj_kernel                                                      38.6 µs  19.5%      3
+moe_gemm2                                                         33.2 µs  16.8%      1
+nvjet_sm90_tst_64x16_64x16_2x1_v_bz_TNT                           26.5 µs  13.4%      2
+_attn_kernel                                                       9.7 µs   4.9%      1
+_combine                                                           4.8 µs   2.4%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       3.8 µs   1.9%      1
+moe_route                                                          3.7 µs   1.9%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       3.6 µs   1.8%      1
+_pre_expert_kernel                                                 3.3 µs   1.7%      1
+void sglang::muse_spark::routing_kernel<sglang::muse_spar...       2.7 µs   1.3%      1
+_combine_kernel                                                    2.3 µs   1.2%      1
+... 1 more
+total                                                            197.7 µs
+
+profile 3: batch=16 ctx=80000 dist=soft layer=full load=decode 16 page=1 spread=agentic
+kernel                                                           GPU time  share  calls
+full_fa2                                                         104.1 µs  36.0%      1
+moe_gemm1                                                         60.0 µs  20.7%      1
+_proj_kernel                                                      38.6 µs  13.3%      3
+moe_gemm2                                                         32.9 µs  11.4%      1
+nvjet_sm90_tst_64x16_64x16_2x1_v_bz_TNT                           26.4 µs   9.1%      2
+_combine                                                           4.6 µs   1.6%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       3.8 µs   1.3%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       3.8 µs   1.3%      1
+moe_route                                                          3.7 µs   1.3%      1
+_combine_kernel                                                    3.3 µs   1.2%      1
+_pre_expert_kernel                                                 3.1 µs   1.1%      1
+void sglang::muse_spark::routing_kernel<sglang::muse_spar...       2.7 µs   0.9%      1
+... 1 more
+total                                                            289.3 µs
+
+profile 4: batch=32 ctx=80000 dist=soft layer=sliding load=decode 32 page=1 spread=agentic
+kernel                                                           GPU time  share  calls
+moe_gemm1                                                         81.9 µs  34.2%      1
+moe_gemm2                                                         47.8 µs  20.0%      1
+_proj_kernel                                                      40.9 µs  17.1%      3
+nvjet_sm90_tst_64x32_64x16_2x1_v_bz_TNT                           27.2 µs  11.3%      2
+_attn_kernel                                                      14.0 µs   5.8%      1
+_combine                                                           5.2 µs   2.2%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       4.0 µs   1.7%      1
+_pre_expert_kernel                                                 3.9 µs   1.6%      1
+moe_route                                                          3.8 µs   1.6%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       3.7 µs   1.6%      1
+void sglang::muse_spark::routing_kernel<sglang::muse_spar...       2.8 µs   1.2%      1
+_swiglu_reduce                                                     2.4 µs   1.0%      1
+... 1 more
+total                                                            239.5 µs
+
+profile 5: batch=32 ctx=80000 dist=soft layer=full load=decode 32 page=1 spread=agentic
+kernel                                                           GPU time  share  calls
+full_fa2                                                         197.3 µs  44.6%      1
+moe_gemm1                                                         94.6 µs  21.4%      1
+moe_gemm2                                                         54.3 µs  12.3%      1
+_proj_kernel                                                      40.6 µs   9.2%      3
+nvjet_sm90_tst_64x32_64x16_2x1_v_bz_TNT                           27.8 µs   6.3%      2
+_combine                                                           5.1 µs   1.2%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       4.0 µs   0.9%      1
+moe_route                                                          3.6 µs   0.8%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       3.6 µs   0.8%      1
+_pre_expert_kernel                                                 3.1 µs   0.7%      1
+void sglang::muse_spark::routing_kernel<sglang::muse_spar...       2.8 µs   0.6%      1
+_combine_kernel                                                    2.8 µs   0.6%      1
+... 1 more
+total                                                            442.1 µs
+
+profile 6: batch=1 ctx=80000 dist=soft layer=sliding load=verify 1 page=1 q_len=8
+kernel                                                           GPU time  share  calls
+moe_gemm1                                                         49.5 µs  30.5%      1
+_proj_kernel                                                      44.7 µs  27.6%      4
+moe_gemm2                                                         27.3 µs  16.8%      1
+_attn_kernel                                                       7.1 µs   4.4%      1
+nvjet_sm90_tst_64x8_64x16_2x1_v_bz_TNT                             7.0 µs   4.3%      1
+_ffn_boundary_kernel                                               5.9 µs   3.6%      1
+_combine                                                           4.3 µs   2.6%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       3.6 µs   2.2%      1
+_pre_expert_kernel                                                 3.2 µs   2.0%      1
+_route_prep                                                        3.0 µs   1.8%      1
+void sglang::muse_spark::routing_kernel<sglang::muse_spar...       2.7 µs   1.7%      1
+_combine_kernel                                                    2.2 µs   1.4%      1
+... 1 more
+total                                                            162.3 µs
+
+profile 7: batch=1 ctx=80000 dist=soft layer=full load=verify 1 page=1 q_len=8
+kernel                                                           GPU time  share  calls
+moe_gemm1                                                         48.9 µs  27.0%      1
+_proj_kernel                                                      47.5 µs  26.2%      4
+moe_gemm2                                                         25.9 µs  14.3%      1
+_attn_kernel                                                      21.9 µs  12.1%      1
+nvjet_sm90_tst_64x8_64x16_2x1_v_bz_TNT                             6.8 µs   3.7%      1
+_ffn_boundary_kernel                                               5.5 µs   3.1%      1
+_combine_kernel                                                    5.2 µs   2.9%      1
+_combine                                                           4.6 µs   2.5%      1
+_pre_expert_kernel                                                 4.0 µs   2.2%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       3.8 µs   2.1%      1
+_route_prep                                                        2.9 µs   1.6%      1
+void sglang::muse_spark::routing_kernel<sglang::muse_spar...       2.5 µs   1.4%      1
+... 1 more
+total                                                            181.3 µs
+
+profile 8: batch=16 ctx=80000 dist=soft layer=sliding load=verify 16 page=1 q_len=8 spread=agentic
+kernel                                                           GPU time  share  calls
+moe_gemm1                                                        237.5 µs  49.9%      1
+moe_gemm2                                                        115.9 µs  24.4%      1
+nvjet_sm90_tst_128x64_64x8_1x2_h_bz_TNT                           28.0 µs   5.9%      2
+nvjet_sm90_tst_64x64_64x13_2x1_v_bz_TNT                           25.3 µs   5.3%      1
+nvjet_sm90_tst_96x64_64x10_4x2_h_bz_splitK_TNN                    15.6 µs   3.3%      1
+_attn_kernel                                                      13.3 µs   2.8%      1
+_proj_kernel                                                       8.5 µs   1.8%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       5.2 µs   1.1%      1
+_combine                                                           4.6 µs   1.0%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       4.6 µs   1.0%      1
+moe_route                                                          4.0 µs   0.8%      1
+_combine_kernel                                                    3.4 µs   0.7%      1
+... 3 more
+total                                                            475.5 µs
+
+profile 9: batch=16 ctx=80000 dist=soft layer=full load=verify 16 page=1 q_len=8 spread=agentic
+kernel                                                           GPU time  share  calls
+moe_gemm1                                                        182.8 µs  32.6%      1
+_attn_kernel                                                     167.8 µs  29.9%      1
+moe_gemm2                                                        102.1 µs  18.2%      1
+nvjet_sm90_tst_128x64_64x8_1x2_h_bz_TNT                           28.0 µs   5.0%      2
+nvjet_sm90_tst_64x64_64x13_2x1_v_bz_TNT                           24.2 µs   4.3%      1
+nvjet_sm90_tst_96x64_64x10_4x2_h_bz_splitK_TNN                    15.1 µs   2.7%      1
+_proj_kernel                                                       8.5 µs   1.5%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       5.2 µs   0.9%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 256, ...       4.6 µs   0.8%      1
+_combine                                                           4.5 µs   0.8%      1
+moe_route                                                          4.0 µs   0.7%      1
+_combine_kernel                                                    3.9 µs   0.7%      1
+... 3 more
+total                                                            560.4 µs
+
+profile 10: batch=32 ctx=80000 dist=soft layer=sliding load=verify 32 page=1 q_len=8 spread=agentic
+kernel                                                           GPU time  share  calls
+void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 56...     598.7 µs  78.6%      2
+nvjet_sm90_tst_128x128_64x6_2x1_v_bz_TNT                          34.9 µs   4.6%      2
+nvjet_sm90_tst_128x64_64x8_1x2_h_bz_TNT                           30.7 µs   4.0%      1
+nvjet_sm90_tst_96x64_64x10_2x4_h_bz_TNN                           23.1 µs   3.0%      1
+_attn_kernel                                                      19.3 µs   2.5%      1
+_proj_kernel                                                      10.6 µs   1.4%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 512, ...       8.4 µs   1.1%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 512, ...       7.6 µs   1.0%      1
+void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::A...       5.8 µs   0.8%      1
+_post_expert_norm_weighted_sum_kernel                              5.6 µs   0.7%      1
+_combine_kernel                                                    4.7 µs   0.6%      1
+_pre_expert_kernel                                                 3.3 µs   0.4%      1
+... 3 more
+total                                                            761.3 µs
+
+profile 11: batch=32 ctx=80000 dist=soft layer=full load=verify 32 page=1 q_len=8 spread=agentic
+kernel                                                           GPU time  share  calls
+void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 56...     529.2 µs  51.0%      2
+_attn_kernel                                                     326.5 µs  31.5%      1
+_proj_kernel                                                      45.6 µs   4.4%      1
+nvjet_sm90_tst_128x64_64x8_1x2_h_bz_TNT                           34.3 µs   3.3%      1
+nvjet_sm90_tst_128x128_64x6_2x1_v_bz_TNT                          34.2 µs   3.3%      2
+nvjet_sm90_tst_96x64_64x10_2x4_h_bz_TNN                           22.9 µs   2.2%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 512, ...       8.6 µs   0.8%      1
+void sglang::muse_spark_norm_residual_kernel<8192l, 512, ...       7.7 µs   0.7%      1
+void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::A...       5.9 µs   0.6%      1
+_combine_kernel                                                    5.3 µs   0.5%      1
+_post_expert_norm_weighted_sum_kernel                              5.1 µs   0.5%      1
+_pre_expert_kernel                                                 3.4 µs   0.3%      1
+... 3 more
+total                                                           1037.4 µs
+GPU busy (kernels overlap: PDL or streams)                      1002.9 µs
+an overlapping kernel's time includes any wait for the one before it, so the rows add up to more

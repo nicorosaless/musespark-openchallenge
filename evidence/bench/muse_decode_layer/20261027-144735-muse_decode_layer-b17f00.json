@@ -1,0 +1,100 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261027-144735-muse_decode_layer-b17f00/problem",
+  "submission": "‹scratch›/okc/bench/running/20261027-144735-muse_decode_layer-b17f00/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261027-144735-muse_decode_layer-b17f00/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "verify 1 |",
+  "no_profile": true,
+  "keep_going": false
+ },
+ "start": "2026-10-27T14:48:41+0100",
+ "submission_sha256": "bad9f0bcaf0fcff51ed73245db6b5bf96c93bc07571114cbdf67edeccddef77b",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_decode_layer",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 4.31,
+  "base": 0.1
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 27.2,
+ "within_limit": true,
+ "graph_overhead_us": 3.903999924659729,
+ "shapes": [
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer sliding, page 1, q_len 8, dist soft",
+   "weight": 46,
+   "floor_us": 62.3,
+   "base_us": 377.8560012578964,
+   "sub_us": 247.3420810632981,
+   "speedup": 1.5276656508812914,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.07106089125065007,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.413e-02 (worst row 7.294e-02) [bound 0.139]; attention input relative L2 error 3.423e-02 (worst row 4.748e-02) [bound 0.088]"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer full, page 1, q_len 8, dist soft",
+   "weight": 16,
+   "floor_us": 66.4,
+   "base_us": 424.73599314689636,
+   "sub_us": 295.66611362184153,
+   "speedup": 1.4365393042306358,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.08182421782742,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.078e-02 (worst row 6.947e-02) [bound 0.150]; attention input relative L2 error 3.863e-02 (worst row 4.651e-02) [bound 0.096]"
+  }
+ ],
+ "speedup": 1.5009039776610529,
+ "ci95": [
+  1.4695860630750646,
+  1.5234175373259686
+ ],
+ "loads": [
+  {
+   "load": "verify 1",
+   "base_us": 24177.151948213577,
+   "sub_us": 16108.393546861178,
+   "speedup": 1.5009039776610529
+  }
+ ],
+ "step_base_us": 24177.151948213595,
+ "step_sub_us": 16108.393546861189,
+ "timing_checks_ok": true,
+ "complete": false,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 30,
+  "job": "48135808",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261027-144735-muse_decode_layer-b17f00",
+  "problem": "muse_decode_layer",
+  "submission": "‹tmp›/okc-dl/v33/submission.py",
+  "cwd": "‹local›",
+  "git": "102084a1f03cb706327a79418c8cdaf310563cbf",
+  "submitted": "2026-10-27T13:47:35.737885+00:00",
+  "ncu": null
+ }
+}

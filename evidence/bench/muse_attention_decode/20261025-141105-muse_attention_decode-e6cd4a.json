@@ -1,0 +1,192 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-141105-muse_attention_decode-e6cd4a/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-141105-muse_attention_decode-e6cd4a/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-141105-muse_attention_decode-e6cd4a/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "layer full",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-25T14:11:11+0100",
+ "submission_sha256": "75cfe798709521f760a21256a4baaa86fe91454e28379b47b82fa38cdd12b802",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_attention_decode",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 0.0,
+  "base": 0.0
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 23.9,
+ "within_limit": true,
+ "graph_overhead_us": 4.064000211656094,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, heads tp8, layer full, page 1, dist coherent",
+   "weight": 16,
+   "floor_us": 4.3,
+   "base_us": 39.7439980879426,
+   "sub_us": 21.57619577400309,
+   "speedup": 1.84202991594235,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.04730471519343604,
+   "check_ok": false,
+   "check_msg": "new key cache entries: relative L2 error 1.469e+00 > 0.08",
+   "profile": "    19.58 µs/rep  94.6%  x1   _recoger\n     1.11 µs/rep   5.4%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::FillFunctor<c10::BFloat16>, std::array<char*, 1u"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, heads tp8, layer full, page 1, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 63.2,
+   "base_us": 279.9039864912629,
+   "sub_us": 218.9805499659517,
+   "speedup": 1.2782139168742792,
+   "reps": 60,
+   "copies": 6,
+   "ratio_iqr": 0.015072492570698648,
+   "check_ok": false,
+   "check_msg": "new key cache entries: relative L2 error 1.393e+00 > 0.08",
+   "profile": "   211.28 µs/rep  99.5%  x1   _recoger\n     1.16 µs/rep   0.5%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::FillFunctor<c10::BFloat16>, std::array<char*, 1u"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, heads tp8, layer full, page 1, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 126.4,
+   "base_us": 539.791994728148,
+   "sub_us": 438.52637167062943,
+   "speedup": 1.2309225387557254,
+   "reps": 60,
+   "copies": 3,
+   "ratio_iqr": 0.022610675035411143,
+   "check_ok": false,
+   "check_msg": "new key cache entries: relative L2 error 1.407e+00 > 0.08",
+   "profile": "   432.15 µs/rep  99.7%  x1   _recoger\n     1.12 µs/rep   0.3%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::FillFunctor<c10::BFloat16>, std::array<char*, 1u"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, heads tp8, layer full, page 1, q_len 8, dist coherent",
+   "weight": 16,
+   "floor_us": 4.3,
+   "base_us": 45.15199828892946,
+   "sub_us": 21.887021565464792,
+   "speedup": 2.062957636966655,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.03999752904665099,
+   "check_ok": false,
+   "check_msg": "new key cache entries: relative L2 error 1.446e+00 > 0.08",
+   "profile": "    19.83 µs/rep  94.5%  x1   _recoger\n     1.16 µs/rep   5.5%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::FillFunctor<c10::BFloat16>, std::array<char*, 1u"
+  },
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, heads tp8, layer full, page 1, q_len 8, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 63.4,
+   "base_us": 284.51200667768717,
+   "sub_us": 218.8624030307223,
+   "speedup": 1.2999583424922436,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.01888872191511881,
+   "check_ok": false,
+   "check_msg": "new key cache entries: relative L2 error 1.409e+00 > 0.08",
+   "profile": "   211.87 µs/rep  99.4%  x1   _recoger\n     1.29 µs/rep   0.6%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::FillFunctor<c10::BFloat16>, std::array<char*, 1u"
+  },
+  {
+   "load": "verify 32",
+   "shape": "batch 32, ctx 80000, heads tp8, layer full, page 1, q_len 8, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 126.8,
+   "base_us": 546.3999742642045,
+   "sub_us": 439.24921898645124,
+   "speedup": 1.2439406848007586,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.020905770436709048,
+   "check_ok": false,
+   "check_msg": "new key cache entries: relative L2 error 1.415e+00 > 0.08",
+   "profile": "   433.80 µs/rep  99.7%  x1   _recoger\n     1.34 µs/rep   0.3%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::FillFunctor<c10::BFloat16>, std::array<char*, 1u"
+  }
+ ],
+ "speedup": 1.459570443912118,
+ "ci95": [
+  1.4376768872534362,
+  1.4814640005707995
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 635.9039694070816,
+   "sub_us": 345.21913238404943,
+   "speedup": 1.84202991594235
+  },
+  {
+   "load": "decode 16",
+   "base_us": 4478.463783860207,
+   "sub_us": 3503.688799455227,
+   "speedup": 1.2782139168742792
+  },
+  {
+   "load": "decode 32",
+   "base_us": 8636.671915650368,
+   "sub_us": 7016.421946730071,
+   "speedup": 1.2309225387557254
+  },
+  {
+   "load": "verify 1",
+   "base_us": 722.4319726228714,
+   "sub_us": 350.1923450474367,
+   "speedup": 2.062957636966655
+  },
+  {
+   "load": "verify 16",
+   "base_us": 4552.192106842995,
+   "sub_us": 3501.798448491557,
+   "speedup": 1.2999583424922436
+  },
+  {
+   "load": "verify 32",
+   "base_us": 8742.399588227272,
+   "sub_us": 7027.98750378322,
+   "speedup": 1.2439406848007586
+  }
+ ],
+ "step_base_us": 2984.8272632468393,
+ "step_sub_us": 2045.0039089901977,
+ "timing_checks_ok": false,
+ "complete": false,
+ "status": "timing_checks_failed",
+ "worker_end": {
+  "rc": 0,
+  "s": 26,
+  "job": "48012040",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261025-141105-muse_attention_decode-e6cd4a",
+  "problem": "muse_attention_decode",
+  "submission": "muse_attention_decode/variantes/exp/rec_dot_seq.py",
+  "cwd": "‹local›",
+  "git": "d637c3f31b4f3243d9165654f7eb7adfbadf6da2",
+  "submitted": "2026-10-25T13:11:05.003730+00:00",
+  "ncu": null
+ }
+}

@@ -1,0 +1,66 @@
+okc run d84ce2e350eb48c1 on muse_moe_w4a16
+submission  muse_moe_w4a16/submission.py
+status      ok
+passed      true
+speedup     0.9767541449669536
+speedup_ci  [0.9621028327924492 0.9914054571414578]
+score_us    13768.561996176635
+tests       5/5 passed
+
+scored shapes (µs; speed of light is the reference's bound)
+case                                                         sglang      yours  speedup        sol  
+bs=1 load=decode 1 sharding=ep8                               79.68      58.61   1.360x      11.42  
+bs=16 load=decode 16 sharding=ep8                            188.80     224.11   0.842x      52.52  
+bs=32 load=decode 32 sharding=ep8                            214.45     283.05   0.758x      70.76  
+bs=8 load=verify 1 sharding=ep8                              143.47     152.12   0.943x      37.32  
+bs=128 load=verify 16 sharding=ep8                           459.87     435.12   1.057x     101.34  
+bs=256 load=verify 32 sharding=ep8                           617.78     615.36   1.004x     108.94  
+
+profile 0: bs=1 load=decode 1 sharding=ep8
+kernel                                                           GPU time  share  calls
+_gemm1_swiglu                                                     23.5 µs  49.4%      1
+_gemm2                                                            13.8 µs  29.0%      1
+_combine                                                           5.9 µs  12.4%      1
+_swiglu_reduce                                                     2.4 µs   5.1%      1
+_route_prep                                                        1.9 µs   4.0%      1
+total                                                             47.5 µs
+
+profile 1: bs=16 load=decode 16 sharding=ep8
+kernel                                                           GPU time  share  calls
+_gemm1_swiglu                                                     74.6 µs  59.3%      1
+_gemm2                                                            43.2 µs  34.3%      1
+_route_prep                                                        4.4 µs   3.5%      1
+_combine                                                           3.8 µs   3.0%      1
+total                                                            125.9 µs
+
+profile 2: bs=32 load=decode 32 sharding=ep8
+kernel                                                           GPU time  share  calls
+_gemm1_swiglu                                                    149.7 µs  61.3%      1
+_gemm2                                                            83.9 µs  34.3%      1
+_route_prep                                                        6.4 µs   2.6%      1
+_combine                                                           4.4 µs   1.8%      1
+total                                                            244.5 µs
+
+profile 3: bs=8 load=verify 1 sharding=ep8
+kernel                                                           GPU time  share  calls
+_gemm1_swiglu                                                     76.2 µs  59.7%      1
+_gemm2                                                            44.6 µs  35.0%      1
+_combine                                                           3.7 µs   2.9%      1
+_route_prep                                                        3.1 µs   2.5%      1
+total                                                            127.7 µs
+
+profile 4: bs=128 load=verify 16 sharding=ep8
+kernel                                                           GPU time  share  calls
+_gemm1_swiglu                                                    270.3 µs  60.5%      1
+_gemm2                                                           149.8 µs  33.5%      1
+_route_prep                                                       20.7 µs   4.6%      1
+_combine                                                           6.1 µs   1.4%      1
+total                                                            446.9 µs
+
+profile 5: bs=256 load=verify 32 sharding=ep8
+kernel                                                           GPU time  share  calls
+_gemm1_swiglu                                                    369.3 µs  59.2%      1
+_gemm2                                                           207.2 µs  33.2%      1
+_route_prep                                                       40.4 µs   6.5%      1
+_combine                                                           6.5 µs   1.0%      1
+total                                                            623.4 µs

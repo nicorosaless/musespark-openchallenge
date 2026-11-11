@@ -1,0 +1,223 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-051535-muse_moe_w4a16-2e0923/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-051535-muse_moe_w4a16-2e0923/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-051535-muse_moe_w4a16-2e0923/result.json",
+  "no_tests": false,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-25T05:15:42+0100",
+ "submission_sha256": "66abb265321ae0116a7db60d90ae8d320dca1060484105a37ea6eb23509d24d6",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "problem",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 6.03,
+  "base": 0.03
+ },
+ "tests": [
+  {
+   "shape": "bs 4, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 5.597e-03 (worst row 5.722e-03)",
+   "s": 188.74
+  },
+  {
+   "shape": "bs 33, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 5.589e-03 (worst row 5.953e-03)",
+   "s": 0.28
+  },
+  {
+   "shape": "bs 257, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 5.551e-03 (worst row 5.961e-03)",
+   "s": 0.08
+  },
+  {
+   "shape": "bs 128, sharding ep8, dist skewed",
+   "ok": true,
+   "msg": "relative L2 error 5.371e-03 (worst row 5.624e-03)",
+   "s": 0.02
+  },
+  {
+   "shape": "bs 1, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 5.478e-03 (worst row 5.478e-03)",
+   "s": 0.13
+  }
+ ],
+ "tests_ok": true,
+ "duration_s": 217.8,
+ "within_limit": true,
+ "graph_overhead_us": 3.6960002034902573,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "bs 1, sharding ep8",
+   "weight": 60,
+   "floor_us": 11.4,
+   "base_us": 99.47200305759907,
+   "sub_us": 100.04632201311269,
+   "speedup": 0.9942594695741205,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.013764264757795242,
+   "check_ok": true,
+   "check_msg": "relative L2 error 5.498e-03 (worst row 5.498e-03)",
+   "profile": "    71.43 µs/rep  65.9%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 1, 8, 4, true\n     5.46 µs/rep   5.0%  x2   void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{la\n     5.31 µs/rep   4.9%  x1   void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, fl\n     5.13 µs/rep   4.7%  x3   void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float\n     4.21 µs/rep   3.9%  x1   void at::native::reduce_kernel<128, 4, at::native::ReduceOp<float, at::native::func_wrapper_t<float, at::nativ\n     2.74 µs/rep   2.5%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::(anonymous namespac\n     2.60 µs/rep   2.4%  x1   void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<a\n     1.85 µs/rep   1.7%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n     1.60 µs/rep   1.5%  x1   _moe_align_small_numel_kernel\n     1.47 µs/rep   1.4%  x1   void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{la\n     1.26 µs/rep   1.2%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase\n     1.16 µs/rep   1.1%  x1   void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_\n     1.12 µs/rep   1.0%  x1   void at::native::vectorized_elementwise_kernel<4, at::native::rsqrt_kernel_cuda(at::TensorIteratorBase&)::{lam\n     1.10 µs/rep   1.0%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::compare_scalar_kernel<int>(at::TensorIteratorBas\n     1.02 µs/rep   0.9%  x1   void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<float>, std::array<char*, "
+  },
+  {
+   "load": "decode 16",
+   "shape": "bs 16, sharding ep8",
+   "weight": 60,
+   "floor_us": 52.5,
+   "base_us": 302.79999412596226,
+   "sub_us": 303.4519340094386,
+   "speedup": 0.9978515876473008,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.011201273485800911,
+   "check_ok": true,
+   "check_msg": "relative L2 error 5.588e-03 (worst row 5.797e-03)",
+   "profile": "   241.43 µs/rep  83.2%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 1, 8, 4, true\n     8.71 µs/rep   3.0%  x1   void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, fl\n     7.89 µs/rep   2.7%  x3   void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float\n     6.04 µs/rep   2.1%  x2   void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{la\n     4.99 µs/rep   1.7%  x1   void at::native::reduce_kernel<128, 4, at::native::ReduceOp<float, at::native::func_wrapper_t<float, at::nativ\n     3.00 µs/rep   1.0%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::(anonymous namespac\n     2.75 µs/rep   0.9%  x1   void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, bool,\n     2.20 µs/rep   0.8%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n     2.07 µs/rep   0.7%  x1   void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_\n     1.97 µs/rep   0.7%  x1   void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<a\n     1.81 µs/rep   0.6%  x1   void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{la\n     1.45 µs/rep   0.5%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase\n     1.39 µs/rep   0.5%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::compare_scalar_kernel<int>(at::TensorIteratorBas\n     1.24 µs/rep   0.4%  x1   void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long, bool)\n     1.12 µs/rep   0.4%  x1   void at::native::vectorized_elementwise_kernel<4, at::native::rsqrt_kernel_cuda(at::TensorIteratorBase&)::{lam"
+  },
+  {
+   "load": "decode 32",
+   "shape": "bs 32, sharding ep8",
+   "weight": 60,
+   "floor_us": 70.8,
+   "base_us": 359.7759995609522,
+   "sub_us": 360.7117113298952,
+   "speedup": 0.9974059290576034,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.008970074765916825,
+   "check_ok": true,
+   "check_msg": "relative L2 error 5.561e-03 (worst row 5.791e-03)",
+   "profile": "   319.39 µs/rep  95.4%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 1, 8, 4, fals\n     4.16 µs/rep   1.2%  x1   _post_expert_norm_weighted_sum_kernel\n     2.75 µs/rep   0.8%  x1   void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, bool,\n     2.40 µs/rep   0.7%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n     2.40 µs/rep   0.7%  x1   void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<a\n     2.17 µs/rep   0.6%  x1   void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{la\n     1.42 µs/rep   0.4%  x1   void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long, bool)"
+  },
+  {
+   "load": "verify 1",
+   "shape": "bs 8, sharding ep8",
+   "weight": 60,
+   "floor_us": 37.3,
+   "base_us": 239.7600058466196,
+   "sub_us": 239.99434805662332,
+   "speedup": 0.999023551129844,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.012499999238579806,
+   "check_ok": true,
+   "check_msg": "relative L2 error 5.622e-03 (worst row 5.792e-03)",
+   "profile": "   148.71 µs/rep  77.1%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 1, 8, 4, true\n     8.63 µs/rep   4.5%  x1   void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, fl\n     6.09 µs/rep   3.2%  x3   void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float\n     5.58 µs/rep   2.9%  x2   void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{la\n     4.20 µs/rep   2.2%  x1   void at::native::reduce_kernel<128, 4, at::native::ReduceOp<float, at::native::func_wrapper_t<float, at::nativ\n     3.46 µs/rep   1.8%  x1   _moe_align_small_numel_kernel\n     2.84 µs/rep   1.5%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::(anonymous namespac\n     2.56 µs/rep   1.3%  x1   void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<a\n     2.06 µs/rep   1.1%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n     1.63 µs/rep   0.8%  x1   void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_\n     1.46 µs/rep   0.8%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase\n     1.35 µs/rep   0.7%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::compare_scalar_kernel<int>(at::TensorIteratorBas\n     1.26 µs/rep   0.7%  x1   void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{la\n     1.15 µs/rep   0.6%  x1   void at::native::vectorized_elementwise_kernel<4, at::native::rsqrt_kernel_cuda(at::TensorIteratorBase&)::{lam\n     1.08 µs/rep   0.6%  x1   void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<float>, std::array<char*, "
+  },
+  {
+   "load": "verify 16",
+   "shape": "bs 128, sharding ep8",
+   "weight": 60,
+   "floor_us": 101.3,
+   "base_us": 509.0560261160135,
+   "sub_us": 509.3131278140333,
+   "speedup": 0.9994951991535674,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.00823103278574655,
+   "check_ok": true,
+   "check_msg": "relative L2 error 5.564e-03 (worst row 5.997e-03)",
+   "profile": "   521.42 µs/rep  96.1%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 3, 8, 4, fals\n     5.56 µs/rep   1.0%  x1   _post_expert_norm_weighted_sum_kernel\n     4.48 µs/rep   0.8%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n     3.33 µs/rep   0.6%  x1   void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{la\n     3.25 µs/rep   0.6%  x1   void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<a\n     2.74 µs/rep   0.5%  x1   void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, bool,\n     1.89 µs/rep   0.3%  x1   void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long, bool)"
+  },
+  {
+   "load": "verify 32",
+   "shape": "bs 256, sharding ep8",
+   "weight": 60,
+   "floor_us": 108.9,
+   "base_us": 634.0959910303354,
+   "sub_us": 633.2104038617642,
+   "speedup": 1.0013985669900087,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.0040928853892341355,
+   "check_ok": true,
+   "check_msg": "relative L2 error 5.553e-03 (worst row 5.997e-03)",
+   "profile": "   594.93 µs/rep  95.9%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 4, 8, 4, fals\n     7.20 µs/rep   1.2%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n     6.29 µs/rep   1.0%  x1   _post_expert_norm_weighted_sum_kernel\n     3.23 µs/rep   0.5%  x1   void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{la\n     3.16 µs/rep   0.5%  x1   void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<a\n     2.89 µs/rep   0.5%  x1   void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, bool,\n     2.55 µs/rep   0.4%  x1   void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long, bool)"
+  }
+ ],
+ "speedup": 0.9982366399197491,
+ "ci95": [
+  0.9832630903209528,
+  1.0132101895185452
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 5968.320183455944,
+   "sub_us": 6002.779320786761,
+   "speedup": 0.9942594695741205
+  },
+  {
+   "load": "decode 16",
+   "base_us": 18167.999647557735,
+   "sub_us": 18207.116040566318,
+   "speedup": 0.9978515876473008
+  },
+  {
+   "load": "decode 32",
+   "base_us": 21586.55997365713,
+   "sub_us": 21642.702679793714,
+   "speedup": 0.9974059290576034
+  },
+  {
+   "load": "verify 1",
+   "base_us": 14385.600350797176,
+   "sub_us": 14399.660883397399,
+   "speedup": 0.9990235511298441
+  },
+  {
+   "load": "verify 16",
+   "base_us": 30543.36156696081,
+   "sub_us": 30558.787668841996,
+   "speedup": 0.9994951991535674
+  },
+  {
+   "load": "verify 32",
+   "base_us": 38045.759461820126,
+   "sub_us": 37992.62423170586,
+   "speedup": 1.0013985669900087
+  }
+ ],
+ "step_base_us": 18425.344836292297,
+ "step_sub_us": 18457.892747528844,
+ "timing_checks_ok": true,
+ "complete": true,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 221,
+  "job": "47989388",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261025-051535-muse_moe_w4a16-2e0923",
+  "problem": "muse_moe_w4a16",
+  "submission": "calibracion/muse_moe_w4a16/submission.py",
+  "cwd": "‹local›",
+  "git": "aa0652e951e1efdc053a27b771eb6eb78f7d7832",
+  "submitted": "2026-10-25T04:15:35.670876+00:00",
+  "ncu": null
+ }
+}

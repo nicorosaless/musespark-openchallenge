@@ -1,0 +1,402 @@
+#!/usr/bin/python3 -I
+"""bench: runs a submission.py on an H100 of the university cluster, imitating the okc judge.
+
+  bench run <problem> <submission.py> [judge options] [--no-wait] [--max-wait S]
+  bench fetch <id>             result of a run that is already queued
+  bench status                 workers, queue and heartbeat
+  bench hours                  H100 hours from sacct; writes evidence/h100-hours.jsonl
+  bench stop                   cancel the workers (frees the GPU now)
+
+<problem> is the folder name (muse_bf16_proj, ...) or its path. Judge options:
+--no-tests, --no-timing, --reps N, --copies N, --filter TEXT, --no-profile, --keep-going.
+--ncu REGEX runs under Nsight Compute (`--set full`, the first kernel whose name matches)
+and fetches the report into <id>.ncu.txt and <id>.ncu-rep; the timings of that run are not
+valid. Use it with --no-tests and a --filter that selects one shape. Standard output is the
+judge's JSON; the summary goes to stderr.
+The JSON and the log are stored in evidence/bench/<problem>/<id>.{json,log} of the current repo.
+
+The GPU is requested only when there is a queue: if there are more queued runs than free
+workers, `run` submits a worker (1 GPU) to the first QoS in $OKC_BENCH_QOS that has no
+worker yet (each QoS admits one job). Each worker exits after 10 minutes without work. Once the daily H100
+hour cap is spent, `run` leaves the run queued and exits with code 5 (4: the image is not
+ready).
+"""
+
+import fcntl
+import io
+import json
+import os
+import secrets
+import subprocess
+import sys
+import tarfile
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+HOST = os.environ["OKC_BENCH_HOST"]  # SSH alias of the cluster's login node
+REMOTE = os.environ["OKC_BENCH_DIR"]  # shared directory on the cluster
+SIF = os.environ["OKC_BENCH_SIF"]  # the judge's Singularity image
+SLURM_USER = os.environ["OKC_BENCH_USER"]  # Slurm user, for squeue and sacct
+STATE_DIR = Path.home() / ".local/state/okc-bench"
+NOTIFY = Path(os.environ.get("OKC_NOTIFY", "/bin/true"))  # one-line phone notification
+LIMITS_S = {"muse_bf16_proj": 600}
+PROBLEM_FILES = ("reference.py", "checks.py", "baseline.py", "nvfp4.py", "TASK.md")
+OPTIONS_WITH_VALUE = {"--reps", "--copies", "--filter"}
+FLAG_OPTIONS = {"--no-tests", "--no-timing", "--no-profile", "--keep-going"}
+THRESHOLDS_H = (10, 20, 40)
+DAILY_CAP_H = 6  # H100 hours per day; when reached, the bench pauses
+TOTAL_CAP_H = 22.0  # H100 hours for the whole challenge
+# Comma-separated QoS names, one worker each. An interactive QoS can land on a login node
+# where the container does not see the GPU, so in practice this held a single debug QoS.
+WORKER_QOS = tuple(q for q in os.environ["OKC_BENCH_QOS"].split(",") if q)
+POLL_S = 15
+
+
+def log(*a):
+    print(*a, file=sys.stderr, flush=True)
+
+
+def ssh(cmd, stdin=None, check=True):
+    r = subprocess.run(["ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=20", HOST, cmd],
+                       input=stdin, capture_output=True, timeout=300)
+    if check and r.returncode != 0:
+        raise RuntimeError(f"ssh {cmd[:60]}…: rc {r.returncode}: {r.stderr.decode(errors='replace').strip()}")
+    return r
+
+
+def notify(text, key, every_s=1800):
+    """One-line notification, at most one per `key` every `every_s`."""
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    mark = STATE_DIR / f"notify-{key}"
+    if mark.exists() and time.time() - mark.stat().st_mtime < every_s:
+        return
+    mark.touch()
+    subprocess.run([str(NOTIFY), text], check=False)
+
+
+def repo_root() -> Path:
+    r = subprocess.run(["git", "rev-parse", "--show-toplevel"], capture_output=True, text=True)
+    return Path(r.stdout.strip()) if r.returncode == 0 else HERE.parent.parent
+
+
+def problem_dir(name: str) -> Path:
+    p = Path(name)
+    if not p.is_dir():
+        p = repo_root() / name
+    if not (p / "reference.py").is_file():
+        sys.exit(f"bench: cannot find the problem {name}")
+    return p.resolve()
+
+
+# ---------------------------------------------------------------- worker
+
+def workers():
+    """[(jobid, state, time, reason, qos)] of the okc-bench workers."""
+    r = ssh(f"squeue -h -u {SLURM_USER} -n okc-bench -o '%i|%T|%M|%R|%q'")
+    return [tuple(l.split("|")) for l in r.stdout.decode().splitlines() if l.strip()]
+
+
+class CapReached(Exception):
+    pass
+
+
+def ensure_worker():
+    """Submit a worker if there are more queued runs than free workers, to the first QoS in
+    WORKER_QOS that has no worker yet (each QoS admits one job). Raise CapReached if
+    DAILY_CAP_H hours of H100 were already spent today. Return a jobid, or None if Slurm
+    does not accept one yet."""
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    with open(STATE_DIR / "sbatch.lock", "w") as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX)
+        r = ssh(f"[ \"$(cat {REMOTE}/paused 2>/dev/null)\" = \"$(date +%F)\" ] && echo paused || echo free; "
+                f"ls {REMOTE}/queue | grep -vc '\\.tmp$'; ls {REMOTE}/running | wc -l; "
+                f"squeue -h -u {SLURM_USER} -n okc-bench -o '%i|%T|%M|%R|%q'")
+        lines = r.stdout.decode().splitlines()
+        paused, queued, busy = lines[0] == "paused", int(lines[1] or 0), int(lines[2] or 0)
+        w = [tuple(l.split("|")) for l in lines[3:] if l.strip()]
+        if paused:
+            # Someone (or the cap) paused the bench today: $REMOTE/paused holds today's date.
+            raise CapReached(f"bench paused until tomorrow ({REMOTE}/paused)")
+        if w and queued <= len(w) - busy:
+            return w[0][0]
+        used = {q for *_, q in w}
+        free = [q for q in WORKER_QOS if q not in used]
+        if not free:
+            return w[0][0]
+        total = sum(row["gpu_hours"] for row in hour_rows())
+        if total >= TOTAL_CAP_H:
+            ssh(f"date +%F > {REMOTE}/paused")
+            notify(f"OKC: total cap of {TOTAL_CAP_H} H100 hours reached ({total:.1f} h); bench paused", "cap")
+            raise CapReached(f"{total:.2f} H100 hours spent in total (cap {TOTAL_CAP_H} h)")
+        today = hours_today()
+        if today >= DAILY_CAP_H:
+            ssh(f"date +%F > {REMOTE}/paused")
+            notify(f"OKC: daily cap of {DAILY_CAP_H} H100 hours reached ({today:.1f} h); bench paused", "cap")
+            raise CapReached(f"{today:.2f} H100 hours spent today (cap {DAILY_CAP_H} h)")
+        for qos in free:
+            r = ssh(f"mkdir -p {REMOTE}/logs && sbatch --parsable --qos={qos} {REMOTE}/worker.sbatch",
+                    check=False)
+            if r.returncode == 0:
+                jid = r.stdout.decode().strip().split(";")[0]
+                log(f"bench: worker {jid} submitted to {qos} ({queued} queued, {len(w)} workers already)")
+                return jid
+            err = r.stderr.decode(errors="replace").strip()
+            if "MaxSubmit" in err or "QOSMax" in err:
+                log(f"bench: {qos} is taken by another job of mine ({err})")
+                continue
+            notify(f"OKC bench down: sbatch fails: {err[:120]}", "sbatch")
+            raise RuntimeError(f"sbatch: {err}")
+        return w[0][0] if w else None
+
+
+# ---------------------------------------------------------------- run
+
+def pack(problem: Path, submission: Path, args: list[str], id_: str, ncu: str = "") -> bytes:
+    buf = io.BytesIO()
+    meta = {"id": id_, "problem": problem.name, "submission": str(submission), "cwd": os.getcwd(),
+            "git": subprocess.run(["git", "rev-parse", "HEAD"], capture_output=True, text=True).stdout.strip(),
+            "submitted": datetime.now(timezone.utc).isoformat(), "ncu": ncu or None}
+    extra = {"args": "".join(a + "\n" for a in args), "limit_s": str(LIMITS_S.get(problem.name, 900)),
+             "meta.json": json.dumps(meta, indent=1)}
+    if ncu:
+        extra["ncu"] = ncu
+    with tarfile.open(fileobj=buf, mode="w:gz") as tar:
+        tar.add(HERE / "judge.py", "judge.py")
+        tar.add(submission, "submission.py")
+        for f in PROBLEM_FILES:
+            if (problem / f).is_file():
+                tar.add(problem / f, f"problem/{f}")
+        for name, text in extra.items():
+            info = tarfile.TarInfo(name)
+            data = text.encode()
+            info.size = len(data)
+            tar.addfile(info, io.BytesIO(data))
+    return buf.getvalue()
+
+
+def validate_args(args):
+    i = 0
+    while i < len(args):
+        a = args[i]
+        if a in FLAG_OPTIONS:
+            i += 1
+        elif a in OPTIONS_WITH_VALUE and i + 1 < len(args):
+            if "\n" in args[i + 1]:
+                sys.exit(f"bench: value not allowed for {a}")
+            i += 2
+        else:
+            sys.exit(f"bench: unknown option {a}")
+    return args
+
+
+def run(argv):
+    if len(argv) < 2:
+        sys.exit(__doc__)
+    problem, submission = problem_dir(argv[0]), Path(argv[1]).resolve()
+    rest, wait, max_wait, ncu = [], True, 4 * 3600, ""
+    i = 2
+    while i < len(argv):
+        if argv[i] == "--no-wait":
+            wait = False
+        elif argv[i] == "--ncu":
+            ncu = argv[i + 1]
+            if "\n" in ncu or not ncu:
+                sys.exit("bench: --ncu needs a regular expression")
+            i += 1
+        elif argv[i] == "--max-wait":
+            max_wait = int(argv[i + 1])
+            i += 1
+        else:
+            rest.append(argv[i])
+        i += 1
+    args = validate_args(rest)
+    first = submission.read_text().splitlines()[0] if submission.is_file() else ""
+    if f"problem={problem.name}" not in first:
+        sys.exit(f"bench: {submission} does not start with '# okc: problem={problem.name}'")
+    if ssh(f"test -f {SIF}.ready", check=False).returncode != 0:
+        log(f"bench: the judge's image is not ready on the cluster yet ({SIF}.ready does not exist);"
+            " try again later")
+        return 4
+    id_ = f"{datetime.now().strftime('%Y%m%d-%H%M%S')}-{problem.name}-{secrets.token_hex(3)}"
+    package = pack(problem, submission, args, id_, ncu)
+    ssh(f"mkdir -p {REMOTE}/queue && cat > {REMOTE}/worker.sbatch", (HERE / "worker.sbatch").read_bytes())
+    ssh(f"set -e; t={REMOTE}/queue/{id_}.tmp; mkdir -p $t; tar xz -C $t; mv $t {REMOTE}/queue/{id_}", package)
+    log(f"bench: {id_} queued")
+    try:
+        ensure_worker()
+    except CapReached as e:
+        log(f"bench: {e}; {id_} stays queued for tomorrow. Code 5")
+        return 5
+    if not wait:
+        print(json.dumps({"id": id_, "status": "queued"}))
+        return 0
+    return wait_for_result(id_, problem.name, max_wait)
+
+
+def run_phase(id_):
+    r = ssh(f"if [ -f {REMOTE}/done/{id_}/result.json ]; then echo done; "
+            f"elif [ -d {REMOTE}/running/{id_} ]; then echo running; "
+            f"elif [ -d {REMOTE}/queue/{id_} ]; then echo queue; else echo unknown; fi; "
+            f"squeue -h -u {SLURM_USER} -n okc-bench -o '%i|%T|%M|%R'")
+    lines = r.stdout.decode().splitlines()
+    return lines[0], [tuple(l.split("|")) for l in lines[1:] if l.strip()]
+
+
+def wait_for_result(id_, problem, max_wait):
+    t0, seen, no_worker = time.time(), None, 0
+    while time.time() - t0 < max_wait:
+        phase, w = run_phase(id_)
+        summary = f"{phase} · worker {w[0][0]} {w[0][1]} {w[0][3]}" if w else f"{phase} · no worker"
+        if summary != seen:
+            log(f"bench: [{int(time.time() - t0)} s] {summary}")
+            seen = summary
+        if phase == "done":
+            return fetch(id_, problem)
+        if phase == "unknown":
+            sys.exit(f"bench: {id_} is not in the remote queue")
+        if not w:
+            no_worker += 1
+            if phase == "running" and no_worker >= 3:
+                notify(f"OKC bench down: the worker died with {id_} running", "dead")
+                sys.exit(f"bench: the worker disappeared with {id_} running; see {REMOTE}/logs")
+            if phase == "queue":
+                try:
+                    ensure_worker()
+                except CapReached as e:
+                    log(f"bench: {e}; {id_} stays queued. Code 5")
+                    return 5
+        else:
+            no_worker = 0
+        time.sleep(POLL_S)
+    log(f"bench: no result after {max_wait} s; `bench fetch {id_}` collects it later")
+    return 3
+
+
+def fetch(id_, problem=None):
+    r = ssh(f"cd {REMOTE}/done/{id_} && tar cz result.json log.txt end.json meta.json ncu-profile.txt ncu-profile.ncu-rep 2>/dev/null; true")
+    with tarfile.open(fileobj=io.BytesIO(r.stdout), mode="r:gz") as tar:
+        files = {m.name: tar.extractfile(m).read() for m in tar.getmembers() if m.isfile()}
+    res = json.loads(files["result.json"])
+    res["worker_end"] = json.loads(files.get("end.json", b"{}") or b"{}")
+    res["meta"] = json.loads(files.get("meta.json", b"{}") or b"{}")
+    problem = problem or res.get("problem") or res["meta"].get("problem", "unknown")
+    dest = repo_root() / "evidence/bench" / problem
+    dest.mkdir(parents=True, exist_ok=True)
+    (dest / f"{id_}.json").write_text(json.dumps(res, indent=1, ensure_ascii=False))
+    (dest / f"{id_}.log").write_bytes(files.get("log.txt", b""))
+    if res["meta"].get("ncu"):
+        res["warning"] = "run under Nsight Compute: the timings are not comparable"
+        for name, ext in (("ncu-profile.txt", "ncu.txt"), ("ncu-profile.ncu-rep", "ncu-rep")):
+            if name in files:
+                (dest / f"{id_}.{ext}").write_bytes(files[name])
+                log(f"bench: ncu profile in {dest / id_}.{ext}")
+        (dest / f"{id_}.json").write_text(json.dumps(res, indent=1, ensure_ascii=False))
+    summarize(res)
+    log(f"bench: saved to {dest / id_}.json")
+    print(json.dumps(res, ensure_ascii=False))
+    try:
+        hours(write=False)
+    except Exception as e:  # noqa: BLE001
+        log(f"bench: could not update the hours: {e}")
+    return 0 if res.get("status") in ("ok", "tests") else 1
+
+
+def summarize(res):
+    log(f"bench: status {res.get('status')} · {res.get('duration_s')} s of {res.get('limit_s')} · "
+        f"{res.get('environment', {}).get('gpu')} driver {res.get('environment', {}).get('driver')}")
+    for t in res.get("tests", []):
+        if not t["ok"]:
+            log(f"  test FAIL {t['shape']}: {t['msg']}")
+    if res.get("tests"):
+        log(f"  tests: {sum(t['ok'] for t in res['tests'])}/{len(res['tests'])} ok")
+    for f in res.get("shapes", []):
+        log(f"  {f['load']:10s} {f['shape'][:60]:60s} base {f['base_us']:8.2f} µs  sub {f['sub_us']:8.2f} µs"
+            f"  x{f['speedup']:.3f}{'' if f['check_ok'] else '  CHECK FAIL'}")
+    if "speedup" in res:
+        log(f"  speedup x{res['speedup']:.3f}  CI95 [{res['ci95'][0]:.3f}, {res['ci95'][1]:.3f}]")
+    if res.get("error"):
+        log(f"  error: {res['error']}")
+
+
+# ---------------------------------------------------------------- hours
+
+def hours_today():
+    """H100 hours of the okc-* jobs that started today (cluster time), running ones included."""
+    today = ssh("date +%F").stdout.decode().strip()
+    return sum(row["gpu_hours"] for row in hour_rows() if row["start"].startswith(today))
+
+
+def hour_rows():
+    r = ssh(f"sacct -u {SLURM_USER} -S 2026-10-24 -X -P -n "
+            "--format=JobID,JobName,QOS,Start,End,ElapsedRaw,State,AllocTRES")
+    rows = []
+    for line in r.stdout.decode().splitlines():
+        jid, name, qos, start, end, sec, state, tres = line.split("|")
+        if not name.startswith("okc-") or start in ("Unknown", "None"):
+            continue
+        gpus = next((int(t.split("=")[1]) for t in tres.split(",") if t.startswith("gres/gpu=")), 0)
+        rows.append({"job": jid, "name": name, "qos": qos, "start": start, "end": end,
+                     "status": state, "gpus": gpus, "seconds": int(sec or 0),
+                     "gpu_hours": round(int(sec or 0) * gpus / 3600, 4)})
+    return rows
+
+
+def hours(write=True):
+    rows = hour_rows()
+    total = round(sum(row["gpu_hours"] for row in rows), 3)
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    text = "".join(json.dumps(row) + "\n" for row in rows)
+    (STATE_DIR / "h100-hours.jsonl").write_text(text)
+    if write:
+        dest = repo_root() / "evidence/h100-hours.jsonl"
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(text)
+        log(f"bench: {dest}")
+    notified_file = STATE_DIR / "notified-thresholds.json"
+    notified = json.loads(notified_file.read_text()) if notified_file.exists() else []
+    for u in THRESHOLDS_H:
+        if total >= u and u not in notified:
+            subprocess.run([str(NOTIFY), f"OKC: {total:.1f} H100 hours spent (threshold {u} h)"], check=False)
+            notified.append(u)
+    notified_file.write_text(json.dumps(notified))
+    log(f"bench: {len(rows)} okc-* jobs, {total} H100 hours")
+    return total
+
+
+def status():
+    r = ssh(f"squeue -u {SLURM_USER} -o '%i %j %q %T %M %R'; echo; "
+            f"for d in queue running; do echo \"$d: $(ls {REMOTE}/$d 2>/dev/null | tr '\\n' ' ')\"; done; "
+            f"for f in {REMOTE}/heartbeat.*; do [ -f $f ] && echo \"$f: $(( $(date +%s) - $(cat $f) )) s ago\"; done; true")
+    print(r.stdout.decode())
+
+
+def stop():
+    for jid, *_ in workers():
+        ssh(f"scancel {jid}")
+        log(f"bench: worker {jid} cancelled")
+
+
+def main(argv):
+    if not argv or argv[0] in ("-h", "--help"):
+        print(__doc__)
+        return 0
+    command, rest = argv[0], argv[1:]
+    if command == "run":
+        return run(rest)
+    if command == "fetch" and rest:
+        return fetch(rest[0])
+    if command == "status":
+        return status()
+    if command == "hours":
+        print(hours())
+        return 0
+    if command == "stop":
+        return stop()
+    print(__doc__, file=sys.stderr)
+    return 2
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv[1:]) or 0)

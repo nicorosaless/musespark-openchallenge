@@ -1,0 +1,379 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261027-200221-muse_attention_decode-8332a2/problem",
+  "submission": "‹scratch›/okc/bench/running/20261027-200221-muse_attention_decode-8332a2/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261027-200221-muse_attention_decode-8332a2/result.json",
+  "no_tests": false,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-27T20:02:28+0100",
+ "submission_sha256": "d7f9824f6a2944a64b99426bae6aeec3397550471730ea086434bf2879f7b825",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_attention_decode",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 0.0,
+  "base": 0.0
+ },
+ "tests": [
+  {
+   "shape": "batch 1, ctx 10, heads tp8, layer sliding",
+   "ok": true,
+   "msg": "relative L2 error 4.540e-02 (worst row 4.540e-02) [bound 0.129: 2.5 x the reference's 0.045 with FP8 E4M3 queries + 0.015]",
+   "s": 1.88
+  },
+  {
+   "shape": "batch 3, ctx 2047, heads tp8, layer sliding",
+   "ok": true,
+   "msg": "relative L2 error 5.461e-03 (worst row 6.390e-03) [bound 0.150: 2.5 x the reference's 0.088 with FP8 E4M3 queries + 0.015]",
+   "s": 3.56
+  },
+  {
+   "shape": "batch 5, ctx 5000, heads tp8, layer sliding, q_len 8, spread mixed, page 1",
+   "ok": true,
+   "msg": "relative L2 error 7.718e-02 (worst row 1.185e-01) [bound 0.150: 2.5 x the reference's 0.077 with FP8 E4M3 queries + 0.015]",
+   "s": 0.99
+  },
+  {
+   "shape": "batch 4, ctx 3000, heads tp8, layer full",
+   "ok": true,
+   "msg": "relative L2 error 6.894e-02 (worst row 7.629e-02) [bound 0.150: 2.5 x the reference's 0.069 with FP8 E4M3 queries + 0.015]",
+   "s": 3.86
+  },
+  {
+   "shape": "batch 8, ctx 8192, heads dp, layer full, spread mixed",
+   "ok": true,
+   "msg": "relative L2 error 8.465e-02 (worst row 9.671e-02) [bound 0.150: 2.5 x the reference's 0.085 with FP8 E4M3 queries + 0.015]",
+   "s": 1.19
+  },
+  {
+   "shape": "batch 2, ctx 100000, heads tp8, layer full, q_len 8, page 1",
+   "ok": true,
+   "msg": "relative L2 error 8.778e-02 (worst row 1.174e-01) [bound 0.150: 2.5 x the reference's 0.088 with FP8 E4M3 queries + 0.015]",
+   "s": 0.4
+  },
+  {
+   "shape": "batch 4, ctx 6000, heads tp8, layer sliding, dist edges, page 1",
+   "ok": true,
+   "msg": "relative L2 error 4.992e-03 (worst row 5.174e-03) [bound 0.150: 2.5 x the reference's 0.081 with FP8 E4M3 queries + 0.015]",
+   "s": 0.63
+  },
+  {
+   "shape": "batch 4, ctx 6000, heads tp8, layer full, q_len 8, dist edges",
+   "ok": true,
+   "msg": "relative L2 error 7.710e-02 (worst row 1.123e-01) [bound 0.150: 2.5 x the reference's 0.077 with FP8 E4M3 queries + 0.015]",
+   "s": 0.06
+  },
+  {
+   "shape": "batch 1, ctx 1048576, heads tp8, layer full, q_len 8",
+   "ok": true,
+   "msg": "relative L2 error 9.396e-02 (worst row 1.139e-01) [bound 0.150: 2.5 x the reference's 0.094 with FP8 E4M3 queries + 0.015]",
+   "s": 0.85
+  },
+  {
+   "shape": "batch 3, ctx 4000, heads tp8, layer sliding, q_len 8, page 1, kv_scale 0.015625",
+   "ok": true,
+   "msg": "relative L2 error 8.759e-02 (worst row 1.231e-01) [bound 0.150: 2.5 x the reference's 0.088 with FP8 E4M3 queries + 0.015]",
+   "s": 0.01
+  },
+  {
+   "shape": "batch 2, ctx 9000, heads tp8, layer full, kv_scale 0.015625",
+   "ok": true,
+   "msg": "relative L2 error 7.604e-02 (worst row 8.731e-02) [bound 0.150: 2.5 x the reference's 0.076 with FP8 E4M3 queries + 0.015]",
+   "s": 0.01
+  },
+  {
+   "shape": "batch 4, ctx 80000, heads tp8, layer full, spread mixed, dist soft",
+   "ok": true,
+   "msg": "relative L2 error 8.039e-02 (worst row 8.974e-02) [bound 0.150: 2.5 x the reference's 0.080 with FP8 E4M3 queries + 0.015]",
+   "s": 0.03
+  },
+  {
+   "shape": "batch 4, ctx 6000, heads tp8, layer sliding, q_len 8, dist soft, page 1",
+   "ok": true,
+   "msg": "relative L2 error 6.641e-02 (worst row 8.635e-02) [bound 0.150: 2.5 x the reference's 0.066 with FP8 E4M3 queries + 0.015]",
+   "s": 0.01
+  },
+  {
+   "shape": "batch 2, ctx 20000, heads dp, layer full, q_len 8, dist soft",
+   "ok": true,
+   "msg": "relative L2 error 7.066e-02 (worst row 7.927e-02) [bound 0.150: 2.5 x the reference's 0.071 with FP8 E4M3 queries + 0.015]",
+   "s": 0.28
+  },
+  {
+   "shape": "batch 4, ctx 80000, heads tp8, layer full, spread mixed, dist coherent, page 1",
+   "ok": true,
+   "msg": "relative L2 error 5.182e-02 (worst row 7.882e-02) [bound 0.145: 2.5 x the reference's 0.052 with FP8 E4M3 queries + 0.015]",
+   "s": 1.09
+  },
+  {
+   "shape": "batch 2, ctx 20000, heads dp, layer full, q_len 8, dist coherent",
+   "ok": true,
+   "msg": "relative L2 error 3.729e-02 (worst row 4.095e-02) [bound 0.108: 2.5 x the reference's 0.037 with FP8 E4M3 queries + 0.015]",
+   "s": 0.05
+  }
+ ],
+ "tests_ok": true,
+ "duration_s": 43.6,
+ "within_limit": true,
+ "graph_overhead_us": 3.5520000383257866,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, heads tp8, layer sliding, page 1, dist soft",
+   "weight": 46,
+   "floor_us": 0.1,
+   "base_us": 23.936000652611256,
+   "sub_us": 8.931360799695122,
+   "speedup": 2.679994817075168,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.09246475566483836,
+   "check_ok": true,
+   "check_msg": "relative L2 error 8.301e-02 (worst row 8.301e-02) [bound 0.150: 2.5 x the reference's 0.083 with FP8 E4M3 queries + 0.015]",
+   "profile": "     8.15 µs/rep 100.0%  x1   full_fa2"
+  },
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, heads tp8, layer full, page 1, dist coherent",
+   "weight": 16,
+   "floor_us": 4.3,
+   "base_us": 40.11200089007616,
+   "sub_us": 25.44037900678396,
+   "speedup": 1.57670610486502,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.028130642925477067,
+   "check_ok": true,
+   "check_msg": "relative L2 error 4.263e-02 (worst row 4.263e-02) [bound 0.122: 2.5 x the reference's 0.043 with FP8 E4M3 queries + 0.015]",
+   "profile": "    18.86 µs/rep  78.4%  x1   full_fa2\n     5.18 µs/rep  21.6%  x1   _combine_kernel"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, heads tp8, layer sliding, page 1, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 1.6,
+   "base_us": 32.62399975210428,
+   "sub_us": 14.914710663739678,
+   "speedup": 2.187370609301798,
+   "reps": 60,
+   "copies": 6,
+   "ratio_iqr": 0.05947265789883405,
+   "check_ok": true,
+   "check_msg": "relative L2 error 4.349e-03 (worst row 6.117e-03) [bound 0.150: 2.5 x the reference's 0.065 with FP8 E4M3 queries + 0.015]",
+   "profile": "    12.91 µs/rep  52.1%  x1   _combine_kernel\n    11.88 µs/rep  47.9%  x1   _attn_kernel"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, heads tp8, layer full, page 1, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 63.2,
+   "base_us": 279.9360053613782,
+   "sub_us": 243.26646715557706,
+   "speedup": 1.1507381540685166,
+   "reps": 60,
+   "copies": 6,
+   "ratio_iqr": 0.017402552051565934,
+   "check_ok": true,
+   "check_msg": "relative L2 error 4.243e-02 (worst row 5.924e-02) [bound 0.121: 2.5 x the reference's 0.042 with FP8 E4M3 queries + 0.015]",
+   "profile": "   235.92 µs/rep  98.6%  x1   full_fa2\n     3.26 µs/rep   1.4%  x1   _combine_kernel"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, heads tp8, layer sliding, page 1, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 3.3,
+   "base_us": 39.807998575270176,
+   "sub_us": 21.611885079536314,
+   "speedup": 1.841949391678158,
+   "reps": 60,
+   "copies": 3,
+   "ratio_iqr": 0.05968542726729065,
+   "check_ok": true,
+   "check_msg": "relative L2 error 4.449e-03 (worst row 6.182e-03) [bound 0.150: 2.5 x the reference's 0.062 with FP8 E4M3 queries + 0.015]",
+   "profile": "    19.01 µs/rep  51.1%  x1   _combine_kernel\n    18.20 µs/rep  48.9%  x1   _attn_kernel"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, heads tp8, layer full, page 1, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 126.4,
+   "base_us": 539.1839938238263,
+   "sub_us": 474.91156190516267,
+   "speedup": 1.135335580504352,
+   "reps": 60,
+   "copies": 3,
+   "ratio_iqr": 0.008859065639890362,
+   "check_ok": true,
+   "check_msg": "relative L2 error 4.101e-02 (worst row 5.906e-02) [bound 0.118: 2.5 x the reference's 0.041 with FP8 E4M3 queries + 0.015]",
+   "profile": "   472.25 µs/rep  99.4%  x1   full_fa2\n     3.03 µs/rep   0.6%  x1   _combine_kernel"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, heads tp8, layer sliding, page 1, q_len 8, dist soft",
+   "weight": 46,
+   "floor_us": 0.1,
+   "base_us": 26.400000788271427,
+   "sub_us": 9.618780144099045,
+   "speedup": 2.744630856800212,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.07878218506608548,
+   "check_ok": true,
+   "check_msg": "relative L2 error 6.587e-02 (worst row 7.829e-02) [bound 0.150: 2.5 x the reference's 0.066 with FP8 E4M3 queries + 0.015]",
+   "profile": "     7.69 µs/rep  53.1%  x1   _combine_kernel\n     6.80 µs/rep  46.9%  x1   _attn_kernel"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, heads tp8, layer full, page 1, q_len 8, dist coherent",
+   "weight": 16,
+   "floor_us": 4.3,
+   "base_us": 45.23199889808893,
+   "sub_us": 28.937489137269225,
+   "speedup": 1.563093421254495,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.03233192300527521,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.709e-02 (worst row 5.088e-02) [bound 0.083: 2.5 x the reference's 0.027 with FP8 E4M3 queries + 0.015]",
+   "profile": "    21.64 µs/rep  79.9%  x1   verify_ws\n     5.44 µs/rep  20.1%  x1   _combine_kernel"
+  },
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, heads tp8, layer sliding, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 1.9,
+   "base_us": 34.87999830394983,
+   "sub_us": 18.569099903040115,
+   "speedup": 1.878389285753119,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.0402303206626502,
+   "check_ok": true,
+   "check_msg": "relative L2 error 6.548e-02 (worst row 9.507e-02) [bound 0.150: 2.5 x the reference's 0.065 with FP8 E4M3 queries + 0.015]",
+   "profile": "    16.22 µs/rep  53.0%  x1   _combine_kernel\n    14.37 µs/rep  47.0%  x1   _attn_kernel"
+  },
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, heads tp8, layer full, page 1, q_len 8, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 63.4,
+   "base_us": 284.30399764329195,
+   "sub_us": 387.81634172535286,
+   "speedup": 0.7330892668897198,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.009240053784028035,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.963e-02 (worst row 5.807e-02) [bound 0.089: 2.5 x the reference's 0.030 with FP8 E4M3 queries + 0.015]",
+   "profile": "   380.34 µs/rep  98.7%  x1   verify_ws\n     5.07 µs/rep   1.3%  x1   _combine_kernel"
+  },
+  {
+   "load": "verify 32",
+   "shape": "batch 32, ctx 80000, heads tp8, layer sliding, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 3.7,
+   "base_us": 43.632001616060734,
+   "sub_us": 28.25232158834919,
+   "speedup": 1.5443687160227526,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.041843766391316706,
+   "check_ok": true,
+   "check_msg": "relative L2 error 6.641e-02 (worst row 1.096e-01) [bound 0.150: 2.5 x the reference's 0.066 with FP8 E4M3 queries + 0.015]",
+   "profile": "    25.96 µs/rep  53.3%  x1   _combine_kernel\n    22.73 µs/rep  46.7%  x1   _attn_kernel"
+  },
+  {
+   "load": "verify 32",
+   "shape": "batch 32, ctx 80000, heads tp8, layer full, page 1, q_len 8, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 126.8,
+   "base_us": 546.9120042398572,
+   "sub_us": 773.7736559321307,
+   "speedup": 0.7068113524503707,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.006922557025879628,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.831e-02 (worst row 5.900e-02) [bound 0.086: 2.5 x the reference's 0.028 with FP8 E4M3 queries + 0.015]",
+   "profile": "   770.35 µs/rep  99.2%  x1   verify_ws\n     6.59 µs/rep   0.8%  x1   _combine_kernel"
+  }
+ ],
+ "speedup": 1.3063466768022667,
+ "ci95": [
+  1.2867514766502326,
+  1.3259418769543005
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 1742.8480442613363,
+   "sub_us": 817.888660894519,
+   "speedup": 2.130911122248835
+  },
+  {
+   "load": "decode 16",
+   "base_us": 5979.680074378848,
+   "sub_us": 4578.340165021258,
+   "speedup": 1.3060803389105717
+  },
+  {
+   "load": "decode 32",
+   "base_us": 10458.11183564365,
+   "sub_us": 8592.731704141273,
+   "speedup": 1.2170881386420287
+  },
+  {
+   "load": "verify 1",
+   "base_us": 1938.1120186299086,
+   "sub_us": 905.4637128248637,
+   "speedup": 2.140463489788443
+  },
+  {
+   "load": "verify 16",
+   "base_us": 6153.3438842743635,
+   "sub_us": 7059.240063145491,
+   "speedup": 0.8716722804766787
+  },
+  {
+   "load": "verify 32",
+   "base_us": 10757.664142176509,
+   "sub_us": 13679.985287978154,
+   "speedup": 0.7863798034658886
+  }
+ ],
+ "step_base_us": 4908.322981457934,
+ "step_sub_us": 3757.2897521144573,
+ "timing_checks_ok": true,
+ "complete": true,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 46,
+  "job": "48146734",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261027-200221-muse_attention_decode-8332a2",
+  "problem": "muse_attention_decode",
+  "submission": "‹local›",
+  "cwd": "‹local›",
+  "git": "aef0324d58adc49b21d5642c3007c0bcca6138f6",
+  "submitted": "2026-10-27T19:02:21.436659+00:00",
+  "ncu": null
+ }
+}

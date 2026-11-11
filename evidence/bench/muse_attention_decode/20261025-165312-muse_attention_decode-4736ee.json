@@ -1,0 +1,86 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-165312-muse_attention_decode-4736ee/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-165312-muse_attention_decode-4736ee/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-165312-muse_attention_decode-4736ee/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": 4,
+  "copies": 16,
+  "filter": "decode 1 | batch 1, ctx 80000, heads tp8, layer sliding",
+  "no_profile": true,
+  "keep_going": false
+ },
+ "start": "2026-10-25T16:53:19+0100",
+ "submission_sha256": "91ce4698583f53d6722c2019403b1be66bef9cc99d527303625b9991949f5acc",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_attention_decode",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 0.0,
+  "base": 0.0
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 17.9,
+ "within_limit": true,
+ "graph_overhead_us": 3.712000325322151,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, heads tp8, layer sliding, page 1, dist soft",
+   "weight": 46,
+   "floor_us": 0.1,
+   "base_us": 24.687999859452248,
+   "sub_us": 10.387460608283831,
+   "speedup": 2.376711767240202,
+   "reps": 4,
+   "copies": 16,
+   "ratio_iqr": 0.20171995417233557,
+   "check_ok": true,
+   "check_msg": "relative L2 error 5.177e-03 (worst row 5.177e-03) [bound 0.150: 2.5 x the reference's 0.083 with FP8 E4M3 queries + 0.015]"
+  }
+ ],
+ "speedup": 2.376711767240202,
+ "ci95": [
+  2.269697098780082,
+  2.517799347264179
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 1135.6479935348034,
+   "sub_us": 477.82318798105626,
+   "speedup": 2.376711767240202
+  }
+ ],
+ "step_base_us": 1135.6479935348032,
+ "step_sub_us": 477.82318798105615,
+ "timing_checks_ok": true,
+ "complete": false,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 21,
+  "job": "48020427",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261025-165312-muse_attention_decode-4736ee",
+  "problem": "muse_attention_decode",
+  "submission": "muse_attention_decode/variantes/sonda_nvrtc.py",
+  "cwd": "‹local›",
+  "git": "66ee8c02f86de436b8709753825a1b6f0ace559e",
+  "submitted": "2026-10-25T15:53:12.121548+00:00",
+  "ncu": null
+ }
+}

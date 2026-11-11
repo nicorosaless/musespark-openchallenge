@@ -1,0 +1,88 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261026-000611-muse_decode_layer-daaf9d/problem",
+  "submission": "‹scratch›/okc/bench/running/20261026-000611-muse_decode_layer-daaf9d/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261026-000611-muse_decode_layer-daaf9d/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "decode 1 | batch 1, ctx 80000, layer sliding",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-26T00:08:37+0100",
+ "submission_sha256": "5993be434dacce490b1c0cbda3a292c78c4185baa30cb04ead1ecf16bcd0115f",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_decode_layer",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 0.61,
+  "base": 0.06
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 36.9,
+ "within_limit": true,
+ "graph_overhead_us": 2.9439995996654034,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, layer sliding, page 1, dist soft",
+   "weight": 46,
+   "floor_us": 40.0,
+   "base_us": 1727.8079916723073,
+   "sub_us": 314.5939320394549,
+   "speedup": 5.492184736276521,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.7820676359977474,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 7.059e-03 (worst row 7.059e-03) [bound 0.150]; attention input relative L2 error 5.271e-03 (worst row 5.271e-03) [bound 0.109]",
+   "profile": ""
+  }
+ ],
+ "speedup": 5.492184736276521,
+ "ci95": [
+  5.320714040082601,
+  5.618512269716001
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 79479.16761692613,
+   "sub_us": 14471.320873814926,
+   "speedup": 5.492184736276521
+  }
+ ],
+ "step_base_us": 79479.16761692606,
+ "step_sub_us": 14471.320873814911,
+ "timing_checks_ok": true,
+ "complete": false,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 41,
+  "job": "48041300",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261026-000611-muse_decode_layer-daaf9d",
+  "problem": "muse_decode_layer",
+  "submission": "‹tmp›/okc-dl/v12b.py",
+  "cwd": "‹local›",
+  "git": "78e9f5eed33c77f8fcc77a6fc43f6ae88b83d078",
+  "submitted": "2026-10-25T23:06:11.066384+00:00",
+  "ncu": "_pool_route_kernel"
+ },
+ "warning": "run under Nsight Compute: the timings are not comparable"
+}

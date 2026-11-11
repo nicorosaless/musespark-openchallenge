@@ -1,0 +1,51 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261027-142403-muse_bf16_proj-9e90fb/problem",
+  "submission": "‹scratch›/okc/bench/running/20261027-142403-muse_bf16_proj-9e90fb/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261027-142403-muse_bf16_proj-9e90fb/result.json",
+  "no_tests": true,
+  "no_timing": true,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-27T14:24:55+0100",
+ "submission_sha256": "7d8ca4f56265e4a8e89db0bf0805f23f49c722c68744c8cf57ebe8a6772b7c29",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_bf16_proj",
+ "limit_s": 600,
+ "prepare_s": {
+  "sub": 6.37
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 21.0,
+ "within_limit": true,
+ "status": "tests",
+ "worker_end": {
+  "rc": 0,
+  "s": 24,
+  "job": "48135808",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261027-142403-muse_bf16_proj-9e90fb",
+  "problem": "muse_bf16_proj",
+  "submission": "muse_bf16_proj/sonda_submission.py",
+  "cwd": "‹local›",
+  "git": "518004af05b1e01c791056135ad83e9b29dbfebb",
+  "submitted": "2026-10-27T13:24:03.426527+00:00",
+  "ncu": null
+ }
+}

@@ -1,0 +1,88 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261027-164459-muse_moe_w4a16-68bde9/problem",
+  "submission": "‹scratch›/okc/bench/running/20261027-164459-muse_moe_w4a16-68bde9/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261027-164459-muse_moe_w4a16-68bde9/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "bs 8, sharding",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-27T16:45:06+0100",
+ "submission_sha256": "6bc1eda8dc765de466baf1ef9efec2c893b7ab066dd8af5829bb9df817dc952e",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_moe_w4a16",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 2.02,
+  "base": 0.29
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 31.5,
+ "within_limit": true,
+ "graph_overhead_us": 3.5520000383257866,
+ "shapes": [
+  {
+   "load": "verify 1",
+   "shape": "bs 8, sharding ep8",
+   "weight": 60,
+   "floor_us": 37.3,
+   "base_us": 630.0160186365247,
+   "sub_us": 189.0540891700111,
+   "speedup": 3.332464383089692,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.7273130888146788,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.589e-03 (worst row 2.702e-03)",
+   "profile": ""
+  }
+ ],
+ "speedup": 3.332464383089692,
+ "ci95": [
+  3.2448841706639726,
+  3.672181183151913
+ ],
+ "loads": [
+  {
+   "load": "verify 1",
+   "base_us": 37800.96111819148,
+   "sub_us": 11343.245350200667,
+   "speedup": 3.332464383089692
+  }
+ ],
+ "step_base_us": 37800.96111819146,
+ "step_sub_us": 11343.245350200661,
+ "timing_checks_ok": true,
+ "complete": false,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 36,
+  "job": "48140706",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261027-164459-muse_moe_w4a16-68bde9",
+  "problem": "muse_moe_w4a16",
+  "submission": "muse_moe_w4a16/pocos/submission_pocos.py",
+  "cwd": "‹local›",
+  "git": "520265fe088a3b91f075800ced43ed8fc018ec29",
+  "submitted": "2026-10-27T15:44:59.593871+00:00",
+  "ncu": "moe_gemm1"
+ },
+ "warning": "run under Nsight Compute: the timings are not comparable"
+}

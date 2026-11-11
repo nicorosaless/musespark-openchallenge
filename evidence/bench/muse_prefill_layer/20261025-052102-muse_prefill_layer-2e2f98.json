@@ -1,0 +1,235 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-052102-muse_prefill_layer-2e2f98/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-052102-muse_prefill_layer-2e2f98/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-052102-muse_prefill_layer-2e2f98/result.json",
+  "no_tests": false,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-25T05:21:10+0100",
+ "submission_sha256": "4989732e775b756a7799e9d5fff7537ab2de28218d6f8435d07d4149956d2baa",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "problem",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 0.26,
+  "base": 0.02
+ },
+ "tests": [
+  {
+   "shape": "batch 1, ctx 0, layer sliding, q_len 300, page 1",
+   "ok": true,
+   "msg": "update relative L2 error 3.710e-02 (worst row 8.819e-02) [bound 0.069]; attention input relative L2 error 2.380e-02 (worst row 5.160e-02) [bound 0.044]",
+   "s": 4.34
+  },
+  {
+   "shape": "batch 1, ctx 3000, layer full, q_len 753, page 1",
+   "ok": true,
+   "msg": "update relative L2 error 6.808e-02 (worst row 1.248e-01) [bound 0.150]; attention input relative L2 error 4.341e-02 (worst row 8.988e-02) [bound 0.106]",
+   "s": 0.24
+  },
+  {
+   "shape": "batch 2, ctx 2500, layer sliding, q_len 753, page 1",
+   "ok": true,
+   "msg": "update relative L2 error 6.827e-02 (worst row 1.319e-01) [bound 0.150]; attention input relative L2 error 4.399e-02 (worst row 8.399e-02) [bound 0.107]",
+   "s": 0.29
+  },
+  {
+   "shape": "batch 3, ctx 5000, layer full, q_len 200, dist outliers",
+   "ok": true,
+   "msg": "update relative L2 error 6.416e-02 (worst row 1.183e-01) [bound 0.150]; attention input relative L2 error 3.285e-02 (worst row 7.837e-02) [bound 0.081]",
+   "s": 0.28
+  },
+  {
+   "shape": "batch 1, ctx 4096, layer sliding, q_len 4096, page 1",
+   "ok": true,
+   "msg": "update relative L2 error 4.985e-02 (worst row 1.428e-01) [bound 0.114]; attention input relative L2 error 3.218e-02 (worst row 8.665e-02) [bound 0.074]",
+   "s": 23.75
+  }
+ ],
+ "tests_ok": true,
+ "duration_s": 82.7,
+ "within_limit": true,
+ "graph_overhead_us": 3.6160005256533623,
+ "shapes": [
+  {
+   "load": "turn 1",
+   "shape": "batch 1, ctx 80000, layer sliding, q_len 753, page 1, dist soft",
+   "weight": 46,
+   "floor_us": 257.0,
+   "base_us": 1065.4079662635922,
+   "sub_us": 1066.2886085783173,
+   "speedup": 0.9991741051084666,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.00685922598543276,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.333e-02 (worst row 1.088e-01) [bound 0.122]; attention input relative L2 error 3.462e-02 (worst row 6.724e-02) [bound 0.079]",
+   "profile": "   710.96 µs/rep  57.6%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 4, 8, 4, fals\n   169.78 µs/rep  13.8%  x3   nvjet_sm90_tst_128x192_64x5_2x1_v_bz_coopB_TNN\n   104.16 µs/rep   8.4%  x2   nvjet_sm90_tss_64x48_64x15_1x2_h_bz_splitK_NNT\n    49.86 µs/rep   4.0%  x1   nvjet_sm90_tst_112x128_64x7_1x2_h_bz_TNN\n    44.84 µs/rep   3.6%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, false, false, false, true>(sglang::NormR\n    41.39 µs/rep   3.4%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, true, false, true, true>(sglang::NormRes\n    27.43 µs/rep   2.2%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n    16.75 µs/rep   1.4%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n     8.97 µs/rep   0.7%  x1   _post_expert_norm_weighted_sum_kernel\n     8.54 µs/rep   0.7%  x1   void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::BFloat16, float, true>(int, float, c\n     6.62 µs/rep   0.5%  x1   void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<16>, cute::C<64> >, 4, 256, 1, fals\n     5.39 µs/rep   0.4%  x1   void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long, bool)\n     5.24 µs/rep   0.4%  x2   void cublasLt::splitKreduce_kernel<32, 16, int, float, float, float, float, false, float, float, float, true, \n     3.63 µs/rep   0.3%  x1   void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, bool,\n     3.59 µs/rep   0.3%  x1   _qk_rms_norm_fwd_kernel"
+  },
+  {
+   "load": "turn 1",
+   "shape": "batch 1, ctx 80000, layer full, q_len 753, page 1, dist soft",
+   "weight": 16,
+   "floor_us": 496.7,
+   "base_us": 1508.2239853218198,
+   "sub_us": 1511.4264741216466,
+   "speedup": 0.9978811481374322,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.0038283036835460305,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.098e-02 (worst row 9.949e-02) [bound 0.146]; attention input relative L2 error 3.960e-02 (worst row 6.974e-02) [bound 0.095]",
+   "profile": "   647.14 µs/rep  41.3%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 4, 8, 4, fals\n   414.99 µs/rep  26.5%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n   175.21 µs/rep  11.2%  x3   nvjet_sm90_tst_128x192_64x5_2x1_v_bz_coopB_TNN\n   106.40 µs/rep   6.8%  x2   nvjet_sm90_tss_64x48_64x15_1x2_h_bz_splitK_NNT\n    49.64 µs/rep   3.2%  x1   nvjet_sm90_tst_112x128_64x7_1x2_h_bz_TNN\n    43.78 µs/rep   2.8%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, false, false, false, true>(sglang::NormR\n    41.45 µs/rep   2.6%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, true, false, true, true>(sglang::NormRes\n    17.71 µs/rep   1.1%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n     9.51 µs/rep   0.6%  x1   _post_expert_norm_weighted_sum_kernel\n     8.52 µs/rep   0.5%  x1   void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::BFloat16, float, true>(int, float, c\n     6.55 µs/rep   0.4%  x1   void cutlass::device_kernel<flash::FlashAttnFwdCombine<cute::tuple<cute::C<16>, cute::C<64> >, 4, 256, 1, fals\n     5.31 µs/rep   0.3%  x1   void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long, bool)\n     5.01 µs/rep   0.3%  x2   void cublasLt::splitKreduce_kernel<32, 16, int, float, float, float, float, false, float, float, float, true, \n     3.72 µs/rep   0.2%  x1   void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, bool,\n     3.65 µs/rep   0.2%  x1   void flash::prepare_varlen_num_blocks_kernel<1, true>(int, int, int, int const*, int const*, int const*, int c"
+  },
+  {
+   "load": "turn 4",
+   "shape": "batch 4, ctx 80000, layer sliding, q_len 753, page 1, dist soft",
+   "weight": 46,
+   "floor_us": 1036.3,
+   "base_us": 4015.7760130241513,
+   "sub_us": 4020.043128550359,
+   "speedup": 0.9989385398639375,
+   "reps": 60,
+   "copies": 9,
+   "ratio_iqr": 0.014063295274592491,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.396e-02 (worst row 1.121e-01) [bound 0.123]; attention input relative L2 error 3.463e-02 (worst row 7.070e-02) [bound 0.079]",
+   "profile": "  2263.09 µs/rep  57.7%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 4, 8, 4, fals\n   337.47 µs/rep   8.6%  x2   nvjet_sm90_tst_256x152_64x4_1x2_h_bz_coopA_TNT\n   325.07 µs/rep   8.3%  x1   nvjet_sm90_tst_128x256_64x4_2x1_v_bz_coopA_TNN\n   197.44 µs/rep   5.0%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, false, false, false, true>(sglang::NormR\n   193.69 µs/rep   4.9%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, true, false, true, true>(sglang::NormRes\n   166.60 µs/rep   4.2%  x2   nvjet_sm90_tss_64x104_64x10_4x2_h_bz_NNT\n   157.23 µs/rep   4.0%  x1   nvjet_sm90_tst_192x144_64x5_1x2_h_bz_coopB_TNT\n    70.44 µs/rep   1.8%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n    62.22 µs/rep   1.6%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n    33.80 µs/rep   0.9%  x1   _post_expert_norm_weighted_sum_kernel\n    28.97 µs/rep   0.7%  x1   void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::BFloat16, float, true>(int, float, c\n    18.03 µs/rep   0.5%  x1   void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long, bool)\n    12.04 µs/rep   0.3%  x1   _qk_rms_norm_fwd_kernel\n    10.42 µs/rep   0.3%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 16, 4, true, false, true, true, true, true>(sglang::NormGate\n     6.89 µs/rep   0.2%  x1   void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, bool,"
+  },
+  {
+   "load": "turn 4",
+   "shape": "batch 4, ctx 80000, layer full, q_len 753, page 1, dist soft",
+   "weight": 16,
+   "floor_us": 1992.4,
+   "base_us": 5612.095926888287,
+   "sub_us": 5603.918254633261,
+   "speedup": 1.0014592775774815,
+   "reps": 60,
+   "copies": 9,
+   "ratio_iqr": 0.009999347393389701,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.052e-02 (worst row 1.162e-01) [bound 0.146]; attention input relative L2 error 3.916e-02 (worst row 7.545e-02) [bound 0.094]",
+   "profile": "  2447.94 µs/rep  43.7%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 4, 8, 4, fals\n  1620.81 µs/rep  28.9%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n   336.19 µs/rep   6.0%  x2   nvjet_sm90_tst_256x152_64x4_1x2_h_bz_coopA_TNT\n   323.13 µs/rep   5.8%  x1   nvjet_sm90_tst_128x256_64x4_2x1_v_bz_coopA_TNN\n   197.58 µs/rep   3.5%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, false, false, false, true>(sglang::NormR\n   192.67 µs/rep   3.4%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, true, false, true, true>(sglang::NormRes\n   150.78 µs/rep   2.7%  x1   nvjet_sm90_tst_192x144_64x5_1x2_h_bz_coopB_TNT\n   117.72 µs/rep   2.1%  x2   nvjet_sm90_tss_64x104_64x10_4x2_h_bz_NNT\n    75.56 µs/rep   1.3%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n    35.92 µs/rep   0.6%  x1   _post_expert_norm_weighted_sum_kernel\n    28.21 µs/rep   0.5%  x1   void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::BFloat16, float, true>(int, float, c\n    17.61 µs/rep   0.3%  x1   void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long, bool)\n     8.63 µs/rep   0.2%  x1   _qk_rms_norm_fwd_kernel\n     8.30 µs/rep   0.1%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 16, 4, true, false, true, true, true, true>(sglang::NormGate\n     6.88 µs/rep   0.1%  x1   void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, bool,"
+  },
+  {
+   "load": "first turn",
+   "shape": "batch 1, ctx 0, layer full, q_len 16384, page 1, dist soft",
+   "weight": 16,
+   "floor_us": 5518.4,
+   "base_us": 26076.704357750714,
+   "sub_us": 26008.194535135724,
+   "speedup": 1.0026341629566957,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.010211326217336891,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 2.227e-02 (worst row 4.683e-02) [bound 0.044]; attention input relative L2 error 1.455e-02 (worst row 3.376e-02) [bound 0.030]",
+   "profile": " 17209.00 µs/rep  65.3%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 4, 8, 4, fals\n  2637.65 µs/rep  10.0%  x3   nvjet_sm90_tst_192x192_64x4_2x1_v_bz_coopB_TNN\n  1793.91 µs/rep   6.8%  x1   nvjet_sm90_tst_320x128_64x3_1x2_h_bz_coopB_TNT\n  1090.07 µs/rep   4.1%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, false, false, false, true>(sglang::NormR\n  1081.93 µs/rep   4.1%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, true, false, true, true>(sglang::NormRes\n   899.88 µs/rep   3.4%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n   473.27 µs/rep   1.8%  x2   nvjet_sm90_tss_128x256_64x4_2x1_v_bz_coopA_NNN\n   381.71 µs/rep   1.4%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n   243.31 µs/rep   0.9%  x1   void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::BFloat16, float, true>(int, float, c\n   199.73 µs/rep   0.8%  x1   _post_expert_norm_weighted_sum_kernel\n    93.72 µs/rep   0.4%  x1   void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long, bool)\n    62.73 µs/rep   0.2%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 16, 4, true, false, true, true, true, true>(sglang::NormGate\n    46.31 µs/rep   0.2%  x1   _qk_rms_norm_fwd_kernel\n    36.20 µs/rep   0.1%  x2   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n    26.43 µs/rep   0.1%  x1   void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, bool,"
+  },
+  {
+   "load": "first turn",
+   "shape": "batch 1, ctx 32768, layer sliding, q_len 16384, page 1, dist soft",
+   "weight": 138,
+   "floor_us": 5663.4,
+   "base_us": 27327.072476036847,
+   "sub_us": 27162.453371552743,
+   "speedup": 1.0060605388707822,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.011801293750658748,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 3.517e-02 (worst row 1.278e-01) [bound 0.069]; attention input relative L2 error 2.295e-02 (worst row 8.387e-02) [bound 0.045]",
+   "profile": " 19331.25 µs/rep  69.1%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 4, 8, 4, fals\n  2642.61 µs/rep   9.4%  x3   nvjet_sm90_tst_192x192_64x4_2x1_v_bz_coopB_TNN\n  1808.80 µs/rep   6.5%  x1   nvjet_sm90_tst_320x128_64x3_1x2_h_bz_coopB_TNT\n  1090.60 µs/rep   3.9%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, false, false, false, true>(sglang::NormR\n  1081.73 µs/rep   3.9%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, true, false, true, true>(sglang::NormRes\n   477.64 µs/rep   1.7%  x2   nvjet_sm90_tss_128x256_64x4_2x1_v_bz_coopA_NNN\n   411.56 µs/rep   1.5%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n   306.73 µs/rep   1.1%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n   247.57 µs/rep   0.9%  x1   void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::BFloat16, float, true>(int, float, c\n   212.65 µs/rep   0.8%  x1   _post_expert_norm_weighted_sum_kernel\n    91.74 µs/rep   0.3%  x1   void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long, bool)\n    63.79 µs/rep   0.2%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 16, 4, true, false, true, true, true, true>(sglang::NormGate\n    58.73 µs/rep   0.2%  x1   _qk_rms_norm_fwd_kernel\n    36.54 µs/rep   0.1%  x2   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n    26.47 µs/rep   0.1%  x1   void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, bool,"
+  },
+  {
+   "load": "first turn",
+   "shape": "batch 1, ctx 32768, layer full, q_len 16384, page 1, dist soft",
+   "weight": 16,
+   "floor_us": 7710.0,
+   "base_us": 31716.83153975755,
+   "sub_us": 31721.121925623123,
+   "speedup": 0.9998647467174826,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.0071639856210896635,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.459e-02 (worst row 1.063e-01) [bound 0.130]; attention input relative L2 error 3.554e-02 (worst row 7.450e-02) [bound 0.085]",
+   "profile": " 19924.47 µs/rep  60.4%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 4, 8, 4, fals\n  4468.39 µs/rep  13.6%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n  2643.77 µs/rep   8.0%  x3   nvjet_sm90_tst_192x192_64x4_2x1_v_bz_coopB_TNN\n  2036.30 µs/rep   6.2%  x1   nvjet_sm90_tst_320x128_64x3_1x2_h_bz_coopB_TNT\n  1090.46 µs/rep   3.3%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, false, false, false, true>(sglang::NormR\n  1081.77 µs/rep   3.3%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, true, false, true, true>(sglang::NormRes\n   499.32 µs/rep   1.5%  x2   nvjet_sm90_tss_128x256_64x4_2x1_v_bz_coopA_NNN\n   421.12 µs/rep   1.3%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n   246.78 µs/rep   0.7%  x1   void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::BFloat16, float, true>(int, float, c\n   218.82 µs/rep   0.7%  x1   _post_expert_norm_weighted_sum_kernel\n    89.52 µs/rep   0.3%  x1   void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long, bool)\n    59.52 µs/rep   0.2%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 16, 4, true, false, true, true, true, true>(sglang::NormGate\n    46.03 µs/rep   0.1%  x1   _qk_rms_norm_fwd_kernel\n    36.78 µs/rep   0.1%  x2   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n    26.49 µs/rep   0.1%  x1   void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, bool,"
+  },
+  {
+   "load": "first turn",
+   "shape": "batch 1, ctx 65536, layer full, q_len 16384, page 1, dist soft",
+   "weight": 16,
+   "floor_us": 9847.7,
+   "base_us": 37153.82418502122,
+   "sub_us": 37183.79756766073,
+   "speedup": 0.9991939128168668,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.007797284049601894,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.616e-02 (worst row 1.241e-01) [bound 0.135]; attention input relative L2 error 3.656e-02 (worst row 8.188e-02) [bound 0.088]",
+   "profile": " 21327.94 µs/rep  56.6%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 4, 8, 4, fals\n  8039.42 µs/rep  21.3%  x1   void cutlass::device_kernel<flash::enable_sm90_or_later<flash::FlashAttnFwdSm90<flash::CollectiveMainloopFwdSm\n  2647.87 µs/rep   7.0%  x3   nvjet_sm90_tst_192x192_64x4_2x1_v_bz_coopB_TNN\n  1751.49 µs/rep   4.6%  x1   nvjet_sm90_tst_320x128_64x3_1x2_h_bz_coopB_TNT\n  1091.85 µs/rep   2.9%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, false, false, false, true>(sglang::NormR\n  1083.45 µs/rep   2.9%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, true, false, true, true>(sglang::NormRes\n   499.37 µs/rep   1.3%  x2   nvjet_sm90_tss_128x256_64x4_2x1_v_bz_coopA_NNN\n   431.30 µs/rep   1.1%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n   243.30 µs/rep   0.6%  x1   void at::native::(anonymous namespace)::vectorized_layer_norm_kernel<c10::BFloat16, float, true>(int, float, c\n   221.95 µs/rep   0.6%  x1   _post_expert_norm_weighted_sum_kernel\n    89.74 µs/rep   0.2%  x1   void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long, bool)\n    57.62 µs/rep   0.2%  x1   void sglang::norm_gate_kernel<__nv_bfloat16, 64l, 16, 4, true, false, true, true, true, true>(sglang::NormGate\n    45.78 µs/rep   0.1%  x1   _qk_rms_norm_fwd_kernel\n    36.99 µs/rep   0.1%  x2   void at::native::vectorized_elementwise_kernel<8, at::native::ConvertToFloat8E4M3fnOp<c10::BFloat16>, std::arr\n    26.56 µs/rep   0.1%  x1   void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, bool,"
+  }
+ ],
+ "speedup": 1.0009722837533002,
+ "ci95": [
+  0.9859576994970006,
+  1.0159868680095996
+ ],
+ "loads": [
+  {
+   "load": "turn 1",
+   "base_us": 73140.35021327436,
+   "sub_us": 73232.09958054894,
+   "speedup": 0.9987471427447787
+  },
+  {
+   "load": "turn 4",
+   "base_us": 274519.23142932355,
+   "sub_us": 274584.6759874487,
+   "speedup": 0.9997616598308343
+  },
+  {
+   "load": "first turn",
+   "base_us": 5290293.763013557,
+   "sub_us": 5267028.389728992,
+   "speedup": 1.0044171725616542
+  }
+ ],
+ "step_base_us": 473590.7370552152,
+ "step_sub_us": 473130.7197432217,
+ "timing_checks_ok": true,
+ "complete": true,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 85,
+  "job": "47989388",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261025-052102-muse_prefill_layer-2e2f98",
+  "problem": "muse_prefill_layer",
+  "submission": "calibracion/muse_prefill_layer/submission.py",
+  "cwd": "‹local›",
+  "git": "aa0652e951e1efdc053a27b771eb6eb78f7d7832",
+  "submitted": "2026-10-25T04:21:02.273953+00:00",
+  "ncu": null
+ }
+}

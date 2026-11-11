@@ -1,0 +1,41 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-134004-muse_attention_decode-e61acc/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-134004-muse_attention_decode-e61acc/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-134004-muse_attention_decode-e61acc/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "batch 16, ctx 80000, heads tp8, layer full, page 1, q_len 8",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-25T13:40:54+0100",
+ "submission_sha256": "f9863fd6ff38d83a2230ac9f1037728cafdc20b57419ceb12fc4e07985a40e2b",
+ "status": "error",
+ "error": "RuntimeError: No CUDA GPUs are available",
+ "tracebacks": [
+  "Traceback (most recent call last):\n  File \"‹scratch›/okc/bench/running/20261025-134004-muse_attention_decode-e61acc/juez.py\", line 346, in main\n    \"host\": platform.node(), \"gpu\": torch.cuda.get_device_name(0),\n                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py\", line 766, in get_device_name\n    return get_device_properties(device).name\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py\", line 799, in get_device_properties\n    _lazy_init()  # will define _get_device_properties\n    ^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py\", line 591, in _lazy_init\n    torch._C._cuda_init()\nRuntimeError: No CUDA GPUs are available\n"
+ ],
+ "duration_s": 6.4,
+ "within_limit": true,
+ "worker_end": {
+  "rc": 0,
+  "s": 38,
+  "job": "48012225",
+  "node": "‹login›"
+ },
+ "meta": {
+  "id": "20261025-134004-muse_attention_decode-e61acc",
+  "problem": "muse_attention_decode",
+  "submission": "muse_attention_decode/variantes/ncu_trabajo.py",
+  "cwd": "‹local›",
+  "git": "f172b126a074b83446e7908ad85fd3ccd9874226",
+  "submitted": "2026-10-25T12:40:04.894733+00:00",
+  "ncu": "_attn_kernel"
+ },
+ "warning": "run under Nsight Compute: the timings are not comparable"
+}

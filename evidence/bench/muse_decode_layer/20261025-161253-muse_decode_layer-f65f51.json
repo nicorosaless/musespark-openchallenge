@@ -1,0 +1,85 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-161253-muse_decode_layer-f65f51/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-161253-muse_decode_layer-f65f51/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-161253-muse_decode_layer-f65f51/result.json",
+  "no_tests": false,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-25T16:13:18+0100",
+ "submission_sha256": "5993be434dacce490b1c0cbda3a292c78c4185baa30cb04ead1ecf16bcd0115f",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_decode_layer",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 0.3
+ },
+ "tests": [
+  {
+   "shape": "batch 1, ctx 10, layer sliding",
+   "ok": true,
+   "msg": "update relative L2 error 5.584e-03 (worst row 5.584e-03) [bound 0.055]; attention input relative L2 error 3.642e-03 (worst row 3.642e-03) [bound 0.032]",
+   "s": 7.68
+  },
+  {
+   "shape": "batch 1, ctx 3000, layer full",
+   "ok": true,
+   "msg": "update relative L2 error 8.133e-03 (worst row 8.133e-03) [bound 0.150]; attention input relative L2 error 6.104e-03 (worst row 6.104e-03) [bound 0.111]",
+   "s": 0.97
+  },
+  {
+   "shape": "batch 8, ctx 2047, layer sliding",
+   "ok": true,
+   "msg": "update relative L2 error 8.872e-03 (worst row 1.084e-02) [bound 0.150]; attention input relative L2 error 6.110e-03 (worst row 7.647e-03) [bound 0.116]",
+   "s": 1.99
+  },
+  {
+   "shape": "batch 9, ctx 5000, layer sliding, spread mixed, page 1",
+   "ok": true,
+   "msg": "update relative L2 error 8.335e-03 (worst row 9.016e-03) [bound 0.150]; attention input relative L2 error 6.250e-03 (worst row 6.821e-03) [bound 0.106]",
+   "s": 1.32
+  },
+  {
+   "shape": "batch 3, ctx 6000, layer full, q_len 8, dist outliers",
+   "ok": false,
+   "msg": "KeyError: 'pooler'",
+   "s": 0.93
+  }
+ ],
+ "tracebacks": [
+  "Traceback (most recent call last):\n  File \"‹scratch›/okc/bench/running/20261025-161253-muse_decode_layer-f65f51/juez.py\", line 363, in main\n    out = sub(data)\n          ^^^^^^^^^\n  File \"‹scratch›/okc/bench/running/20261025-161253-muse_decode_layer-f65f51/juez.py\", line 179, in __call__\n    return self.mod.kernel_fn(data, self.state) if self.con_state else self.mod.kernel_fn(data)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹scratch›/okc/bench/running/20261025-161253-muse_decode_layer-f65f51/submission.py\", line 1638, in kernel_fn\n    expert_input = _dense(ffn_input, \"pooler\", state)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹scratch›/okc/bench/running/20261025-161253-muse_decode_layer-f65f51/submission.py\", line 1543, in _dense\n    return _project(x, state[\"packed\"][name], None, n, torch.bfloat16, TILING, _block_m(m), ws)\n                       ~~~~~~~~~~~~~~~^^^^^^\nKeyError: 'pooler'\n"
+ ],
+ "tests_ok": false,
+ "duration_s": 30.1,
+ "within_limit": true,
+ "status": "tests_failed",
+ "worker_end": {
+  "rc": 0,
+  "s": 34,
+  "job": "48016569",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261025-161253-muse_decode_layer-f65f51",
+  "problem": "muse_decode_layer",
+  "submission": "‹tmp›/okc-dl/v12b.py",
+  "cwd": "‹local›",
+  "git": "1d16143af62becd1b2ebd8822b09fa4208f4ccf5",
+  "submitted": "2026-10-25T15:12:53.039435+00:00",
+  "ncu": null
+ }
+}

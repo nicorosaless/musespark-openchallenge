@@ -1,0 +1,95 @@
+okc run 077cc23691d64c9f on muse_attention_decode
+submission  ‹tmp›/okc_atn_dbg/chk2/dec.py
+status      ok
+passed      true
+speedup     1.6284720657620995
+speedup_ci  [1.604044984775668 1.6579319133155985]
+score_us    2312.7814588808624
+tests       16/16 passed
+
+scored shapes (µs; speed of light is the reference's bound)
+case                                                         sglang      yours  speedup        sol  
+batch=1 ctx=80000 dist=soft heads=tp8 layer=sliding load=decode 1 page=1      20.06       9.84   2.039x       0.11  
+batch=1 ctx=80000 dist=coherent heads=tp8 layer=full load=decode 1 page=1      31.34      19.53   1.605x       4.27  
+batch=16 ctx=80000 dist=soft heads=tp8 layer=sliding load=decode 16 page=1 spread=agentic      27.12      13.42   2.021x       1.65  
+batch=16 ctx=80000 dist=coherent heads=tp8 layer=full load=decode 16 page=1 spread=agentic     201.22     111.30   1.808x      63.18  
+batch=32 ctx=80000 dist=soft heads=tp8 layer=sliding load=decode 32 page=1 spread=agentic      31.18      16.97   1.838x       3.29  
+batch=32 ctx=80000 dist=coherent heads=tp8 layer=full load=decode 32 page=1 spread=agentic     385.60     204.21   1.888x     126.35  
+batch=1 ctx=80000 dist=soft heads=tp8 layer=sliding load=verify 1 page=1 q_len=8      22.93      10.18   2.253x       0.12  
+batch=1 ctx=80000 dist=coherent heads=tp8 layer=full load=verify 1 page=1 q_len=8      36.10      23.79   1.517x       4.28  
+batch=16 ctx=80000 dist=soft heads=tp8 layer=sliding load=verify 16 page=1 q_len=8 spread=agentic      29.60      17.22   1.719x       1.86  
+batch=16 ctx=80000 dist=coherent heads=tp8 layer=full load=verify 16 page=1 q_len=8 spread=agentic     205.65     181.81   1.131x      63.39  
+batch=32 ctx=80000 dist=soft heads=tp8 layer=sliding load=verify 32 page=1 q_len=8 spread=agentic      34.82      23.93   1.455x       3.72  
+batch=32 ctx=80000 dist=coherent heads=tp8 layer=full load=verify 32 page=1 q_len=8 spread=agentic     390.18     345.08   1.131x     126.78  
+
+profile 0: batch=1 ctx=80000 dist=soft heads=tp8 layer=sliding load=decode 1 page=1
+kernel                                                           GPU time  share  calls
+_attn_kernel                                                       5.6 µs  73.7%      1
+_combine_kernel                                                    2.0 µs  26.3%      1
+total                                                              7.6 µs
+
+profile 1: batch=1 ctx=80000 dist=coherent heads=tp8 layer=full load=decode 1 page=1
+kernel                                                           GPU time  share  calls
+full_fa2                                                          12.8 µs  73.5%      1
+_combine_kernel                                                    4.6 µs  26.5%      1
+total                                                             17.4 µs
+
+profile 2: batch=16 ctx=80000 dist=soft heads=tp8 layer=sliding load=decode 16 page=1 spread=agentic
+kernel                                                           GPU time  share  calls
+_attn_kernel                                                       7.6 µs  78.0%      1
+_combine_kernel                                                    2.1 µs  22.0%      1
+total                                                              9.7 µs
+
+profile 3: batch=16 ctx=80000 dist=coherent heads=tp8 layer=full load=decode 16 page=1 spread=agentic
+kernel                                                           GPU time  share  calls
+full_fa2                                                         110.0 µs  97.5%      1
+_combine_kernel                                                    2.8 µs   2.5%      1
+total                                                            112.8 µs
+
+profile 4: batch=32 ctx=80000 dist=soft heads=tp8 layer=sliding load=decode 32 page=1 spread=agentic
+kernel                                                           GPU time  share  calls
+_attn_kernel                                                      11.4 µs  85.8%      1
+_combine_kernel                                                    1.9 µs  14.2%      1
+total                                                             13.3 µs
+
+profile 5: batch=32 ctx=80000 dist=coherent heads=tp8 layer=full load=decode 32 page=1 spread=agentic
+kernel                                                           GPU time  share  calls
+full_fa2                                                         201.8 µs  98.7%      1
+_combine_kernel                                                    2.7 µs   1.3%      1
+total                                                            204.4 µs
+
+profile 6: batch=1 ctx=80000 dist=soft heads=tp8 layer=sliding load=verify 1 page=1 q_len=8
+kernel                                                           GPU time  share  calls
+_attn_kernel                                                       5.5 µs  72.8%      1
+_combine_kernel                                                    2.0 µs  27.2%      1
+total                                                              7.5 µs
+
+profile 7: batch=1 ctx=80000 dist=coherent heads=tp8 layer=full load=verify 1 page=1 q_len=8
+kernel                                                           GPU time  share  calls
+verify_wg                                                         17.1 µs  77.7%      1
+_combine_kernel                                                    4.9 µs  22.3%      1
+total                                                             22.0 µs
+
+profile 8: batch=16 ctx=80000 dist=soft heads=tp8 layer=sliding load=verify 16 page=1 q_len=8 spread=agentic
+kernel                                                           GPU time  share  calls
+_attn_kernel                                                      11.6 µs  77.5%      1
+_combine_kernel                                                    3.4 µs  22.5%      1
+total                                                             14.9 µs
+
+profile 9: batch=16 ctx=80000 dist=coherent heads=tp8 layer=full load=verify 16 page=1 q_len=8 spread=agentic
+kernel                                                           GPU time  share  calls
+verify_wg                                                        176.7 µs  97.9%      1
+_combine_kernel                                                    3.8 µs   2.1%      1
+total                                                            180.6 µs
+
+profile 10: batch=32 ctx=80000 dist=soft heads=tp8 layer=sliding load=verify 32 page=1 q_len=8 spread=agentic
+kernel                                                           GPU time  share  calls
+_attn_kernel                                                      17.3 µs  78.9%      1
+_combine_kernel                                                    4.6 µs  21.1%      1
+total                                                             21.9 µs
+
+profile 11: batch=32 ctx=80000 dist=coherent heads=tp8 layer=full load=verify 32 page=1 q_len=8 spread=agentic
+kernel                                                           GPU time  share  calls
+verify_wg                                                        341.4 µs  98.5%      1
+_combine_kernel                                                    5.2 µs   1.5%      1
+total                                                            346.6 µs

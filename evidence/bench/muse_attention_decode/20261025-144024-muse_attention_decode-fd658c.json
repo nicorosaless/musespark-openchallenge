@@ -1,0 +1,40 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-144024-muse_attention_decode-fd658c/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-144024-muse_attention_decode-fd658c/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-144024-muse_attention_decode-fd658c/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "layer full, page 1, spread agentic",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-25T14:40:32+0100",
+ "submission_sha256": "580e7af3a71e427c87c0e97182c968094aaa8d8440ac36b91b9795d9a8df85b3",
+ "status": "error",
+ "error": "RuntimeError: No CUDA GPUs are available",
+ "tracebacks": [
+  "Traceback (most recent call last):\n  File \"‹scratch›/okc/bench/running/20261025-144024-muse_attention_decode-fd658c/juez.py\", line 346, in main\n    \"host\": platform.node(), \"gpu\": torch.cuda.get_device_name(0),\n                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py\", line 766, in get_device_name\n    return get_device_properties(device).name\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py\", line 799, in get_device_properties\n    _lazy_init()  # will define _get_device_properties\n    ^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py\", line 591, in _lazy_init\n    torch._C._cuda_init()\nRuntimeError: No CUDA GPUs are available\n"
+ ],
+ "duration_s": 2.9,
+ "within_limit": true,
+ "worker_end": {
+  "rc": 0,
+  "s": 5,
+  "job": "48012225",
+  "node": "‹login›"
+ },
+ "meta": {
+  "id": "20261025-144024-muse_attention_decode-fd658c",
+  "problem": "muse_attention_decode",
+  "submission": "muse_attention_decode/variantes/bis/15d3341.py",
+  "cwd": "‹local›",
+  "git": "99e9a37cf9963ff7702431db7e0180048d131420",
+  "submitted": "2026-10-25T13:40:24.195171+00:00",
+  "ncu": null
+ }
+}

@@ -1,0 +1,51 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261026-011421-muse_bf16_proj-887fc0/problem",
+  "submission": "‹scratch›/okc/bench/running/20261026-011421-muse_bf16_proj-887fc0/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261026-011421-muse_bf16_proj-887fc0/result.json",
+  "no_tests": true,
+  "no_timing": true,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-26T01:14:29+0100",
+ "submission_sha256": "79feb9312789988ed841f216abbef864352d6b6413206cc6388dc2f16457c642",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_bf16_proj",
+ "limit_s": 600,
+ "prepare_s": {
+  "sub": 4.23
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 19.1,
+ "within_limit": true,
+ "status": "tests",
+ "worker_end": {
+  "rc": 0,
+  "s": 22,
+  "job": "48044409",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261026-011421-muse_bf16_proj-887fc0",
+  "problem": "muse_bf16_proj",
+  "submission": "‹tmp›/bf16var/v8_timed.py",
+  "cwd": "‹local›",
+  "git": "e08c57a5c077f8d6052b64910e65f8e76a641fc9",
+  "submitted": "2026-10-26T00:14:21.142511+00:00",
+  "ncu": null
+ }
+}

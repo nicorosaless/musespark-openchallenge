@@ -1,0 +1,59 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261027-140601-muse_bf16_proj-4862e1/problem",
+  "submission": "‹scratch›/okc/bench/running/20261027-140601-muse_bf16_proj-4862e1/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261027-140601-muse_bf16_proj-4862e1/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "layer=pooler load=decode 1",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-27T14:08:50+0100",
+ "submission_sha256": "099a099d41cddeb4a4cdc1301776f3cc3b128bde24d2c55872f836eb9fdf5aff",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_bf16_proj",
+ "limit_s": 600,
+ "prepare_s": {
+  "sub": 8.23,
+  "base": 0.0
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 27.0,
+ "within_limit": true,
+ "graph_overhead_us": 2.975999843329191,
+ "shapes": [],
+ "status": "error",
+ "error": "ZeroDivisionError: division by zero",
+ "tracebacks": [
+  "Traceback (most recent call last):\n  File \"‹scratch›/okc/bench/running/20261027-140601-muse_bf16_proj-4862e1/juez.py\", line 397, in main\n    sp, loads = speedup_problema(res[\"formas\"], [r[\"speedup\"] for r in res[\"formas\"]])\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹scratch›/okc/bench/running/20261027-140601-muse_bf16_proj-4862e1/juez.py\", line 248, in speedup_problema\n    return float(math.exp(sum(map(math.log, sp)) / len(sp))), loads\n                          ~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~\nZeroDivisionError: division by zero\n"
+ ],
+ "worker_end": {
+  "rc": 0,
+  "s": 31,
+  "job": "48135808",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261027-140601-muse_bf16_proj-4862e1",
+  "problem": "muse_bf16_proj",
+  "submission": "muse_bf16_proj/submission_v10.py",
+  "cwd": "‹local›",
+  "git": "c42b77ddc190c88f9b6d7ebae2ed8a96cdce20dd",
+  "submitted": "2026-10-27T13:06:01.769289+00:00",
+  "ncu": "_c1_gemv"
+ },
+ "warning": "run under Nsight Compute: the timings are not comparable"
+}

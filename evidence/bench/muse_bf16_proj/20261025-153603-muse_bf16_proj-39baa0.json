@@ -1,0 +1,41 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-153603-muse_bf16_proj-39baa0/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-153603-muse_bf16_proj-39baa0/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-153603-muse_bf16_proj-39baa0/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "decode 32 | layer pooler",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-25T15:36:09+0100",
+ "submission_sha256": "4022762b7ca30564c2e5936fe79bd48ecc2d31dfd44006b985cc3050d4b43107",
+ "status": "error",
+ "error": "RuntimeError: No CUDA GPUs are available",
+ "tracebacks": [
+  "Traceback (most recent call last):\n  File \"‹scratch›/okc/bench/running/20261025-153603-muse_bf16_proj-39baa0/juez.py\", line 346, in main\n    \"host\": platform.node(), \"gpu\": torch.cuda.get_device_name(0),\n                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py\", line 766, in get_device_name\n    return get_device_properties(device).name\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py\", line 799, in get_device_properties\n    _lazy_init()  # will define _get_device_properties\n    ^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py\", line 591, in _lazy_init\n    torch._C._cuda_init()\nRuntimeError: No CUDA GPUs are available\n"
+ ],
+ "duration_s": 7.7,
+ "within_limit": true,
+ "worker_end": {
+  "rc": 0,
+  "s": 10,
+  "job": "48016646",
+  "node": "‹login›"
+ },
+ "meta": {
+  "id": "20261025-153603-muse_bf16_proj-39baa0",
+  "problem": "muse_bf16_proj",
+  "submission": "muse_bf16_proj/ncu_submission.py",
+  "cwd": "‹local›",
+  "git": "a6a415f5f6951870bfeb15c4f69995e968c9fde5",
+  "submitted": "2026-10-25T14:36:03.929696+00:00",
+  "ncu": "gemv_c"
+ },
+ "warning": "run under Nsight Compute: the timings are not comparable"
+}

@@ -1,0 +1,40 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-143312-muse_bf16_proj-be8354/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-143312-muse_bf16_proj-be8354/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-143312-muse_bf16_proj-be8354/result.json",
+  "no_tests": false,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "decode",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-25T14:33:19+0100",
+ "submission_sha256": "44bed8f82d87ba8366742a58becd649c34c419239297938855ed0d4885d2c816",
+ "status": "error",
+ "error": "RuntimeError: No CUDA GPUs are available",
+ "tracebacks": [
+  "Traceback (most recent call last):\n  File \"‹scratch›/okc/bench/running/20261025-143312-muse_bf16_proj-be8354/juez.py\", line 346, in main\n    \"host\": platform.node(), \"gpu\": torch.cuda.get_device_name(0),\n                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py\", line 766, in get_device_name\n    return get_device_properties(device).name\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py\", line 799, in get_device_properties\n    _lazy_init()  # will define _get_device_properties\n    ^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/torch/cuda/__init__.py\", line 591, in _lazy_init\n    torch._C._cuda_init()\nRuntimeError: No CUDA GPUs are available\n"
+ ],
+ "duration_s": 2.8,
+ "within_limit": true,
+ "worker_end": {
+  "rc": 0,
+  "s": 4,
+  "job": "48012225",
+  "node": "‹login›"
+ },
+ "meta": {
+  "id": "20261025-143312-muse_bf16_proj-be8354",
+  "problem": "muse_bf16_proj",
+  "submission": "muse_bf16_proj/submission.py",
+  "cwd": "‹local›",
+  "git": "c17ec13169399266d961603653295d74f423c8f2",
+  "submitted": "2026-10-25T13:33:12.255493+00:00",
+  "ncu": null
+ }
+}

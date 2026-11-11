@@ -1,0 +1,282 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261027-181039-muse_decode_layer-d051f3/problem",
+  "submission": "‹scratch›/okc/bench/running/20261027-181039-muse_decode_layer-d051f3/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261027-181039-muse_decode_layer-d051f3/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-27T18:10:48+0100",
+ "submission_sha256": "93600d5e778e2a9d05fb216b630e3bed3656ddb24df1796862a4c8c1ae853664",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_decode_layer",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 9.94,
+  "base": 0.11
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 43.8,
+ "within_limit": true,
+ "graph_overhead_us": 4.064000211656094,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, layer sliding, page 1, dist soft",
+   "weight": 46,
+   "floor_us": 40.0,
+   "base_us": 254.1919881477952,
+   "sub_us": 154.67033951733185,
+   "speedup": 1.6434436553319345,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.09602978350883751,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.334e-02 (worst row 6.334e-02) [bound 0.150]; attention input relative L2 error 4.264e-02 (worst row 4.264e-02) [bound 0.109]",
+   "profile": "    54.86 µs/rep  22.4%  x3   _c1_gemv\n    40.27 µs/rep  16.4%  x1   moe_gemm1\n    37.64 µs/rep  15.4%  x1   moe_gemm2\n    21.75 µs/rep   8.9%  x3   _c1_finish\n    20.53 µs/rep   8.4%  x1   _c1_gemv_sk\n    18.65 µs/rep   7.6%  x1   _swiglu_reduce\n    14.21 µs/rep   5.8%  x1   _proj_kernel_red\n     8.60 µs/rep   3.5%  x1   full_fa2\n     7.25 µs/rep   3.0%  x1   _combine\n     6.30 µs/rep   2.6%  x1   _ffn_boundary_kernel\n     5.95 µs/rep   2.4%  x1   _splitk_finish\n     3.62 µs/rep   1.5%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, false, false, false, true>(sglang::NormRe\n     3.32 µs/rep   1.4%  x1   _route_pre_expert_kernel\n     1.94 µs/rep   0.8%  x1   _route_prep"
+  },
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, layer full, page 1, dist soft",
+   "weight": 16,
+   "floor_us": 44.2,
+   "base_us": 283.6159998551011,
+   "sub_us": 180.1154267649931,
+   "speedup": 1.5746346937020066,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.08202859591901701,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.025e-02 (worst row 6.025e-02) [bound 0.150]; attention input relative L2 error 4.000e-02 (worst row 4.000e-02) [bound 0.101]",
+   "profile": "    55.03 µs/rep  21.2%  x3   _c1_gemv\n    40.25 µs/rep  15.5%  x1   moe_gemm1\n    36.22 µs/rep  13.9%  x1   moe_gemm2\n    21.66 µs/rep   8.3%  x3   _c1_finish\n    20.50 µs/rep   7.9%  x1   _c1_gemv_sk\n    19.95 µs/rep   7.7%  x1   full_fa2\n    18.70 µs/rep   7.2%  x1   _swiglu_reduce\n    14.16 µs/rep   5.5%  x1   _proj_kernel_red\n     7.64 µs/rep   2.9%  x1   _combine\n     6.44 µs/rep   2.5%  x1   _ffn_boundary_kernel\n     5.29 µs/rep   2.0%  x1   _splitk_finish\n     4.86 µs/rep   1.9%  x1   _combine_kernel\n     3.59 µs/rep   1.4%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, false, false, false, true>(sglang::NormRe\n     3.47 µs/rep   1.3%  x1   _route_pre_expert_kernel\n     1.94 µs/rep   0.7%  x1   _route_prep"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, layer sliding, page 1, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 76.7,
+   "base_us": 402.4639958515763,
+   "sub_us": 287.41598597291306,
+   "speedup": 1.4002839629438903,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.059468143341415924,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 8.157e-03 (worst row 1.158e-02) [bound 0.132]; attention input relative L2 error 5.783e-03 (worst row 7.072e-03) [bound 0.083]",
+   "profile": "   104.93 µs/rep  22.2%  x1   moe_gemm1\n    82.54 µs/rep  17.5%  x2   _c1_gemm\n    59.65 µs/rep  12.6%  x1   moe_gemm2\n    58.36 µs/rep  12.4%  x1   _swiglu_reduce\n    44.59 µs/rep   9.4%  x2   _c1_finish\n    41.42 µs/rep   8.8%  x2   _proj_kernel_red\n    19.69 µs/rep   4.2%  x2   _splitk_finish\n    13.93 µs/rep   3.0%  x1   nvjet_sm90_tst_64x16_64x16_2x1_v_bz_TNT\n    11.24 µs/rep   2.4%  x1   _combine_kernel\n    11.19 µs/rep   2.4%  x1   _attn_kernel\n     9.33 µs/rep   2.0%  x1   _combine\n     4.34 µs/rep   0.9%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, true, false, true, true>(sglang::NormResi\n     3.74 µs/rep   0.8%  x1   moe_route\n     3.72 µs/rep   0.8%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, false, false, false, true>(sglang::NormRe\n     3.45 µs/rep   0.7%  x1   _route_pre_expert_kernel"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, layer full, page 1, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 137.5,
+   "base_us": 679.936015047133,
+   "sub_us": 538.6297873771301,
+   "speedup": 1.262343878822775,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.05373866820252271,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.268e-02 (worst row 8.098e-02) [bound 0.150]; attention input relative L2 error 3.824e-02 (worst row 4.925e-02) [bound 0.096]",
+   "profile": "   240.31 µs/rep  36.0%  x1   full_fa2\n    91.07 µs/rep  13.6%  x1   moe_gemm1\n    81.94 µs/rep  12.3%  x2   _c1_gemm\n    59.68 µs/rep   8.9%  x1   moe_gemm2\n    44.49 µs/rep   6.7%  x2   _c1_finish\n    44.16 µs/rep   6.6%  x1   _swiglu_reduce\n    42.88 µs/rep   6.4%  x2   _proj_kernel_red\n    19.66 µs/rep   2.9%  x2   _splitk_finish\n    13.80 µs/rep   2.1%  x1   nvjet_sm90_tst_64x16_64x16_2x1_v_bz_TNT\n    12.19 µs/rep   1.8%  x1   _combine\n     4.24 µs/rep   0.6%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, true, false, true, true>(sglang::NormResi\n     3.69 µs/rep   0.6%  x1   moe_route\n     3.58 µs/rep   0.5%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, false, false, false, true>(sglang::NormRe\n     3.49 µs/rep   0.5%  x1   _route_pre_expert_kernel\n     2.93 µs/rep   0.4%  x1   _combine_kernel"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, layer sliding, page 1, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 84.5,
+   "base_us": 437.5839913263917,
+   "sub_us": 383.07577214811613,
+   "speedup": 1.1422909594950839,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.020408667312340922,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 7.515e-03 (worst row 9.420e-03) [bound 0.134]; attention input relative L2 error 5.718e-03 (worst row 7.811e-03) [bound 0.088]",
+   "profile": "   135.69 µs/rep  25.5%  x3   _proj_kernel_red\n   120.50 µs/rep  22.7%  x1   moe_gemm1\n    78.74 µs/rep  14.8%  x1   moe_gemm2\n    50.41 µs/rep   9.5%  x1   nvjet_sm90_tst_64x32_64x16_2x1_v_bz_NNT\n    34.64 µs/rep   6.5%  x1   _swiglu_reduce\n    26.57 µs/rep   5.0%  x3   _splitk_finish\n    19.07 µs/rep   3.6%  x1   _combine\n    18.03 µs/rep   3.4%  x1   _attn_kernel\n    17.81 µs/rep   3.4%  x1   _combine_kernel\n    14.28 µs/rep   2.7%  x1   nvjet_sm90_tst_64x32_64x16_2x1_v_bz_TNT\n     4.37 µs/rep   0.8%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, true, false, true, true>(sglang::NormResi\n     3.85 µs/rep   0.7%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, false, false, false, true>(sglang::NormRe\n     3.75 µs/rep   0.7%  x1   moe_route\n     3.51 µs/rep   0.7%  x1   _route_pre_expert_kernel"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, layer full, page 1, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 208.1,
+   "base_us": 934.4319934025407,
+   "sub_us": 826.4280027444346,
+   "speedup": 1.130687719074671,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.008060429965903504,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.963e-02 (worst row 9.017e-02) [bound 0.150]; attention input relative L2 error 3.953e-02 (worst row 5.825e-02) [bound 0.099]",
+   "profile": "   470.86 µs/rep  49.8%  x1   full_fa2\n   134.86 µs/rep  14.3%  x3   _proj_kernel_red\n   114.44 µs/rep  12.1%  x1   moe_gemm1\n    73.07 µs/rep   7.7%  x1   moe_gemm2\n    49.96 µs/rep   5.3%  x1   nvjet_sm90_tst_64x32_64x16_2x1_v_bz_NNT\n    29.19 µs/rep   3.1%  x1   _swiglu_reduce\n    25.39 µs/rep   2.7%  x3   _splitk_finish\n    17.01 µs/rep   1.8%  x1   _combine\n    13.78 µs/rep   1.5%  x1   nvjet_sm90_tst_64x32_64x16_2x1_v_bz_TNT\n     4.27 µs/rep   0.5%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, true, false, true, true>(sglang::NormResi\n     3.75 µs/rep   0.4%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, false, false, false, true>(sglang::NormRe\n     3.67 µs/rep   0.4%  x1   moe_route\n     3.37 µs/rep   0.4%  x1   _route_pre_expert_kernel\n     2.57 µs/rep   0.3%  x1   _combine_kernel"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer sliding, page 1, q_len 8, dist soft",
+   "weight": 46,
+   "floor_us": 62.3,
+   "base_us": 373.9359909668565,
+   "sub_us": 244.27989790070404,
+   "speedup": 1.5307685740021704,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.07220162369882743,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.413e-02 (worst row 7.296e-02) [bound 0.139]; attention input relative L2 error 3.423e-02 (worst row 4.749e-02) [bound 0.088]",
+   "profile": "   118.70 µs/rep  28.6%  x1   moe_gemm1\n    81.77 µs/rep  19.7%  x1   moe_gemm2\n    50.29 µs/rep  12.1%  x3   _proj_kernel_red\n    39.99 µs/rep   9.6%  x1   _c1_gemm\n    32.43 µs/rep   7.8%  x1   _swiglu_reduce\n    18.49 µs/rep   4.5%  x1   _combine\n    18.09 µs/rep   4.4%  x2   _splitk_finish\n    12.82 µs/rep   3.1%  x1   nvjet_sm90_tst_64x8_64x16_2x1_v_bz_TNT\n    10.60 µs/rep   2.6%  x1   _ffn_boundary_kernel\n     7.51 µs/rep   1.8%  x1   _c1_finish\n     7.15 µs/rep   1.7%  x1   _combine_kernel\n     6.97 µs/rep   1.7%  x1   _attn_kernel\n     3.67 µs/rep   0.9%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, false, false, false, true>(sglang::NormRe\n     3.38 µs/rep   0.8%  x1   _route_pre_expert_kernel\n     3.23 µs/rep   0.8%  x1   _route_prep"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer full, page 1, q_len 8, dist soft",
+   "weight": 16,
+   "floor_us": 66.4,
+   "base_us": 424.71999768167734,
+   "sub_us": 291.999886802015,
+   "speedup": 1.4545211038716968,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.0870862087761568,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.078e-02 (worst row 6.947e-02) [bound 0.150]; attention input relative L2 error 3.863e-02 (worst row 4.651e-02) [bound 0.096]",
+   "profile": "    90.10 µs/rep  22.1%  x1   moe_gemm1\n    83.46 µs/rep  20.5%  x1   moe_gemm2\n    51.32 µs/rep  12.6%  x3   _proj_kernel_red\n    44.03 µs/rep  10.8%  x1   _swiglu_reduce\n    44.00 µs/rep  10.8%  x1   _c1_gemm\n    22.61 µs/rep   5.5%  x1   verify_ws\n    16.02 µs/rep   3.9%  x2   _splitk_finish\n    13.58 µs/rep   3.3%  x1   nvjet_sm90_tst_64x8_64x16_2x1_v_bz_TNT\n    10.25 µs/rep   2.5%  x1   _ffn_boundary_kernel\n     9.10 µs/rep   2.2%  x1   _combine\n     7.53 µs/rep   1.8%  x1   _c1_finish\n     5.24 µs/rep   1.3%  x1   _combine_kernel\n     3.64 µs/rep   0.9%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, false, false, false, true>(sglang::NormRe\n     3.43 µs/rep   0.8%  x1   _route_pre_expert_kernel\n     3.26 µs/rep   0.8%  x1   _route_prep"
+  },
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, layer sliding, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 126.6,
+   "base_us": 659.9360043182969,
+   "sub_us": 653.2608474586098,
+   "speedup": 1.0102182105136954,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.03156414490522974,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.849e-02 (worst row 9.011e-02) [bound 0.145]; attention input relative L2 error 3.795e-02 (worst row 5.553e-02) [bound 0.094]",
+   "profile": "   291.45 µs/rep  41.1%  x1   moe_gemm1\n   141.42 µs/rep  19.9%  x1   moe_gemm2\n    62.41 µs/rep   8.8%  x1   _proj_kernel_red\n    56.99 µs/rep   8.0%  x1   nvjet_sm90_tst_64x64_64x13_2x1_v_bz_NNT\n    49.59 µs/rep   7.0%  x1   nvjet_sm90_tst_128x64_64x8_1x2_h_bz_NNT\n    28.54 µs/rep   4.0%  x1   nvjet_sm90_tst_96x64_64x10_4x2_h_bz_splitK_TNN\n    15.73 µs/rep   2.2%  x1   nvjet_sm90_tst_128x64_64x8_1x2_h_bz_TNT\n    15.39 µs/rep   2.2%  x1   _combine_kernel\n    14.65 µs/rep   2.1%  x1   _attn_kernel\n     6.84 µs/rep   1.0%  x1   _splitk_finish\n     6.39 µs/rep   0.9%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, false, false, false, true>(sglang::NormRe\n     5.88 µs/rep   0.8%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, true, false, true, true>(sglang::NormResi\n     4.07 µs/rep   0.6%  x1   moe_route\n     3.72 µs/rep   0.5%  x1   _route_pre_expert_kernel\n     3.31 µs/rep   0.5%  x1   _combine"
+  },
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, layer full, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 188.7,
+   "base_us": 944.7200233116746,
+   "sub_us": 1041.3759209352006,
+   "speedup": 0.9071844319804083,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.006622801074010587,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.252e-02 (worst row 8.985e-02) [bound 0.150]; attention input relative L2 error 4.080e-02 (worst row 5.564e-02) [bound 0.102]",
+   "profile": "   383.45 µs/rep  35.9%  x1   verify_ws\n   289.06 µs/rep  27.1%  x1   moe_gemm1\n   146.99 µs/rep  13.8%  x1   moe_gemm2\n    61.53 µs/rep   5.8%  x1   _proj_kernel_red\n    56.13 µs/rep   5.3%  x1   nvjet_sm90_tst_64x64_64x13_2x1_v_bz_NNT\n    49.43 µs/rep   4.6%  x1   nvjet_sm90_tst_128x64_64x8_1x2_h_bz_NNT\n    28.74 µs/rep   2.7%  x1   nvjet_sm90_tst_96x64_64x10_4x2_h_bz_splitK_TNN\n    15.03 µs/rep   1.4%  x1   nvjet_sm90_tst_128x64_64x8_1x2_h_bz_TNT\n     6.76 µs/rep   0.6%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, false, false, false, true>(sglang::NormRe\n     6.41 µs/rep   0.6%  x1   _splitk_finish\n     5.88 µs/rep   0.6%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, true, false, true, true>(sglang::NormResi\n     4.44 µs/rep   0.4%  x1   _combine_kernel\n     3.97 µs/rep   0.4%  x1   moe_route\n     3.70 µs/rep   0.3%  x1   _route_pre_expert_kernel\n     3.30 µs/rep   0.3%  x1   _combine"
+  },
+  {
+   "load": "verify 32",
+   "shape": "batch 32, ctx 80000, layer sliding, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 143.8,
+   "base_us": 829.3439978733659,
+   "sub_us": 802.2327820674703,
+   "speedup": 1.0337946995085716,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.01356336502277311,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.792e-02 (worst row 9.298e-02) [bound 0.144]; attention input relative L2 error 3.762e-02 (worst row 6.178e-02) [bound 0.093]",
+   "profile": "   375.00 µs/rep  42.5%  x1   moe_gemm1\n   183.17 µs/rep  20.8%  x1   moe_gemm2\n    69.67 µs/rep   7.9%  x1   _proj_kernel_red\n    63.67 µs/rep   7.2%  x1   nvjet_sm90_tst_128x64_64x8_1x2_h_bz_NNT\n    51.97 µs/rep   5.9%  x1   nvjet_sm90_tst_128x128_64x6_2x1_v_bz_NNT\n    29.73 µs/rep   3.4%  x1   nvjet_sm90_tst_96x64_64x10_2x4_h_bz_TNN\n    25.02 µs/rep   2.8%  x1   _combine_kernel\n    22.55 µs/rep   2.6%  x1   _attn_kernel\n    15.84 µs/rep   1.8%  x1   nvjet_sm90_tst_128x128_64x6_2x1_v_bz_TNT\n    12.60 µs/rep   1.4%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, false, false, false, true>(sglang::NormR\n    11.00 µs/rep   1.2%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, true, false, true, true>(sglang::NormRes\n     8.54 µs/rep   1.0%  x1   _splitk_finish\n     4.52 µs/rep   0.5%  x1   moe_route\n     4.23 µs/rep   0.5%  x1   _combine\n     4.19 µs/rep   0.5%  x1   _route_pre_expert_kernel"
+  },
+  {
+   "load": "verify 32",
+   "shape": "batch 32, ctx 80000, layer full, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 267.2,
+   "base_us": 1318.1440467014909,
+   "sub_us": 1579.5141091107362,
+   "speedup": 0.8345250220294669,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.014420135194486483,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.418e-02 (worst row 1.039e-01) [bound 0.150]; attention input relative L2 error 4.161e-02 (worst row 7.194e-02) [bound 0.103]",
+   "profile": "   768.30 µs/rep  47.4%  x1   verify_ws\n   379.40 µs/rep  23.4%  x1   moe_gemm1\n   191.02 µs/rep  11.8%  x1   moe_gemm2\n    70.63 µs/rep   4.4%  x1   _proj_kernel_red\n    62.10 µs/rep   3.8%  x1   nvjet_sm90_tst_128x64_64x8_1x2_h_bz_NNT\n    52.15 µs/rep   3.2%  x1   nvjet_sm90_tst_128x128_64x6_2x1_v_bz_NNT\n    29.63 µs/rep   1.8%  x1   nvjet_sm90_tst_96x64_64x10_2x4_h_bz_TNN\n    15.81 µs/rep   1.0%  x1   nvjet_sm90_tst_128x128_64x6_2x1_v_bz_TNT\n    12.78 µs/rep   0.8%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, false, false, false, true>(sglang::NormR\n    11.00 µs/rep   0.7%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 512, true, false, true, false, true, true>(sglang::NormRes\n    10.12 µs/rep   0.6%  x1   _splitk_finish\n     6.26 µs/rep   0.4%  x1   _combine_kernel\n     4.47 µs/rep   0.3%  x1   moe_route\n     4.31 µs/rep   0.3%  x1   _combine\n     4.24 µs/rep   0.3%  x1   _route_pre_expert_kernel"
+  }
+ ],
+ "speedup": 1.2308311218861419,
+ "ci95": [
+  1.2123686550578496,
+  1.2492935887144339
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 16230.687452480197,
+   "sub_us": 9996.682446037154,
+   "speedup": 1.623607385759693
+  },
+  {
+   "load": "decode 16",
+   "base_us": 29392.32004992664,
+   "sub_us": 21839.211952788086,
+   "speedup": 1.3458507620818383
+  },
+  {
+   "load": "decode 32",
+   "base_us": 35079.77549545467,
+   "sub_us": 30844.333562724292,
+   "speedup": 1.1373166946245503
+  },
+  {
+   "load": "verify 1",
+   "base_us": 23996.575547382236,
+   "sub_us": 15908.873492264625,
+   "speedup": 1.5083767910436963
+  },
+  {
+   "load": "verify 16",
+   "base_us": 45472.57657162845,
+   "sub_us": 46712.01371805926,
+   "speedup": 0.973466415857991
+  },
+  {
+   "load": "verify 32",
+   "base_us": 59240.128649398685,
+   "sub_us": 62174.933720875415,
+   "speedup": 0.9527976164051565
+  }
+ ],
+ "step_base_us": 32039.844695538046,
+ "step_sub_us": 26031.064803138685,
+ "timing_checks_ok": true,
+ "complete": true,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 47,
+  "job": "48145398",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261027-181039-muse_decode_layer-d051f3",
+  "problem": "muse_decode_layer",
+  "submission": "‹tmp›/okc-dl/v45/submission.py",
+  "cwd": "‹local›",
+  "git": "b47ead53b2184a9b87d57dd224c480fef8d7b6f0",
+  "submitted": "2026-10-27T17:10:39.043330+00:00",
+  "ncu": null
+ }
+}

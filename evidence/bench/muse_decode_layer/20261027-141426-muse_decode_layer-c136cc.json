@@ -1,0 +1,270 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261027-141426-muse_decode_layer-c136cc/problem",
+  "submission": "‹scratch›/okc/bench/running/20261027-141426-muse_decode_layer-c136cc/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261027-141426-muse_decode_layer-c136cc/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": true,
+  "keep_going": false
+ },
+ "start": "2026-10-27T14:15:11+0100",
+ "submission_sha256": "16dd6701e0cb0ac993c69388be13d3aca6cc62ddc65a987c76e22f50efed5f69",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_decode_layer",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 4.33,
+  "base": 0.1
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 39.9,
+ "within_limit": true,
+ "graph_overhead_us": 4.064000211656094,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, layer sliding, page 1, dist soft",
+   "weight": 46,
+   "floor_us": 40.0,
+   "base_us": 254.76799253374338,
+   "sub_us": 171.0173059828891,
+   "speedup": 1.48972053482841,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.0752499204601147,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.999e-03 (worst row 6.999e-03) [bound 0.150]; attention input relative L2 error 5.231e-03 (worst row 5.231e-03) [bound 0.109]"
+  },
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, layer full, page 1, dist soft",
+   "weight": 16,
+   "floor_us": 44.2,
+   "base_us": 281.8240011110902,
+   "sub_us": 201.77674168043163,
+   "speedup": 1.3967120232193817,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.06589075033950631,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.025e-02 (worst row 6.025e-02) [bound 0.150]; attention input relative L2 error 4.000e-02 (worst row 4.000e-02) [bound 0.101]"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, layer sliding, page 1, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 76.7,
+   "base_us": 403.23200169950724,
+   "sub_us": 307.67595697926015,
+   "speedup": 1.3105736491678104,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.04723869168596351,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 8.158e-03 (worst row 1.159e-02) [bound 0.132]; attention input relative L2 error 5.783e-03 (worst row 7.074e-03) [bound 0.083]"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, layer full, page 1, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 137.5,
+   "base_us": 681.5360123291612,
+   "sub_us": 568.1933565947182,
+   "speedup": 1.1994790231510717,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.04242261440313966,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.268e-02 (worst row 8.098e-02) [bound 0.150]; attention input relative L2 error 3.824e-02 (worst row 4.926e-02) [bound 0.096]"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, layer sliding, page 1, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 84.5,
+   "base_us": 439.05600253492594,
+   "sub_us": 396.5751691595155,
+   "speedup": 1.1071192466876898,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.020556017651735647,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 7.515e-03 (worst row 9.420e-03) [bound 0.134]; attention input relative L2 error 5.718e-03 (worst row 7.811e-03) [bound 0.088]"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, layer full, page 1, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 208.1,
+   "base_us": 939.4560093060136,
+   "sub_us": 846.2546382124432,
+   "speedup": 1.110133956004591,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.006720037138564283,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.962e-02 (worst row 9.017e-02) [bound 0.150]; attention input relative L2 error 3.953e-02 (worst row 5.818e-02) [bound 0.099]"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer sliding, page 1, q_len 8, dist soft",
+   "weight": 46,
+   "floor_us": 62.3,
+   "base_us": 373.99999145418406,
+   "sub_us": 256.86509210602566,
+   "speedup": 1.4560171971511369,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.06369926991548613,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.412e-02 (worst row 7.294e-02) [bound 0.139]; attention input relative L2 error 3.422e-02 (worst row 4.748e-02) [bound 0.088]"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer full, page 1, q_len 8, dist soft",
+   "weight": 16,
+   "floor_us": 66.4,
+   "base_us": 423.42399898916483,
+   "sub_us": 314.15297955585646,
+   "speedup": 1.3478274170367368,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.0735054206833099,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.078e-02 (worst row 6.947e-02) [bound 0.150]; attention input relative L2 error 3.863e-02 (worst row 4.651e-02) [bound 0.096]"
+  },
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, layer sliding, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 126.6,
+   "base_us": 660.2080101147294,
+   "sub_us": 676.3241287472646,
+   "speedup": 0.9761710133536319,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.025066571706931384,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.849e-02 (worst row 9.011e-02) [bound 0.145]; attention input relative L2 error 3.795e-02 (worst row 5.553e-02) [bound 0.094]"
+  },
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, layer full, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 188.7,
+   "base_us": 947.0399850979447,
+   "sub_us": 1065.8830318997163,
+   "speedup": 0.8885027313081826,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.012806740771362013,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.252e-02 (worst row 8.985e-02) [bound 0.150]; attention input relative L2 error 4.080e-02 (worst row 5.564e-02) [bound 0.102]"
+  },
+  {
+   "load": "verify 32",
+   "shape": "batch 32, ctx 80000, layer sliding, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 143.8,
+   "base_us": 828.7840122357011,
+   "sub_us": 826.687084196116,
+   "speedup": 1.0025365438503544,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.012442308016848092,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.792e-02 (worst row 9.298e-02) [bound 0.144]; attention input relative L2 error 3.762e-02 (worst row 6.178e-02) [bound 0.093]"
+  },
+  {
+   "load": "verify 32",
+   "shape": "batch 32, ctx 80000, layer full, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 267.2,
+   "base_us": 1320.1760286465287,
+   "sub_us": 1593.5179975798796,
+   "speedup": 0.8284663434310231,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.013590291109579766,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.418e-02 (worst row 1.039e-01) [bound 0.150]; attention input relative L2 error 4.161e-02 (worst row 7.194e-02) [bound 0.103]"
+  }
+ ],
+ "speedup": 1.1709842858487969,
+ "ci95": [
+  1.153419521561065,
+  1.1885490501365288
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 16228.511674329638,
+   "sub_us": 11095.223942099805,
+   "speedup": 1.46265742440331
+  },
+  {
+   "load": "decode 16",
+   "base_us": 29453.24827544391,
+   "sub_us": 23244.18772656146,
+   "speedup": 1.2671231458773355
+  },
+  {
+   "load": "decode 32",
+   "base_us": 35227.87226550281,
+   "sub_us": 31782.531992736804,
+   "speedup": 1.1084035807327548
+  },
+  {
+   "load": "verify 1",
+   "base_us": 23978.783590719104,
+   "sub_us": 16842.24190977088,
+   "speedup": 1.423728724428784
+  },
+  {
+   "load": "verify 16",
+   "base_us": 45522.20822684467,
+   "sub_us": 48165.03843276963,
+   "speedup": 0.9451296979734811
+  },
+  {
+   "load": "verify 32",
+   "base_us": 59246.88102118671,
+   "sub_us": 63523.89383429941,
+   "speedup": 0.9326708021981589
+  }
+ ],
+ "step_base_us": 32075.175712154323,
+ "step_sub_us": 27391.63633515747,
+ "timing_checks_ok": true,
+ "complete": true,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 43,
+  "job": "48135808",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261027-141426-muse_decode_layer-c136cc",
+  "problem": "muse_decode_layer",
+  "submission": "‹tmp›/okc-dl/p2/submission.py",
+  "cwd": "‹local›",
+  "git": "363de07c991ec9a587f0257af9e46758e4dd13d8",
+  "submitted": "2026-10-27T13:14:26.225329+00:00",
+  "ncu": null
+ }
+}

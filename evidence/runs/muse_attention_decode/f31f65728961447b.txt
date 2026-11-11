@@ -1,0 +1,25 @@
+✓ muse_attention_decode  passed  job f31f65728961447b
+
+  1.760×  ━━━━━━━━━╋━━━━━━━───────────  faster than SGLang  95%: 1.733–1.792×
+
+  time        2,140.3 µs
+  tests       16/16 passed
+  profile     ‹local›  and .json
+  output      ‹local›
+
+  CASE                    SGLANG      YOURS   SPEEDUP
+  ──────────────────────────────────────────────────────────────────
+  decode 1 · sliding     20.6 µs     8.1 µs    2.546×   ━━━━━━╋━━━━━
+  decode 1 · full        31.0 µs    16.3 µs    1.901×   ━━━━━━╋━━━━━
+  decode 16 · sliding    26.9 µs    12.4 µs    2.177×   ━━━━━━╋━━━━━
+  decode 16 · full      199.4 µs   107.5 µs    1.855×   ━━━━━━╋━━━━─
+  decode 32 · sliding    31.3 µs    16.7 µs    1.877×   ━━━━━━╋━━━━─
+  decode 32 · full      382.6 µs   198.5 µs    1.927×   ━━━━━━╋━━━━━
+  verify 1 · sliding     22.6 µs    10.0 µs    2.257×   ━━━━━━╋━━━━━
+  verify 1 · full        35.8 µs    18.3 µs    1.951×   ━━━━━━╋━━━━━
+  verify 16 · sliding    29.3 µs    17.4 µs    1.685×   ━━━━━━╋━━━━─
+  verify 16 · full      204.1 µs   169.6 µs    1.204×   ━━━━━━╋━────
+  verify 32 · sliding    34.3 µs    23.9 µs    1.436×   ━━━━━━╋━━───
+  verify 32 · full      388.2 µs   320.8 µs    1.210×   ━━━━━━╋━────
+
+next  okc leaderboard muse_attention_decode

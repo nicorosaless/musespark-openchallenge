@@ -1,0 +1,82 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261027-143123-muse_attention_decode-669866/problem",
+  "submission": "‹scratch›/okc/bench/running/20261027-143123-muse_attention_decode-669866/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261027-143123-muse_attention_decode-669866/result.json",
+  "no_tests": false,
+  "no_timing": true,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": true,
+  "keep_going": false
+ },
+ "start": "2026-10-27T14:32:42+0100",
+ "submission_sha256": "6a7fa1f2e91af2e180d551681e585e205cf7497d690ee1b2eba158e8885f5b11",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_attention_decode",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 0.0
+ },
+ "tests": [
+  {
+   "shape": "batch 1, ctx 10, heads tp8, layer sliding",
+   "ok": true,
+   "msg": "relative L2 error 4.540e-02 (worst row 4.540e-02) [bound 0.129: 2.5 x the reference's 0.045 with FP8 E4M3 queries + 0.015]",
+   "s": 1.94
+  },
+  {
+   "shape": "batch 3, ctx 2047, heads tp8, layer sliding",
+   "ok": true,
+   "msg": "relative L2 error 8.750e-02 (worst row 1.057e-01) [bound 0.150: 2.5 x the reference's 0.088 with FP8 E4M3 queries + 0.015]",
+   "s": 0.01
+  },
+  {
+   "shape": "batch 5, ctx 5000, heads tp8, layer sliding, q_len 8, spread mixed, page 1",
+   "ok": true,
+   "msg": "relative L2 error 7.718e-02 (worst row 1.186e-01) [bound 0.150: 2.5 x the reference's 0.077 with FP8 E4M3 queries + 0.015]",
+   "s": 1.24
+  },
+  {
+   "shape": "batch 4, ctx 3000, heads tp8, layer full",
+   "ok": true,
+   "msg": "relative L2 error 6.894e-02 (worst row 7.629e-02) [bound 0.150: 2.5 x the reference's 0.069 with FP8 E4M3 queries + 0.015]",
+   "s": 6.65
+  },
+  {
+   "shape": "batch 8, ctx 8192, heads dp, layer full, spread mixed",
+   "ok": false,
+   "msg": "relative L2 error 1.996e-01 > 0.15 [bound 0.150: 2.5 x the reference's 0.085 with FP8 E4M3 queries + 0.015]",
+   "s": 1.2
+  }
+ ],
+ "tests_ok": false,
+ "duration_s": 15.3,
+ "within_limit": true,
+ "status": "tests_failed",
+ "worker_end": {
+  "rc": 0,
+  "s": 36,
+  "job": "48135808",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261027-143123-muse_attention_decode-669866",
+  "problem": "muse_attention_decode",
+  "submission": "muse_attention_decode/variantes/sl_ts.py",
+  "cwd": "‹local›",
+  "git": "03248b2f930d3375b9cc04cec92080e012f9920e",
+  "submitted": "2026-10-27T13:31:23.812938+00:00",
+  "ncu": null
+ }
+}

@@ -1,0 +1,223 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261026-023418-muse_moe_w4a16-98981b/problem",
+  "submission": "‹scratch›/okc/bench/running/20261026-023418-muse_moe_w4a16-98981b/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261026-023418-muse_moe_w4a16-98981b/result.json",
+  "no_tests": false,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-26T02:34:24+0100",
+ "submission_sha256": "5b9dccc41c774276c8b3b47aeec7a93455e4b5bafb6a6756ada44eb3209453b3",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_moe_w4a16",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 11.07,
+  "base": 0.11
+ },
+ "tests": [
+  {
+   "shape": "bs 4, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 2.525e-03 (worst row 2.578e-03)",
+   "s": 3.33
+  },
+  {
+   "shape": "bs 33, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 3.237e-03 (worst row 3.429e-03)",
+   "s": 0.27
+  },
+  {
+   "shape": "bs 257, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 3.242e-03 (worst row 3.476e-03)",
+   "s": 0.07
+  },
+  {
+   "shape": "bs 128, sharding ep8, dist skewed",
+   "ok": true,
+   "msg": "relative L2 error 3.227e-03 (worst row 3.438e-03)",
+   "s": 0.21
+  },
+  {
+   "shape": "bs 1, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 2.473e-03 (worst row 2.473e-03)",
+   "s": 0.47
+  }
+ ],
+ "tests_ok": true,
+ "duration_s": 38.2,
+ "within_limit": true,
+ "graph_overhead_us": 3.8720001466572285,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "bs 1, sharding ep8",
+   "weight": 60,
+   "floor_us": 11.4,
+   "base_us": 99.74399907514453,
+   "sub_us": 60.49701602597689,
+   "speedup": 1.648742460823445,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.21002044396469488,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.587e-03 (worst row 2.587e-03)",
+   "profile": "    41.27 µs/rep  54.5%  x1   moe_gemm1\n    21.35 µs/rep  28.2%  x1   moe_gemm2\n     6.62 µs/rep   8.8%  x1   _combine\n     4.05 µs/rep   5.4%  x1   moe_route\n     2.38 µs/rep   3.1%  x1   _swiglu_reduce"
+  },
+  {
+   "load": "decode 16",
+   "shape": "bs 16, sharding ep8",
+   "weight": 60,
+   "floor_us": 52.5,
+   "base_us": 303.77600295469165,
+   "sub_us": 243.2088055730736,
+   "speedup": 1.2490337355956476,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.10200751909460815,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.280e-03 (worst row 3.554e-03)",
+   "profile": "   152.00 µs/rep  64.0%  x1   moe_gemm1\n    77.59 µs/rep  32.6%  x1   moe_gemm2\n     4.29 µs/rep   1.8%  x1   _combine\n     3.81 µs/rep   1.6%  x1   moe_route"
+  },
+  {
+   "load": "decode 32",
+   "shape": "bs 32, sharding ep8",
+   "weight": 60,
+   "floor_us": 70.8,
+   "base_us": 351.1520097963512,
+   "sub_us": 338.2723833953474,
+   "speedup": 1.0380747203532459,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.0334488370687025,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.257e-03 (worst row 3.554e-03)",
+   "profile": "   221.51 µs/rep  62.7%  x1   moe_gemm1\n   123.17 µs/rep  34.9%  x1   moe_gemm2\n     4.47 µs/rep   1.3%  x1   _combine\n     4.03 µs/rep   1.1%  x1   moe_route"
+  },
+  {
+   "load": "verify 1",
+   "shape": "bs 8, sharding ep8",
+   "weight": 60,
+   "floor_us": 37.3,
+   "base_us": 240.4479975812137,
+   "sub_us": 187.4611597825837,
+   "speedup": 1.282655019632247,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.025534326928242868,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.269e-03 (worst row 3.554e-03)",
+   "profile": "   102.61 µs/rep  64.7%  x1   moe_gemm1\n    48.20 µs/rep  30.4%  x1   moe_gemm2\n     4.00 µs/rep   2.5%  x1   _combine\n     3.79 µs/rep   2.4%  x1   moe_route"
+  },
+  {
+   "load": "verify 16",
+   "shape": "bs 128, sharding ep8",
+   "weight": 60,
+   "floor_us": 101.3,
+   "base_us": 510.9280119650066,
+   "sub_us": 535.2869987847098,
+   "speedup": 0.9544935952582321,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.05484979572350468,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.238e-03 (worst row 3.554e-03)",
+   "profile": "   367.53 µs/rep  63.3%  x1   moe_gemm1\n   203.36 µs/rep  35.0%  x1   moe_gemm2\n     5.09 µs/rep   0.9%  x1   _combine\n     4.30 µs/rep   0.7%  x1   moe_route"
+  },
+  {
+   "load": "verify 32",
+   "shape": "bs 256, sharding ep8",
+   "weight": 60,
+   "floor_us": 108.9,
+   "base_us": 638.1760011427104,
+   "sub_us": 664.9176683242255,
+   "speedup": 0.9597819873715925,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.09033977481987376,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.230e-03 (worst row 3.554e-03)",
+   "profile": "   449.06 µs/rep  64.2%  x1   moe_gemm1\n   239.26 µs/rep  34.2%  x1   moe_gemm2\n     5.94 µs/rep   0.8%  x1   _combine\n     4.89 µs/rep   0.7%  x1   moe_route"
+  }
+ ],
+ "speedup": 1.1659193610292993,
+ "ci95": [
+  1.1484305706138598,
+  1.1834081514447385
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 5984.639944508672,
+   "sub_us": 3629.8209615586134,
+   "speedup": 1.648742460823445
+  },
+  {
+   "load": "decode 16",
+   "base_us": 18226.5601772815,
+   "sub_us": 14592.528334384415,
+   "speedup": 1.2490337355956476
+  },
+  {
+   "load": "decode 32",
+   "base_us": 21069.12058778107,
+   "sub_us": 20296.34300372084,
+   "speedup": 1.0380747203532459
+  },
+  {
+   "load": "verify 1",
+   "base_us": 14426.879854872823,
+   "sub_us": 11247.669586955022,
+   "speedup": 1.282655019632247
+  },
+  {
+   "load": "verify 16",
+   "base_us": 30655.680717900395,
+   "sub_us": 32117.21992708259,
+   "speedup": 0.9544935952582321
+  },
+  {
+   "load": "verify 32",
+   "base_us": 38290.56006856263,
+   "sub_us": 39895.06009945353,
+   "speedup": 0.9597819873715925
+  }
+ ],
+ "step_base_us": 18408.880332691493,
+ "step_sub_us": 15789.153991267225,
+ "timing_checks_ok": true,
+ "complete": true,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 41,
+  "job": "48046442",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261026-023418-muse_moe_w4a16-98981b",
+  "problem": "muse_moe_w4a16",
+  "submission": "muse_moe_w4a16/submission.py",
+  "cwd": "‹local›",
+  "git": "5cb52cbe13ce15b7196aff128c17919ec7917535",
+  "submitted": "2026-10-26T01:34:18.140900+00:00",
+  "ncu": null
+ }
+}

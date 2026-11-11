@@ -1,0 +1,82 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261027-181218-muse_moe_w4a16-4657d1/problem",
+  "submission": "‹scratch›/okc/bench/running/20261027-181218-muse_moe_w4a16-4657d1/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261027-181218-muse_moe_w4a16-4657d1/result.json",
+  "no_tests": false,
+  "no_timing": true,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-27T18:12:25+0100",
+ "submission_sha256": "81b00e7470c32973b069d7cb6c2469bcfc355bb10b10bedbf9da35749698cfc4",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_moe_w4a16",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 31.01
+ },
+ "tests": [
+  {
+   "shape": "bs 4, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 2.525e-03 (worst row 2.585e-03)",
+   "s": 3.45
+  },
+  {
+   "shape": "bs 33, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 2.544e-03 (worst row 2.774e-03)",
+   "s": 0.29
+  },
+  {
+   "shape": "bs 257, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 3.242e-03 (worst row 3.476e-03)",
+   "s": 0.24
+  },
+  {
+   "shape": "bs 128, sharding ep8, dist skewed",
+   "ok": true,
+   "msg": "relative L2 error 3.227e-03 (worst row 3.438e-03)",
+   "s": 0.19
+  },
+  {
+   "shape": "bs 1, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 2.473e-03 (worst row 2.473e-03)",
+   "s": 0.47
+  }
+ ],
+ "tests_ok": true,
+ "duration_s": 39.5,
+ "within_limit": true,
+ "status": "tests",
+ "worker_end": {
+  "rc": 0,
+  "s": 41,
+  "job": "48145398",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261027-181218-muse_moe_w4a16-4657d1",
+  "problem": "muse_moe_w4a16",
+  "submission": "‹tmp›/okc-moe/bq_v48/submission.py",
+  "cwd": "muse_moe_w4a16",
+  "git": "05c883b2d88c1654f457965d9c8140703e025bdb",
+  "submitted": "2026-10-27T17:12:18.297453+00:00",
+  "ncu": null
+ }
+}

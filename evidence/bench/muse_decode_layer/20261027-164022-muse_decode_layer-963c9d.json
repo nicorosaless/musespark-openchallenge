@@ -1,0 +1,270 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261027-164022-muse_decode_layer-963c9d/problem",
+  "submission": "‹scratch›/okc/bench/running/20261027-164022-muse_decode_layer-963c9d/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261027-164022-muse_decode_layer-963c9d/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": true,
+  "keep_going": false
+ },
+ "start": "2026-10-27T16:40:30+0100",
+ "submission_sha256": "56c59f07dae69de205dfd3ea8c3f21861c1b006b50a0c0ac28093b9c87fa587f",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_decode_layer",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 9.32,
+  "base": 0.11
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 38.2,
+ "within_limit": true,
+ "graph_overhead_us": 4.19200025498867,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, layer sliding, page 1, dist soft",
+   "weight": 46,
+   "floor_us": 40.0,
+   "base_us": 254.1439924389124,
+   "sub_us": 139.68942910024924,
+   "speedup": 1.8193502119371103,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.22044444594792312,
+   "check_ok": false,
+   "check_msg": "routing: token 0 routed to an expert whose biased score is 3.67e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, layer full, page 1, dist soft",
+   "weight": 16,
+   "floor_us": 44.2,
+   "base_us": 282.11199678480625,
+   "sub_us": 164.3222061281205,
+   "speedup": 1.7168221108524195,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.2506118687837209,
+   "check_ok": false,
+   "check_msg": "routing: token 0 routed to an expert whose biased score is 4.21e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, layer sliding, page 1, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 76.7,
+   "base_us": 401.0879937559366,
+   "sub_us": 376.088188511466,
+   "speedup": 1.0664732528384322,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.11415147981758422,
+   "check_ok": false,
+   "check_msg": "routing: token 7 routed to an expert whose biased score is 6.94e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, layer full, page 1, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 137.5,
+   "base_us": 678.5280052572489,
+   "sub_us": 624.1478453007185,
+   "speedup": 1.0871270490893543,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.11077286669775166,
+   "check_ok": false,
+   "check_msg": "routing: token 2 routed to an expert whose biased score is 5.79e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, layer sliding, page 1, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 84.5,
+   "base_us": 437.5359956175089,
+   "sub_us": 465.3470873933351,
+   "speedup": 0.9402358099378866,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.041768067230115835,
+   "check_ok": false,
+   "check_msg": "routing: token 25 routed to an expert whose biased score is 6.38e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, layer full, page 1, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 208.1,
+   "base_us": 935.9999839216471,
+   "sub_us": 988.1737383093787,
+   "speedup": 0.9472018407643646,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.03546068423105253,
+   "check_ok": false,
+   "check_msg": "routing: token 13 routed to an expert whose biased score is 6.52e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer sliding, page 1, q_len 8, dist soft",
+   "weight": 46,
+   "floor_us": 62.3,
+   "base_us": 376.4479998499155,
+   "sub_us": 236.28334423102228,
+   "speedup": 1.5932058227593455,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.22341542947954918,
+   "check_ok": false,
+   "check_msg": "routing: token 0 routed to an expert whose biased score is 6.09e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer full, page 1, q_len 8, dist soft",
+   "weight": 16,
+   "floor_us": 66.4,
+   "base_us": 423.9679966121912,
+   "sub_us": 273.3129124965429,
+   "speedup": 1.5512183187376996,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.46107837102166394,
+   "check_ok": false,
+   "check_msg": "routing: token 4 routed to an expert whose biased score is 5.30e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, layer sliding, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 126.6,
+   "base_us": 658.4800127893686,
+   "sub_us": 664.1290527637287,
+   "speedup": 0.9914940628619513,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.02498683016738512,
+   "check_ok": false,
+   "check_msg": "routing: token 40 routed to an expert whose biased score is 6.54e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, layer full, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 188.7,
+   "base_us": 941.5360037237406,
+   "sub_us": 1067.0044683347724,
+   "speedup": 0.8824105537188189,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.048147793410497464,
+   "check_ok": false,
+   "check_msg": "routing: token 82 routed to an expert whose biased score is 6.45e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "verify 32",
+   "shape": "batch 32, ctx 80000, layer sliding, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 143.8,
+   "base_us": 828.9920035749674,
+   "sub_us": 859.3720310590787,
+   "speedup": 0.9646485731602512,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.06737674200803401,
+   "check_ok": false,
+   "check_msg": "routing: token 161 routed to an expert whose biased score is 7.06e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "verify 32",
+   "shape": "batch 32, ctx 80000, layer full, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 267.2,
+   "base_us": 1315.312022343278,
+   "sub_us": 1525.745730303887,
+   "speedup": 0.8620781275798186,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.021719989775333626,
+   "check_ok": false,
+   "check_msg": "routing: token 247 routed to an expert whose biased score is 6.90e-01 below its 8th best (> 0.05)"
+  }
+ ],
+ "speedup": 1.1670476221644468,
+ "ci95": [
+  1.1495419078319802,
+  1.1845533364969134
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 16204.41560074687,
+   "sub_us": 9054.869036661392,
+   "speedup": 1.7895803390571816
+  },
+  {
+   "load": "decode 16",
+   "base_us": 29306.495796889067,
+   "sub_us": 27286.422196338932,
+   "speedup": 1.0740321902965047
+  },
+  {
+   "load": "decode 32",
+   "base_us": 35102.65554115176,
+   "sub_us": 37216.745833043475,
+   "speedup": 0.9431951868823877
+  },
+  {
+   "load": "verify 1",
+   "base_us": 24100.095938891172,
+   "sub_us": 15242.04043457171,
+   "speedup": 1.5811594282500252
+  },
+  {
+   "load": "verify 16",
+   "base_us": 45354.656647890806,
+   "sub_us": 47622.00792048788,
+   "speedup": 0.9523885831025278
+  },
+  {
+   "load": "verify 32",
+   "base_us": 59178.62452194095,
+   "sub_us": 63943.04511357982,
+   "speedup": 0.9254896199707724
+  }
+ ],
+ "step_base_us": 32022.63952903624,
+ "step_sub_us": 27439.016986852643,
+ "timing_checks_ok": false,
+ "complete": true,
+ "status": "timing_checks_failed",
+ "worker_end": {
+  "rc": 0,
+  "s": 41,
+  "job": "48140706",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261027-164022-muse_decode_layer-963c9d",
+  "problem": "muse_decode_layer",
+  "submission": "‹tmp›/okc-dl/abl/sin_attn_boundary/submission.py",
+  "cwd": "‹local›",
+  "git": "382ad19beea9f3fe6896473320b992ed70113584",
+  "submitted": "2026-10-27T15:40:22.649012+00:00",
+  "ncu": null
+ }
+}

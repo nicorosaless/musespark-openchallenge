@@ -1,0 +1,147 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261026-015350-muse_bf16_proj-7a92dc/problem",
+  "submission": "‹scratch›/okc/bench/running/20261026-015350-muse_bf16_proj-7a92dc/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261026-015350-muse_bf16_proj-7a92dc/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "verify 3",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-26T01:54:03+0100",
+ "submission_sha256": "abd9cd0eee7f61b2f4488a00481370120852b99721bcdf84bce72b817e94e9ce",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_bf16_proj",
+ "limit_s": 600,
+ "prepare_s": {
+  "sub": 5.17,
+  "base": 0.0
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 31.8,
+ "within_limit": true,
+ "graph_overhead_us": 3.871999680995941,
+ "shapes": [
+  {
+   "load": "verify 32",
+   "shape": "m 256, layer qkv_gate",
+   "weight": 62,
+   "floor_us": 9.8,
+   "base_us": 29.823999851942062,
+   "sub_us": 29.759725296234805,
+   "speedup": 1.0021597832327904,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.010765842557612149,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.089e-04 (worst row 4.687e-04); 37 probe rows exact to 0.0e+00",
+   "profile": "    29.91 µs/rep 100.0%  x1   nvjet_sm90_tst_96x64_64x10_2x4_h_bz_TNN"
+  },
+  {
+   "load": "verify 32",
+   "shape": "m 256, layer o",
+   "weight": 62,
+   "floor_us": 4.5,
+   "base_us": 15.008000656962395,
+   "sub_us": 14.991983459097316,
+   "speedup": 1.001068384174034,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.015011268337865036,
+   "check_ok": true,
+   "check_msg": "relative L2 error 5.325e-05 (worst row 1.997e-04); 34 probe rows exact to 0.0e+00",
+   "profile": "    14.61 µs/rep 100.0%  x1   nvjet_sm90_tst_128x128_64x6_2x1_v_bz_TNT"
+  },
+  {
+   "load": "verify 32",
+   "shape": "m 256, layer pooler",
+   "weight": 62,
+   "floor_us": 17.4,
+   "base_us": 51.72799900174141,
+   "sub_us": 50.623557909539365,
+   "speedup": 1.0218167418057735,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.024938316715543696,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.131e-04 (worst row 5.020e-04); 37 probe rows exact to 0.0e+00",
+   "profile": "    51.18 µs/rep 100.0%  x1   nvjet_sm90_tst_128x64_64x8_1x2_h_bz_TNT"
+  },
+  {
+   "load": "verify 32",
+   "shape": "m 256, layer unpooler",
+   "weight": 62,
+   "floor_us": 17.4,
+   "base_us": 51.072001457214355,
+   "sub_us": 51.104021763879125,
+   "speedup": 0.9993734288308518,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.017380368263492096,
+   "check_ok": true,
+   "check_msg": "relative L2 error 1.426e-04 (worst row 3.029e-04); 34 probe rows exact to 0.0e+00",
+   "profile": "    51.78 µs/rep 100.0%  x1   nvjet_sm90_tst_128x128_64x6_2x1_v_bz_TNT"
+  },
+  {
+   "load": "verify 32",
+   "shape": "m 256, layer router",
+   "weight": 62,
+   "floor_us": 2.7,
+   "base_us": 22.656001150608063,
+   "sub_us": 13.705627015911439,
+   "speedup": 1.653043755262401,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.04811698015404442,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.310e-06 (worst row 3.768e-06); 37 probe rows exact to 2.8e-06",
+   "profile": "    13.19 µs/rep 100.0%  x1   _proj_kernel"
+  }
+ ],
+ "speedup": 1.0630713987378946,
+ "ci95": [
+  1.0471253277568262,
+  1.079017469718963
+ ],
+ "loads": [
+  {
+   "load": "verify 32",
+   "base_us": 10557.856131345034,
+   "sub_us": 9931.464757569049,
+   "speedup": 1.0630713987378946
+  }
+ ],
+ "step_base_us": 10557.856131345028,
+ "step_sub_us": 9931.464757569043,
+ "timing_checks_ok": true,
+ "complete": false,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 36,
+  "job": "48045373",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261026-015350-muse_bf16_proj-7a92dc",
+  "problem": "muse_bf16_proj",
+  "submission": "‹tmp›/bf16rw/n64k128c1m64.py",
+  "cwd": "‹local›",
+  "git": "46e65030b48ff5f1aea62eaff532ac8389dc5686",
+  "submitted": "2026-10-26T00:53:50.232287+00:00",
+  "ncu": null
+ }
+}

@@ -1,0 +1,223 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-134842-muse_moe_w4a16-83a169/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-134842-muse_moe_w4a16-83a169/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-134842-muse_moe_w4a16-83a169/result.json",
+  "no_tests": false,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-25T13:48:49+0100",
+ "submission_sha256": "1ff22178c14a47eeadea00355fa96311fa9ad09da2e247269d8dbcd3425c9df5",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_moe_w4a16",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 10.41,
+  "base": 0.03
+ },
+ "tests": [
+  {
+   "shape": "bs 4, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 2.534e-03 (worst row 2.586e-03)",
+   "s": 4.02
+  },
+  {
+   "shape": "bs 33, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 5.589e-03 (worst row 5.953e-03)",
+   "s": 2.66
+  },
+  {
+   "shape": "bs 257, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 3.243e-03 (worst row 3.476e-03)",
+   "s": 1.36
+  },
+  {
+   "shape": "bs 128, sharding ep8, dist skewed",
+   "ok": true,
+   "msg": "relative L2 error 3.228e-03 (worst row 3.440e-03)",
+   "s": 1.31
+  },
+  {
+   "shape": "bs 1, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 2.480e-03 (worst row 2.480e-03)",
+   "s": 1.25
+  }
+ ],
+ "tests_ok": true,
+ "duration_s": 31.1,
+ "within_limit": true,
+ "graph_overhead_us": 3.9359997026622295,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "bs 1, sharding ep8",
+   "weight": 60,
+   "floor_us": 11.4,
+   "base_us": 100.17600329592824,
+   "sub_us": 64.66026112802884,
+   "speedup": 1.5492669152321765,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.1757507551701376,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.593e-03 (worst row 2.593e-03)",
+   "profile": "    41.42 µs/rep  53.5%  x1   _gemm1_swiglu\n    24.40 µs/rep  31.5%  x1   _gemm2\n     6.85 µs/rep   8.9%  x1   _combine\n     2.53 µs/rep   3.3%  x1   _swiglu_reduce\n     2.18 µs/rep   2.8%  x1   _route_prep"
+  },
+  {
+   "load": "decode 16",
+   "shape": "bs 16, sharding ep8",
+   "weight": 60,
+   "floor_us": 52.5,
+   "base_us": 303.93599765375257,
+   "sub_us": 304.3551661117239,
+   "speedup": 0.9986227654245977,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.009117678384222394,
+   "check_ok": true,
+   "check_msg": "relative L2 error 5.594e-03 (worst row 5.797e-03)",
+   "profile": "   241.12 µs/rep  83.1%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 1, 8, 4, true\n     9.05 µs/rep   3.1%  x1   void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, fl\n     7.84 µs/rep   2.7%  x3   void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float\n     6.01 µs/rep   2.1%  x2   void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{la\n     4.69 µs/rep   1.6%  x1   void at::native::reduce_kernel<128, 4, at::native::ReduceOp<float, at::native::func_wrapper_t<float, at::nativ\n     2.99 µs/rep   1.0%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::(anonymous namespac\n     2.79 µs/rep   1.0%  x1   void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, bool,\n     2.23 µs/rep   0.8%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n     2.19 µs/rep   0.8%  x1   void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<a\n     2.06 µs/rep   0.7%  x1   void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_\n     1.77 µs/rep   0.6%  x1   void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{la\n     1.45 µs/rep   0.5%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase\n     1.40 µs/rep   0.5%  x1   void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long, bool)\n     1.37 µs/rep   0.5%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::compare_scalar_kernel<int>(at::TensorIteratorBas\n     1.12 µs/rep   0.4%  x1   void at::native::vectorized_elementwise_kernel<4, at::native::rsqrt_kernel_cuda(at::TensorIteratorBase&)::{lam"
+  },
+  {
+   "load": "decode 32",
+   "shape": "bs 32, sharding ep8",
+   "weight": 60,
+   "floor_us": 70.8,
+   "base_us": 349.9840130098164,
+   "sub_us": 349.88265383073116,
+   "speedup": 1.0002896947818805,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.009498339268026346,
+   "check_ok": true,
+   "check_msg": "relative L2 error 5.560e-03 (worst row 5.791e-03)",
+   "profile": "   319.83 µs/rep  95.3%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 1, 8, 4, fals\n     4.10 µs/rep   1.2%  x1   _post_expert_norm_weighted_sum_kernel\n     2.86 µs/rep   0.9%  x1   void moe_align_block_size_kernel<int>(int const*, int*, int*, int*, int, int, unsigned long, int*, bool, bool,\n     2.58 µs/rep   0.8%  x1   void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<a\n     2.46 µs/rep   0.7%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n     2.20 µs/rep   0.7%  x1   void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{la\n     1.42 µs/rep   0.4%  x1   void count_and_sort_expert_tokens_kernel<int>(int const*, int*, int*, unsigned long, bool)"
+  },
+  {
+   "load": "verify 1",
+   "shape": "bs 8, sharding ep8",
+   "weight": 60,
+   "floor_us": 37.3,
+   "base_us": 241.26400100067258,
+   "sub_us": 241.59946221288556,
+   "speedup": 0.9986114985143577,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.011392263500311306,
+   "check_ok": true,
+   "check_msg": "relative L2 error 5.623e-03 (worst row 5.792e-03)",
+   "profile": "   147.85 µs/rep  76.7%  x2   void sglang::device::marlin_moe::Marlin<__nv_bfloat16, 562949953487106l, 2814749767172868l, 128, 1, 8, 4, true\n     9.06 µs/rep   4.7%  x1   void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, fl\n     5.98 µs/rep   3.1%  x3   void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float\n     5.91 µs/rep   3.1%  x2   void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{la\n     4.12 µs/rep   2.1%  x1   void at::native::reduce_kernel<128, 4, at::native::ReduceOp<float, at::native::func_wrapper_t<float, at::nativ\n     3.56 µs/rep   1.8%  x1   _moe_align_small_numel_kernel\n     2.78 µs/rep   1.4%  x1   void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::(anonymous namespac\n     2.69 µs/rep   1.4%  x1   void at::native::index_elementwise_kernel<128, 4, at::native::gpu_index_kernel<at::native::index_kernel_impl<a\n     1.94 µs/rep   1.0%  x1   void sglang::act_and_mul_kernel<__nv_bfloat16, (sglang::ActivationKind)0, true, true, false, false, false>(sgl\n     1.65 µs/rep   0.9%  x1   void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_\n     1.44 µs/rep   0.7%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase\n     1.37 µs/rep   0.7%  x1   void at::native::vectorized_elementwise_kernel<8, at::native::compare_scalar_kernel<int>(at::TensorIteratorBas\n     1.33 µs/rep   0.7%  x1   void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{la\n     1.13 µs/rep   0.6%  x1   void at::native::vectorized_elementwise_kernel<4, at::native::rsqrt_kernel_cuda(at::TensorIteratorBase&)::{lam\n     1.12 µs/rep   0.6%  x1   void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<float>, std::array<char*, "
+  },
+  {
+   "load": "verify 16",
+   "shape": "bs 128, sharding ep8",
+   "weight": 60,
+   "floor_us": 101.3,
+   "base_us": 510.3039969690144,
+   "sub_us": 492.6063682509829,
+   "speedup": 1.0359265122391081,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.03889628598092831,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.239e-03 (worst row 3.554e-03)",
+   "profile": "   325.63 µs/rep  62.3%  x1   _gemm1_swiglu\n   170.84 µs/rep  32.7%  x1   _gemm2\n    20.44 µs/rep   3.9%  x1   _route_prep\n     5.69 µs/rep   1.1%  x1   _combine"
+  },
+  {
+   "load": "verify 32",
+   "shape": "bs 256, sharding ep8",
+   "weight": 60,
+   "floor_us": 108.9,
+   "base_us": 637.071989942342,
+   "sub_us": 615.2275458442735,
+   "speedup": 1.0355062842124396,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.03442094097967141,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.230e-03 (worst row 3.554e-03)",
+   "profile": "   365.50 µs/rep  59.0%  x1   _gemm1_swiglu\n   206.72 µs/rep  33.4%  x1   _gemm2\n    40.76 µs/rep   6.6%  x1   _route_prep\n     6.74 µs/rep   1.1%  x1   _combine"
+  }
+ ],
+ "speedup": 1.0878991200541253,
+ "ci95": [
+  1.0715806332533133,
+  1.104217606854937
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 6010.560197755694,
+   "sub_us": 3879.61566768173,
+   "speedup": 1.5492669152321765
+  },
+  {
+   "load": "decode 16",
+   "base_us": 18236.159859225154,
+   "sub_us": 18261.309966703437,
+   "speedup": 0.9986227654245977
+  },
+  {
+   "load": "decode 32",
+   "base_us": 20999.040780588984,
+   "sub_us": 20992.95922984387,
+   "speedup": 1.0002896947818805
+  },
+  {
+   "load": "verify 1",
+   "base_us": 14475.840060040355,
+   "sub_us": 14495.967732773133,
+   "speedup": 0.9986114985143577
+  },
+  {
+   "load": "verify 16",
+   "base_us": 30618.239818140864,
+   "sub_us": 29556.382095058972,
+   "speedup": 1.0359265122391081
+  },
+  {
+   "load": "verify 32",
+   "base_us": 38224.31939654052,
+   "sub_us": 36913.65275065641,
+   "speedup": 1.0355062842124396
+  }
+ ],
+ "step_base_us": 18414.86726244615,
+ "step_sub_us": 16926.998949617657,
+ "timing_checks_ok": true,
+ "complete": true,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 34,
+  "job": "48012040",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261025-134842-muse_moe_w4a16-83a169",
+  "problem": "muse_moe_w4a16",
+  "submission": "muse_moe_w4a16/submission.py",
+  "cwd": "‹local›",
+  "git": "231efa6efedbe2fc93fa04690c27f8269643db9c",
+  "submitted": "2026-10-25T12:48:42.129388+00:00",
+  "ncu": null
+ }
+}

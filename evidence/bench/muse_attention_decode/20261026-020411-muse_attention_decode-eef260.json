@@ -1,0 +1,79 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261026-020411-muse_attention_decode-eef260/problem",
+  "submission": "‹scratch›/okc/bench/running/20261026-020411-muse_attention_decode-eef260/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261026-020411-muse_attention_decode-eef260/result.json",
+  "no_tests": false,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-26T02:04:16+0100",
+ "submission_sha256": "9737154b987fb3ede62ebf606dbfe9f0fe7ff13aeea31d1d47394fba5a7811fe",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_attention_decode",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 0.0
+ },
+ "tests": [
+  {
+   "shape": "batch 1, ctx 10, heads tp8, layer sliding",
+   "ok": true,
+   "msg": "relative L2 error 3.883e-03 (worst row 3.883e-03) [bound 0.129: 2.5 x the reference's 0.045 with FP8 E4M3 queries + 0.015]",
+   "s": 4.36
+  },
+  {
+   "shape": "batch 3, ctx 2047, heads tp8, layer sliding",
+   "ok": true,
+   "msg": "relative L2 error 5.461e-03 (worst row 6.390e-03) [bound 0.150: 2.5 x the reference's 0.088 with FP8 E4M3 queries + 0.015]",
+   "s": 0.73
+  },
+  {
+   "shape": "batch 5, ctx 5000, heads tp8, layer sliding, q_len 8, spread mixed, page 1",
+   "ok": true,
+   "msg": "relative L2 error 7.718e-02 (worst row 1.185e-01) [bound 0.150: 2.5 x the reference's 0.077 with FP8 E4M3 queries + 0.015]",
+   "s": 1.0
+  },
+  {
+   "shape": "batch 4, ctx 3000, heads tp8, layer full",
+   "ok": false,
+   "msg": "TypeError: dict() got multiple values for keyword argument 'KVP'",
+   "s": 2.91
+  }
+ ],
+ "tracebacks": [
+  "Traceback (most recent call last):\n  File \"‹scratch›/okc/bench/running/20261026-020411-muse_attention_decode-eef260/juez.py\", line 363, in main\n    out = sub(data)\n          ^^^^^^^^^\n  File \"‹scratch›/okc/bench/running/20261026-020411-muse_attention_decode-eef260/juez.py\", line 179, in __call__\n    return self.mod.kernel_fn(data, self.state) if self.con_state else self.mod.kernel_fn(data)\n                                                                       ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹scratch›/okc/bench/running/20261026-020411-muse_attention_decode-eef260/submission.py\", line 1605, in kernel_fn\n    k = _cuda_kernel_consts(data, tune)\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹scratch›/okc/bench/running/20261026-020411-muse_attention_decode-eef260/submission.py\", line 1482, in _cuda_kernel_consts\n    k = _cufa_consts(cfg, wg=tune[\"cuda\"] == \"wg\")\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹scratch›/okc/bench/running/20261026-020411-muse_attention_decode-eef260/submission.py\", line 1376, in _cufa_consts\n    return dict(HQ=hq, HKV=hkv, L=length, KVP=2 if decode else 1, WARP_M=warp_m,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTypeError: dict() got multiple values for keyword argument 'KVP'\n"
+ ],
+ "tests_ok": false,
+ "duration_s": 13.1,
+ "within_limit": true,
+ "status": "tests_failed",
+ "worker_end": {
+  "rc": 0,
+  "s": 15,
+  "job": "48045373",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261026-020411-muse_attention_decode-eef260",
+  "problem": "muse_attention_decode",
+  "submission": "muse_attention_decode/variantes/cudec_vwgp.py",
+  "cwd": "‹local›",
+  "git": "716a61a6d78c3dbdf4a185e102b294ca45b6184f",
+  "submitted": "2026-10-26T01:04:11.528838+00:00",
+  "ncu": null
+ }
+}

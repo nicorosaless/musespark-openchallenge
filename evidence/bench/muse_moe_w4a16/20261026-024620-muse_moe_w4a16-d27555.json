@@ -1,0 +1,192 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261026-024620-muse_moe_w4a16-d27555/problem",
+  "submission": "‹scratch›/okc/bench/running/20261026-024620-muse_moe_w4a16-d27555/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261026-024620-muse_moe_w4a16-d27555/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-26T02:46:26+0100",
+ "submission_sha256": "bf2023af6f6671537264516e951ea95a2b4f0584b21ab0583f62f47ce82b05c5",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_moe_w4a16",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 0.99,
+  "base": 0.13
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 27.9,
+ "within_limit": true,
+ "graph_overhead_us": 3.8720001466572285,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "bs 1, sharding ep8",
+   "weight": 60,
+   "floor_us": 11.4,
+   "base_us": 100.27200309559703,
+   "sub_us": 56.660538226096556,
+   "speedup": 1.7696973278911428,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.2943186320365634,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.587e-03 (worst row 2.587e-03)",
+   "profile": "    40.78 µs/rep  55.5%  x1   moe_gemm1\n    21.71 µs/rep  29.5%  x1   moe_gemm2\n     6.56 µs/rep   8.9%  x1   _combine\n     2.31 µs/rep   3.1%  x1   _swiglu_reduce\n     2.12 µs/rep   2.9%  x1   _route_prep"
+  },
+  {
+   "load": "decode 16",
+   "shape": "bs 16, sharding ep8",
+   "weight": 60,
+   "floor_us": 52.5,
+   "base_us": 302.44799656793475,
+   "sub_us": 244.91308291757522,
+   "speedup": 1.234919723213491,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.054554359722550405,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.574e-03 (worst row 2.738e-03)",
+   "profile": "   149.26 µs/rep  62.5%  x1   moe_gemm1\n    78.22 µs/rep  32.8%  x1   moe_gemm2\n     4.90 µs/rep   2.1%  x1   _combine\n     3.88 µs/rep   1.6%  x1   moe_route\n     2.46 µs/rep   1.0%  x1   _swiglu_reduce"
+  },
+  {
+   "load": "decode 32",
+   "shape": "bs 32, sharding ep8",
+   "weight": 60,
+   "floor_us": 70.8,
+   "base_us": 349.95200438424945,
+   "sub_us": 337.9754230491736,
+   "speedup": 1.0354362492604479,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.028973467677090525,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.582e-03 (worst row 2.744e-03)",
+   "profile": "   209.54 µs/rep  63.2%  x1   moe_gemm1\n   110.40 µs/rep  33.3%  x1   moe_gemm2\n     5.02 µs/rep   1.5%  x1   _combine\n     3.89 µs/rep   1.2%  x1   moe_route\n     2.77 µs/rep   0.8%  x1   _swiglu_reduce"
+  },
+  {
+   "load": "verify 1",
+   "shape": "bs 8, sharding ep8",
+   "weight": 60,
+   "floor_us": 37.3,
+   "base_us": 240.31999660655856,
+   "sub_us": 189.81836305809753,
+   "speedup": 1.2660524131324642,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.09818541443379436,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.589e-03 (worst row 2.702e-03)",
+   "profile": "    88.64 µs/rep  61.2%  x1   moe_gemm1\n    46.22 µs/rep  31.9%  x1   moe_gemm2\n     4.84 µs/rep   3.3%  x1   _combine\n     3.10 µs/rep   2.1%  x1   _route_prep\n     1.97 µs/rep   1.4%  x1   _swiglu_reduce"
+  },
+  {
+   "load": "verify 16",
+   "shape": "bs 128, sharding ep8",
+   "weight": 60,
+   "floor_us": 101.3,
+   "base_us": 509.1519723646343,
+   "sub_us": 508.7080076783812,
+   "speedup": 1.0008727298952482,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.04766545127741273,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.238e-03 (worst row 3.554e-03)",
+   "profile": "   363.45 µs/rep  65.0%  x1   moe_gemm1\n   186.44 µs/rep  33.4%  x1   moe_gemm2\n     4.81 µs/rep   0.9%  x1   _combine\n     4.33 µs/rep   0.8%  x1   moe_route"
+  },
+  {
+   "load": "verify 32",
+   "shape": "bs 256, sharding ep8",
+   "weight": 60,
+   "floor_us": 108.9,
+   "base_us": 629.792011808604,
+   "sub_us": 656.2867640477016,
+   "speedup": 0.9596293058301388,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.06471434428443534,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.230e-03 (worst row 3.554e-03)",
+   "profile": "   420.88 µs/rep  64.7%  x1   moe_gemm1\n   219.38 µs/rep  33.7%  x1   moe_gemm2\n     5.76 µs/rep   0.9%  x1   _combine\n     4.80 µs/rep   0.7%  x1   moe_route"
+  }
+ ],
+ "speedup": 1.183765981294372,
+ "ci95": [
+  1.1660094915749564,
+  1.2015224710137875
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 6016.320185735822,
+   "sub_us": 3399.6322935657936,
+   "speedup": 1.7696973278911428
+  },
+  {
+   "load": "decode 16",
+   "base_us": 18146.879794076085,
+   "sub_us": 14694.784975054514,
+   "speedup": 1.234919723213491
+  },
+  {
+   "load": "decode 32",
+   "base_us": 20997.120263054967,
+   "sub_us": 20278.525382950418,
+   "speedup": 1.0354362492604479
+  },
+  {
+   "load": "verify 1",
+   "base_us": 14419.199796393514,
+   "sub_us": 11389.10178348585,
+   "speedup": 1.2660524131324642
+  },
+  {
+   "load": "verify 16",
+   "base_us": 30549.118341878057,
+   "sub_us": 30522.48046070287,
+   "speedup": 1.0008727298952482
+  },
+  {
+   "load": "verify 32",
+   "base_us": 37787.52070851624,
+   "sub_us": 39377.205842862095,
+   "speedup": 0.9596293058301388
+  }
+ ],
+ "step_base_us": 18348.34143024902,
+ "step_sub_us": 15499.973576015665,
+ "timing_checks_ok": true,
+ "complete": true,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 31,
+  "job": "48046442",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261026-024620-muse_moe_w4a16-d27555",
+  "problem": "muse_moe_w4a16",
+  "submission": "‹tmp›/okc-moe/var/C.py",
+  "cwd": "‹local›",
+  "git": "b7058fefdeb75c5aa064654f99cdeabb53c4b012",
+  "submitted": "2026-10-26T01:46:20.408586+00:00",
+  "ncu": null
+ }
+}

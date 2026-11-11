@@ -1,0 +1,51 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261027-194844-muse_moe_w4a16-7a344a/problem",
+  "submission": "‹scratch›/okc/bench/running/20261027-194844-muse_moe_w4a16-7a344a/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261027-194844-muse_moe_w4a16-7a344a/result.json",
+  "no_tests": true,
+  "no_timing": true,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-27T19:52:06+0100",
+ "submission_sha256": "2e9b2b3313161be158d68c7bdf5daae1ac7f794b2d95aaf838b23f0aad2c9eff",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_moe_w4a16",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 7.71
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 11.5,
+ "within_limit": true,
+ "status": "tests",
+ "worker_end": {
+  "rc": 0,
+  "s": 13,
+  "job": "48146734",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261027-194844-muse_moe_w4a16-7a344a",
+  "problem": "muse_moe_w4a16",
+  "submission": "‹tmp›/okc-moe/ws2/submission.py",
+  "cwd": "muse_moe_w4a16",
+  "git": "9413fc91fb1af044ae0f1274754fac2dc47e38ae",
+  "submitted": "2026-10-27T18:48:44.827809+00:00",
+  "ncu": null
+ }
+}

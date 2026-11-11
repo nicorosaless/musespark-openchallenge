@@ -1,0 +1,102 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261026-055425-muse_decode_layer-9d9d9e/problem",
+  "submission": "‹scratch›/okc/bench/running/20261026-055425-muse_decode_layer-9d9d9e/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261026-055425-muse_decode_layer-9d9d9e/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "verify 1 |",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-26T05:54:33+0100",
+ "submission_sha256": "f9ea2531cf271541b35e8160ed3a85d5271c5e6592e1a6b5d1832dcb2a93a808",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_decode_layer",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 6.97,
+  "base": 0.02
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 35.1,
+ "within_limit": true,
+ "graph_overhead_us": 3.7759998813271523,
+ "shapes": [
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer sliding, page 1, q_len 8, dist soft",
+   "weight": 46,
+   "floor_us": 62.3,
+   "base_us": 374.7839918360114,
+   "sub_us": 263.57818862341327,
+   "speedup": 1.4219082155218965,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.0583022189197413,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.412e-02 (worst row 7.297e-02) [bound 0.139]; attention input relative L2 error 3.422e-02 (worst row 4.750e-02) [bound 0.088]",
+   "profile": "   142.26 µs/rep  37.6%  x4   _proj_kernel\n   118.65 µs/rep  31.4%  x1   moe_gemm1\n    65.13 µs/rep  17.2%  x1   moe_gemm2\n    12.79 µs/rep   3.4%  x1   nvjet_sm90_tst_64x8_64x16_2x1_v_bz_TNT\n     7.17 µs/rep   1.9%  x1   _combine_kernel\n     7.07 µs/rep   1.9%  x1   _attn_kernel\n     5.58 µs/rep   1.5%  x1   _ffn_boundary_kernel\n     4.78 µs/rep   1.3%  x1   _combine\n     3.70 µs/rep   1.0%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, false, false, false, true>(sglang::NormRe\n     3.13 µs/rep   0.8%  x1   _pre_expert_kernel\n     3.02 µs/rep   0.8%  x1   void sglang::muse_spark::routing_kernel<sglang::muse_spark::RoutingTrait<8, 8, 0, 1>, true>(sglang::muse_spark\n     2.98 µs/rep   0.8%  x1   _route_prep\n     1.94 µs/rep   0.5%  x1   _swiglu_reduce"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer full, page 1, q_len 8, dist soft",
+   "weight": 16,
+   "floor_us": 66.4,
+   "base_us": 424.3839969858527,
+   "sub_us": 314.7414418369391,
+   "speedup": 1.3483575423338028,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.07485980002256021,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.080e-02 (worst row 6.947e-02) [bound 0.150]; attention input relative L2 error 3.864e-02 (worst row 4.650e-02) [bound 0.096]",
+   "profile": "   147.36 µs/rep  42.0%  x4   _proj_kernel\n    88.94 µs/rep  25.3%  x1   moe_gemm1\n    47.05 µs/rep  13.4%  x1   moe_gemm2\n    24.41 µs/rep   6.9%  x1   _attn_kernel\n    13.50 µs/rep   3.8%  x1   nvjet_sm90_tst_64x8_64x16_2x1_v_bz_TNT\n     5.57 µs/rep   1.6%  x1   _ffn_boundary_kernel\n     5.10 µs/rep   1.5%  x1   _combine_kernel\n     4.50 µs/rep   1.3%  x1   _combine\n     3.69 µs/rep   1.1%  x1   void sglang::muse_spark_norm_residual_kernel<8192l, 256, true, true, false, false, false, true>(sglang::NormRe\n     3.19 µs/rep   0.9%  x1   _pre_expert_kernel\n     3.02 µs/rep   0.9%  x1   _route_prep\n     2.98 µs/rep   0.8%  x1   void sglang::muse_spark::routing_kernel<sglang::muse_spark::RoutingTrait<8, 8, 0, 1>, true>(sglang::muse_spark\n     1.95 µs/rep   0.6%  x1   _swiglu_reduce"
+  }
+ ],
+ "speedup": 1.4003242297594147,
+ "ci95": [
+  1.3793193663130234,
+  1.4213290932058058
+ ],
+ "loads": [
+  {
+   "load": "verify 1",
+   "base_us": 24030.20757623017,
+   "sub_us": 17160.459746068038,
+   "speedup": 1.4003242297594147
+  }
+ ],
+ "step_base_us": 24030.20757623016,
+ "step_sub_us": 17160.459746068034,
+ "timing_checks_ok": true,
+ "complete": false,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 38,
+  "job": "48052615",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261026-055425-muse_decode_layer-9d9d9e",
+  "problem": "muse_decode_layer",
+  "submission": "‹tmp›/okc-dl/v19.py",
+  "cwd": "‹local›",
+  "git": "ebf7faa81886aa80d35a3a6bf637169dfe84d7f8",
+  "submitted": "2026-10-26T04:54:25.324966+00:00",
+  "ncu": null
+ }
+}

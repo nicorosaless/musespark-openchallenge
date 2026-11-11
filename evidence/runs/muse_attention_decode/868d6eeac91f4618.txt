@@ -1,0 +1,10 @@
+✗ muse_attention_decode  passed the tests, failed timing  check run, off the board  job 868d6eeac91f4618
+
+  tests       16/16 passed
+  first fail  batch=1 ctx=80000 dist=soft heads=tp8 layer=sliding load=decode 1
+              page=1  recheck failed on repetition 0: relative L2 error inf >
+              0.146678 [bound 0.147: 2.5 x the reference's 0.053 with FP8 E4M3
+              queries + 0.015]
+  output      ‹local›
+
+next  okc show muse_attention_decode

@@ -1,0 +1,23 @@
+✓ muse_attention_decode  passed  check run, off the board  job 6256b26235754288
+
+  1.680×  ━━━━━━━━━╋━━━━━━────────────  faster than SGLang  95%: 1.654–1.705×
+
+  time        2,242.3 µs
+  tests       16/16 passed
+  profile     ‹local›  and .json
+  output      ‹local›
+
+  CASE                    SGLANG      YOURS   SPEEDUP
+  ──────────────────────────────────────────────────────────────────
+  decode 1 · sliding     20.8 µs     9.4 µs    2.204×   ━━━━━━╋━━━━━
+  decode 1 · full        31.8 µs    19.8 µs    1.606×   ━━━━━━╋━━━──
+  decode 16 · sliding    26.8 µs    12.9 µs    2.083×   ━━━━━━╋━━━━━
+  decode 16 · full      200.8 µs   109.0 µs    1.841×   ━━━━━━╋━━━━─
+  decode 32 · sliding    31.2 µs    18.4 µs    1.699×   ━━━━━━╋━━━━─
+  decode 32 · full      385.1 µs   201.7 µs    1.909×   ━━━━━━╋━━━━━
+  verify 1 · sliding     22.8 µs    10.7 µs    2.130×   ━━━━━━╋━━━━━
+  verify 1 · full        36.0 µs    21.2 µs    1.700×   ━━━━━━╋━━━━─
+  verify 16 · sliding    29.1 µs    17.2 µs    1.694×   ━━━━━━╋━━━━─
+  verify 16 · full      205.0 µs   169.0 µs    1.213×   ━━━━━━╋━────
+  verify 32 · sliding    34.2 µs    23.5 µs    1.453×   ━━━━━━╋━━───
+  verify 32 · full      389.3 µs   320.9 µs    1.213×   ━━━━━━╋━────

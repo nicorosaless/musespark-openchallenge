@@ -1,0 +1,52 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261026-100554-muse_bf16_proj-52b120/problem",
+  "submission": "‹scratch›/okc/bench/running/20261026-100554-muse_bf16_proj-52b120/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261026-100554-muse_bf16_proj-52b120/result.json",
+  "no_tests": true,
+  "no_timing": true,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-26T10:06:22+0100",
+ "submission_sha256": "c5616c317f833a3b7954a2eff525dbe4d7111e872a868dd45575c9402faf44c5",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_bf16_proj",
+ "limit_s": 600,
+ "prepare_s": {
+  "sub": 10.99
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 38.6,
+ "within_limit": true,
+ "status": "tests",
+ "worker_end": {
+  "rc": 0,
+  "s": 43,
+  "job": "48064039",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261026-100554-muse_bf16_proj-52b120",
+  "problem": "muse_bf16_proj",
+  "submission": "muse_bf16_proj/lab_c1_submission.py",
+  "cwd": "‹local›",
+  "git": "62260ea4545e64d956119686867be7746ef6ad32",
+  "submitted": "2026-10-26T09:05:54.612310+00:00",
+  "ncu": "_gemv_c1"
+ },
+ "warning": "run under Nsight Compute: the timings are not comparable"
+}

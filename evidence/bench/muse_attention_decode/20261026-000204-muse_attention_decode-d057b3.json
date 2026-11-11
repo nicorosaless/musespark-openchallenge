@@ -1,0 +1,192 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261026-000204-muse_attention_decode-d057b3/problem",
+  "submission": "‹scratch›/okc/bench/running/20261026-000204-muse_attention_decode-d057b3/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261026-000204-muse_attention_decode-d057b3/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "layer full",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-26T00:06:04+0100",
+ "submission_sha256": "778d16420f22350f59d32bff3dff858dd03d9881c899b3016f0b0fbdbbadc0ec",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_attention_decode",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 0.0,
+  "base": 0.0
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 31.6,
+ "within_limit": true,
+ "graph_overhead_us": 3.711999859660864,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, heads tp8, layer full, page 1, dist coherent",
+   "weight": 16,
+   "floor_us": 4.3,
+   "base_us": 39.48800126090646,
+   "sub_us": 26.282753965038676,
+   "speedup": 1.5024301225599648,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.0313900808669163,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.175e-03 (worst row 3.175e-03) [bound 0.122: 2.5 x the reference's 0.043 with FP8 E4M3 queries + 0.015]",
+   "profile": "    20.25 µs/rep  79.4%  x1   full_fa2\n     5.25 µs/rep  20.6%  x1   _combine_kernel"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, heads tp8, layer full, page 1, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 63.2,
+   "base_us": 278.5440073348582,
+   "sub_us": 244.41405614700005,
+   "speedup": 1.1396398870256916,
+   "reps": 60,
+   "copies": 6,
+   "ratio_iqr": 0.011242921471145584,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.356e-03 (worst row 5.028e-03) [bound 0.121: 2.5 x the reference's 0.042 with FP8 E4M3 queries + 0.015]",
+   "profile": "   239.05 µs/rep  98.7%  x1   full_fa2\n     3.09 µs/rep   1.3%  x1   _combine_kernel"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, heads tp8, layer full, page 1, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 126.4,
+   "base_us": 537.2160063125193,
+   "sub_us": 476.5264815600493,
+   "speedup": 1.1273581366428682,
+   "reps": 60,
+   "copies": 3,
+   "ratio_iqr": 0.010633235102423644,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.135e-03 (worst row 4.025e-03) [bound 0.118: 2.5 x the reference's 0.041 with FP8 E4M3 queries + 0.015]",
+   "profile": "   474.30 µs/rep  99.4%  x1   full_fa2\n     2.74 µs/rep   0.6%  x1   _combine_kernel"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, heads tp8, layer full, page 1, q_len 8, dist coherent",
+   "weight": 16,
+   "floor_us": 4.3,
+   "base_us": 45.05599895492196,
+   "sub_us": 43.17400595001976,
+   "speedup": 1.043590882140538,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.0125355962432121,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.138e-03 (worst row 2.616e-03) [bound 0.083: 2.5 x the reference's 0.027 with FP8 E4M3 queries + 0.015]",
+   "profile": "    36.46 µs/rep  86.8%  x1   full_fa2\n     5.55 µs/rep  13.2%  x1   _combine_kernel"
+  },
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, heads tp8, layer full, page 1, q_len 8, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 63.4,
+   "base_us": 283.8079915381968,
+   "sub_us": 425.7916868651193,
+   "speedup": 0.6665418802037355,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.009448693988319823,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.387e-03 (worst row 4.006e-03) [bound 0.089: 2.5 x the reference's 0.030 with FP8 E4M3 queries + 0.015]",
+   "profile": "   413.71 µs/rep  98.3%  x1   full_fa2\n     6.99 µs/rep   1.7%  x1   _combine_kernel"
+  },
+  {
+   "load": "verify 32",
+   "shape": "batch 32, ctx 80000, heads tp8, layer full, page 1, q_len 8, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 126.8,
+   "base_us": 544.928012881428,
+   "sub_us": 822.5786776841894,
+   "speedup": 0.6624630903581977,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.007282372951585958,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.487e-03 (worst row 5.356e-03) [bound 0.086: 2.5 x the reference's 0.028 with FP8 E4M3 queries + 0.015]",
+   "profile": "   815.51 µs/rep  99.1%  x1   full_fa2\n     7.53 µs/rep   0.9%  x1   _combine_kernel"
+  }
+ ],
+ "speedup": 0.9806722175383199,
+ "ci95": [
+  0.9659621342752451,
+  0.9953823008013946
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 631.8080201745033,
+   "sub_us": 420.5240634406188,
+   "speedup": 1.5024301225599648
+  },
+  {
+   "load": "decode 16",
+   "base_us": 4456.704117357731,
+   "sub_us": 3910.624898352001,
+   "speedup": 1.1396398870256916
+  },
+  {
+   "load": "decode 32",
+   "base_us": 8595.456101000309,
+   "sub_us": 7624.423704960789,
+   "speedup": 1.1273581366428682
+  },
+  {
+   "load": "verify 1",
+   "base_us": 720.8959832787514,
+   "sub_us": 690.7840952003162,
+   "speedup": 1.043590882140538
+  },
+  {
+   "load": "verify 16",
+   "base_us": 4540.927864611149,
+   "sub_us": 6812.666989841909,
+   "speedup": 0.6665418802037355
+  },
+  {
+   "load": "verify 32",
+   "base_us": 8718.848206102848,
+   "sub_us": 13161.25884294703,
+   "speedup": 0.6624630903581977
+  }
+ ],
+ "step_base_us": 2973.199365330457,
+ "step_sub_us": 3031.7972836976783,
+ "timing_checks_ok": true,
+ "complete": false,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 34,
+  "job": "48041300",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261026-000204-muse_attention_decode-d057b3",
+  "problem": "muse_attention_decode",
+  "submission": "muse_attention_decode/variantes/cufull_s4.py",
+  "cwd": "‹local›",
+  "git": "f04ef1346d74fb9fbcf6c3b4b6ffa75bcc8b4658",
+  "submitted": "2026-10-25T23:02:04.816073+00:00",
+  "ncu": null
+ }
+}

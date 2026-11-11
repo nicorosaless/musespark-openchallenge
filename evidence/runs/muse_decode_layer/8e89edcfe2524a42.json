@@ -1,0 +1,265 @@
+{
+ "board": "muse_decode_layer",
+ "call_id": "sfo3b:kc-8e89edcfe2524a42",
+ "cluster": "sfo3b",
+ "content_hash": "43dffee3b42317b7748f80c05b8ad8b2ab201d0e2bfc2619e0d8444a737ff52d",
+ "created_at": 1792932950.8325107,
+ "dedicated": false,
+ "duplicate_of": null,
+ "finished_at": 1792933026.8337278,
+ "id": "8e89edcfe2524a42",
+ "mode": "check",
+ "output": {
+  "log": "‹tmp›/okc-dl/v3/profiles/submission.8e89edcfe2524a42.log"
+ },
+ "payload_ref": "muse_decode_layer/43dffee3b42317b7748f80c05b8ad8b2ab201d0e2bfc2619e0d8444a737ff52d.py",
+ "result": {
+  "checks": {
+   "flagged": [],
+   "ok": true,
+   "rejected": []
+  },
+  "error": null,
+  "evaluator": {
+   "code_sha256": "2999d8a201bb2b0bad6c7b3998af2143a1ed720d531dbb4d15670721ee9f957b",
+   "files": {
+    "challenge/checks.py": "9a046c3c38db28b325dcd1557baecdf6bc9ef941d2175f9a900ba4c230bb8055",
+    "challenge/nvfp4.py": "cfdf37c7bc14b10f7353aba7d4632f4767401b92b4b073941a8030d9a961aaaf",
+    "configs/muse-spark-open.yaml": "98f07230e4e64fe91b7c76d9a3ce04948053c043d494d5f1fae56cfe2de033af",
+    "harness/eval.py": "0051a1bfac67a9f1fad06086b306653c6643b2bb253e15a794aa672312f070a9",
+    "harness/runner.py": "c905e5c80264c6d27620b6fc7d55b162dccdb8ed7282f8a513a4d2e6f2f226f2",
+    "harness/static_checks.py": "c5588b69e9e86229459a525c61b30096f6f13ff2add6cadf98f272c4ac8ca0c2",
+    "harness/worker.py": "950437610f57ddffbc1176b65d9c2ae909c47bf67b1e3fe0716a81946986f568",
+    "problems/muse_decode_layer/baseline.py": "87d95a0c4b78f0fd6c772436b959330ca45652b10e82dfc8add9acf0549227d4",
+    "problems/muse_decode_layer/reference.py": "23e177b87aee70c0d4990515989b95bff2972270cdac8ab967445b21fa2f5163",
+    "problems/muse_decode_layer/task.yml": "6a73de4094ff00d7453fb94bd3aa40f5fae79ac7fbea149660eae2125dc5a0c7"
+   },
+   "image": "localhost:30500/kc/judge@sha256:9a7f287b80d772c6f636bbcb57422c619fe326e2aabc53803b85007bca93f68e"
+  },
+  "flags": [],
+  "gpu": "H200",
+  "log_tail": "Traceback (most recent call last):\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/worker.py\", line 484, in child_main\n    out = kernel()(state.get(\"data\"))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/worker.py\", line 415, in <lambda>\n    return functools.partial(lambda k, p, d: k(d, p), fn, state[\"prep\"])\n                                             ^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1305, in kernel_fn\n    logits = _router(ffn_input, router_input, state)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1227, in _router\n    return router_fp32(router_input, state[\"router\"], ws)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1039, in router_fp32\n    _router_fp32_kernel[grid](x, w, out, ws[\"acc\"], ws[\"cnt\"], tokens, x.stride(0),\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 374, in <lambda>\n    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 757, in run\n    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 902, in _do_compile\n    kernel = self.compile(src, target=target, options=options.__dict__)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 307, in compile\n    module = src.make_ir(target, options, codegen_fns, module_map, context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 80, in make_ir\n    return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntriton.compiler.errors.CompilationError: at 19:4:\n    pid_k = tl.program_id(1)\n    BLOCK_K: tl.constexpr = K // SPLIT_K\n    rows = pid_n * BLOCK_N + tl.arange(0, BLOCK_N)\n    k = pid_k * BLOCK_K + tl.arange(0, BLOCK_K)\n    w = tl.load(w_ptr + rows[:, None] * K + k[None, :])\n    for t in tl.static_range(TP):\n        if t < T:\n            x = tl.load(x_ptr + t * stride_x + k)\n            tl.atomic_add(acc_ptr + t * N + rows, tl.sum(w * x[None, :], axis=1), sem=\"relaxed\")\n    tl.debug_barrier()\n    arrived = tl.atomic_add(cnt_ptr + pid_n, 1, sem=\"acq_rel\")\n    if arrived == SPLIT_K - 1:\n    ^\nAssertionError('initial value for `t` is of type constexpr[1], but the then block redefines it as int32[constexpr[2]]')\nTraceback (most recent call last):\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/worker.py\", line 484, in child_main\n    out = kernel()(state.get(\"data\"))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/worker.py\", line 415, in <lambda>\n    return functools.partial(lambda k, p, d: k(d, p), fn, state[\"prep\"])\n                                             ^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1305, in kernel_fn\n    logits = _router(ffn_input, router_input, state)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1227, in _router\n    return router_fp32(router_input, state[\"router\"], ws)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1039, in router_fp32\n    _router_fp32_kernel[grid](x, w, out, ws[\"acc\"], ws[\"cnt\"], tokens, x.stride(0),\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 374, in <lambda>\n    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 757, in run\n    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 902, in _do_compile\n    kernel = self.compile(src, target=target, options=options.__dict__)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 307, in compile\n    module = src.make_ir(target, options, codegen_fns, module_map, context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 80, in make_ir\n    return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntriton.compiler.errors.CompilationError: at 19:4:\n    pid_k = tl.program_id(1)\n    BLOCK_K: tl.constexpr = K // SPLIT_K\n    rows = pid_n * BLOCK_N + tl.arange(0, BLOCK_N)\n    k = pid_k * BLOCK_K + tl.arange(0, BLOCK_K)\n    w = tl.load(w_ptr + rows[:, None] * K + k[None, :])\n    for t in tl.static_range(TP):\n        if t < T:\n            x = tl.load(x_ptr + t * stride_x + k)\n            tl.atomic_add(acc_ptr + t * N + rows, tl.sum(w * x[None, :], axis=1), sem=\"relaxed\")\n    tl.debug_barrier()\n    arrived = tl.atomic_add(cnt_ptr + pid_n, 1, sem=\"acq_rel\")\n    if arrived == SPLIT_K - 1:\n    ^\nAssertionError('initial value for `t` is of type constexpr[1], but the then block redefines it as int32[constexpr[2]]')\nTraceback (most recent call last):\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/worker.py\", line 484, in child_main\n    out = kernel()(state.get(\"data\"))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/worker.py\", line 415, in <lambda>\n    return functools.partial(lambda k, p, d: k(d, p), fn, state[\"prep\"])\n                                             ^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1305, in kernel_fn\n    logits = _router(ffn_input, router_input, state)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1227, in _router\n    return router_fp32(router_input, state[\"router\"], ws)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1039, in router_fp32\n    _router_fp32_kernel[grid](x, w, out, ws[\"acc\"], ws[\"cnt\"], tokens, x.stride(0),\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 374, in <lambda>\n    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 757, in run\n    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 902, in _do_compile\n    kernel = self.compile(src, target=target, options=options.__dict__)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 307, in compile\n    module = src.make_ir(target, options, codegen_fns, module_map, context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 80, in make_ir\n    return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntriton.compiler.errors.CompilationError: at 19:4:\n    pid_k = tl.program_id(1)\n    BLOCK_K: tl.constexpr = K // SPLIT_K\n    rows = pid_n * BLOCK_N + tl.arange(0, BLOCK_N)\n    k = pid_k * BLOCK_K + tl.arange(0, BLOCK_K)\n    w = tl.load(w_ptr + rows[:, None] * K + k[None, :])\n    for t in tl.static_range(TP):\n        if t < T:\n            x = tl.load(x_ptr + t * stride_x + k)\n            tl.atomic_add(acc_ptr + t * N + rows, tl.sum(w * x[None, :], axis=1), sem=\"relaxed\")\n    tl.debug_barrier()\n    arrived = tl.atomic_add(cnt_ptr + pid_n, 1, sem=\"acq_rel\")\n    if arrived == SPLIT_K - 1:\n    ^\nAssertionError('initial value for `t` is of type constexpr[7], but the then block redefines it as int32[constexpr[8]]')\nTraceback (most recent call last):\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/worker.py\", line 484, in child_main\n    out = kernel()(state.get(\"data\"))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/worker.py\", line 415, in <lambda>\n    return functools.partial(lambda k, p, d: k(d, p), fn, state[\"prep\"])\n                                             ^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1305, in kernel_fn\n    logits = _router(ffn_input, router_input, state)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1227, in _router\n    return router_fp32(router_input, state[\"router\"], ws)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1039, in router_fp32\n    _router_fp32_kernel[grid](x, w, out, ws[\"acc\"], ws[\"cnt\"], tokens, x.stride(0),\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 374, in <lambda>\n    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 757, in run\n    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 902, in _do_compile\n    kernel = self.compile(src, target=target, options=options.__dict__)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 307, in compile\n    module = src.make_ir(target, options, codegen_fns, module_map, context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 80, in make_ir\n    return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntriton.compiler.errors.CompilationError: at 19:4:\n    pid_k = tl.program_id(1)\n    BLOCK_K: tl.constexpr = K // SPLIT_K\n    rows = pid_n * BLOCK_N + tl.arange(0, BLOCK_N)\n    k = pid_k * BLOCK_K + tl.arange(0, BLOCK_K)\n    w = tl.load(w_ptr + rows[:, None] * K + k[None, :])\n    for t in tl.static_range(TP):\n        if t < T:\n            x = tl.load(x_ptr + t * stride_x + k)\n            tl.atomic_add(acc_ptr + t * N + rows, tl.sum(w * x[None, :], axis=1), sem=\"relaxed\")\n    tl.debug_barrier()\n    arrived = tl.atomic_add(cnt_ptr + pid_n, 1, sem=\"acq_rel\")\n    if arrived == SPLIT_K - 1:\n    ^\nAssertionError('initial value for `t` is of type constexpr[7], but the then block redefines it as int32[constexpr[8]]')\nTraceback (most recent call last):\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/worker.py\", line 484, in child_main\n    out = kernel()(state.get(\"data\"))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/worker.py\", line 415, in <lambda>\n    return functools.partial(lambda k, p, d: k(d, p), fn, state[\"prep\"])\n                                             ^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1305, in kernel_fn\n    logits = _router(ffn_input, router_input, state)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1227, in _router\n    return router_fp32(router_input, state[\"router\"], ws)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"‹tmp›/muse_decode_layer-onnhqwo1/run/submission.py\", line 1039, in router_fp32\n    _router_fp32_kernel[grid](x, w, out, ws[\"acc\"], ws[\"cnt\"], tokens, x.stride(0),\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 374, in <lambda>\n    return lambda *args, **kwargs: self.run(grid=grid, warmup=False, *args, **kwargs)\n                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 757, in run\n    kernel = self._do_compile(key, signature, device, constexprs, options, attrs, warmup)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/runtime/jit.py\", line 902, in _do_compile\n    kernel = self.compile(src, target=target, options=options.__dict__)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 307, in compile\n    module = src.make_ir(target, options, codegen_fns, module_map, context)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/sglang/lib/python3.12/site-packages/triton/compiler/compiler.py\", line 80, in make_ir\n    return ast_to_ttir(self.fn, self, context=context, options=options, codegen_fns=codegen_fns,\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntriton.compiler.errors.CompilationError: at 19:4:\n    pid_k = tl.program_id(1)\n    BLOCK_K: tl.constexpr = K // SPLIT_K\n    rows = pid_n * BLOCK_N + tl.arange(0, BLOCK_N)\n    k = pid_k * BLOCK_K + tl.arange(0, BLOCK_K)\n    w = tl.load(w_ptr + rows[:, None] * K + k[None, :])\n    for t in tl.static_range(TP):\n        if t < T:\n            x = tl.load(x_ptr + t * stride_x + k)\n            tl.atomic_add(acc_ptr + t * N + rows, tl.sum(w * x[None, :], axis=1), sem=\"relaxed\")\n    tl.debug_barrier()\n    arrived = tl.atomic_add(cnt_ptr + pid_n, 1, sem=\"acq_rel\")\n    if arrived == SPLIT_K - 1:\n    ^\nAssertionError('initial value for `t` is of type constexpr[1], but the then block redefines it as int32[constexpr[2]]')\n",
+  "machine": {
+   "gpu_after": {
+    "clocks.max.sm": 1980,
+    "clocks.mem": 3201,
+    "clocks.sm": 1980,
+    "driver_version": "580.178.04",
+    "name": "NVIDIA H200",
+    "power.draw": 123.52,
+    "power.limit": 700,
+    "temperature.gpu": 35
+   },
+   "gpu_before": {
+    "clocks.max.sm": 1980,
+    "clocks.mem": 3201,
+    "clocks.sm": 1980,
+    "driver_version": "580.178.04",
+    "name": "NVIDIA H200",
+    "power.draw": 131.84,
+    "power.limit": 700,
+    "temperature.gpu": 32
+   },
+   "node": "n-n5ig53xatkvzqcfmh7y7k2a7fu"
+  },
+  "passed": false,
+  "records": [
+   {
+    "baseline_copies": 2,
+    "baseline_prepare_pad": 10805760,
+    "copies": 1,
+    "error": null,
+    "event": "setup",
+    "first": "baseline",
+    "prepare_pad": 21388800,
+    "prepare_s": 0.163830289,
+    "status": "pass"
+   },
+   {
+    "case": {
+     "batch": 1,
+     "ctx": 10,
+     "layer": "sliding",
+     "seed": 7993948919110105914
+    },
+    "event": "test",
+    "index": 0,
+    "message": "CompilationError: at 19:4:\n    pid_k = tl.program_id(1)\n    BLOCK_K: tl.constexpr = K // SPLIT_K\n    rows = pid_n * BLOCK_N + tl.arange(0, BLOCK_N)\n    k = pid_k * BLOCK_K + tl.arange(0, BLOCK_K)\n    w = tl.load(w_ptr + rows[:, None] * K + k[None, :])\n    for t in tl.static_range(TP):\n        if t < T:\n            x = tl.load(x_ptr + t * stride_x + k)\n            tl.atomic_add(acc_ptr + t * N + rows, tl.sum(w * x[None, :], axis=1), sem=\"relaxed\")\n    tl.debug_barrier()\n    arrived = tl.atomic_add(cnt_ptr + pid_n, 1, sem=\"acq_rel\")\n    if arrived == SPLIT_K - 1:\n    ^\nAssertionError('initial value for `t` is of type constexpr[1], but the then block redefines it as int32[constexpr[2]]')",
+    "status": "fail"
+   },
+   {
+    "case": {
+     "batch": 1,
+     "ctx": 3000,
+     "layer": "full",
+     "seed": 7994084805468509105
+    },
+    "event": "test",
+    "index": 1,
+    "message": "CompilationError: at 19:4:\n    pid_k = tl.program_id(1)\n    BLOCK_K: tl.constexpr = K // SPLIT_K\n    rows = pid_n * BLOCK_N + tl.arange(0, BLOCK_N)\n    k = pid_k * BLOCK_K + tl.arange(0, BLOCK_K)\n    w = tl.load(w_ptr + rows[:, None] * K + k[None, :])\n    for t in tl.static_range(TP):\n        if t < T:\n            x = tl.load(x_ptr + t * stride_x + k)\n            tl.atomic_add(acc_ptr + t * N + rows, tl.sum(w * x[None, :], axis=1), sem=\"relaxed\")\n    tl.debug_barrier()\n    arrived = tl.atomic_add(cnt_ptr + pid_n, 1, sem=\"acq_rel\")\n    if arrived == SPLIT_K - 1:\n    ^\nAssertionError('initial value for `t` is of type constexpr[1], but the then block redefines it as int32[constexpr[2]]')",
+    "status": "fail"
+   },
+   {
+    "case": {
+     "batch": 8,
+     "ctx": 2047,
+     "layer": "sliding",
+     "seed": 7994220691826912297
+    },
+    "event": "test",
+    "index": 2,
+    "message": "CompilationError: at 19:4:\n    pid_k = tl.program_id(1)\n    BLOCK_K: tl.constexpr = K // SPLIT_K\n    rows = pid_n * BLOCK_N + tl.arange(0, BLOCK_N)\n    k = pid_k * BLOCK_K + tl.arange(0, BLOCK_K)\n    w = tl.load(w_ptr + rows[:, None] * K + k[None, :])\n    for t in tl.static_range(TP):\n        if t < T:\n            x = tl.load(x_ptr + t * stride_x + k)\n            tl.atomic_add(acc_ptr + t * N + rows, tl.sum(w * x[None, :], axis=1), sem=\"relaxed\")\n    tl.debug_barrier()\n    arrived = tl.atomic_add(cnt_ptr + pid_n, 1, sem=\"acq_rel\")\n    if arrived == SPLIT_K - 1:\n    ^\nAssertionError('initial value for `t` is of type constexpr[7], but the then block redefines it as int32[constexpr[8]]')",
+    "status": "fail"
+   },
+   {
+    "case": {
+     "batch": 9,
+     "ctx": 5000,
+     "layer": "sliding",
+     "page": 1,
+     "seed": 7994356578185315490,
+     "spread": "mixed"
+    },
+    "event": "test",
+    "index": 3,
+    "message": "update relative L2 error 6.008e-02 (worst row 7.894e-02) [bound 0.150]; attention input relative L2 error 3.958e-02 (worst row 5.123e-02) [bound 0.100]",
+    "status": "pass"
+   },
+   {
+    "case": {
+     "batch": 3,
+     "ctx": 6000,
+     "dist": "outliers",
+     "layer": "full",
+     "q_len": 8,
+     "seed": 7994492464543718684
+    },
+    "event": "test",
+    "index": 4,
+    "message": "update relative L2 error 6.290e-02 (worst row 1.038e-01) [bound 0.150]; attention input relative L2 error 3.348e-02 (worst row 5.222e-02) [bound 0.082]",
+    "status": "pass"
+   },
+   {
+    "case": {
+     "batch": 5,
+     "ctx": 5000,
+     "layer": "sliding",
+     "page": 1,
+     "q_len": 8,
+     "seed": 7994628350902121879,
+     "spread": "mixed"
+    },
+    "event": "test",
+    "index": 5,
+    "message": "update relative L2 error 6.968e-02 (worst row 1.050e-01) [bound 0.150]; attention input relative L2 error 4.713e-02 (worst row 6.564e-02) [bound 0.116]",
+    "status": "pass"
+   },
+   {
+    "case": {
+     "batch": 33,
+     "ctx": 20000,
+     "layer": "full",
+     "page": 1,
+     "seed": 7994764237260525075,
+     "spread": "mixed"
+    },
+    "event": "test",
+    "index": 6,
+    "message": "update relative L2 error 6.888e-02 (worst row 1.043e-01) [bound 0.150]; attention input relative L2 error 4.537e-02 (worst row 7.604e-02) [bound 0.112]",
+    "status": "pass"
+   },
+   {
+    "case": {
+     "batch": 2,
+     "ctx": 300000,
+     "layer": "sliding",
+     "q_len": 8,
+     "seed": 7994900123618928272
+    },
+    "event": "test",
+    "index": 7,
+    "message": "update relative L2 error 7.414e-02 (worst row 8.868e-02) [bound 0.150]; attention input relative L2 error 4.980e-02 (worst row 6.079e-02) [bound 0.122]",
+    "status": "pass"
+   },
+   {
+    "case": {
+     "batch": 1,
+     "ctx": 1048576,
+     "layer": "full",
+     "q_len": 8,
+     "seed": 7995036009977331470
+    },
+    "event": "test",
+    "index": 8,
+    "message": "CompilationError: at 19:4:\n    pid_k = tl.program_id(1)\n    BLOCK_K: tl.constexpr = K // SPLIT_K\n    rows = pid_n * BLOCK_N + tl.arange(0, BLOCK_N)\n    k = pid_k * BLOCK_K + tl.arange(0, BLOCK_K)\n    w = tl.load(w_ptr + rows[:, None] * K + k[None, :])\n    for t in tl.static_range(TP):\n        if t < T:\n            x = tl.load(x_ptr + t * stride_x + k)\n            tl.atomic_add(acc_ptr + t * N + rows, tl.sum(w * x[None, :], axis=1), sem=\"relaxed\")\n    tl.debug_barrier()\n    arrived = tl.atomic_add(cnt_ptr + pid_n, 1, sem=\"acq_rel\")\n    if arrived == SPLIT_K - 1:\n    ^\nAssertionError('initial value for `t` is of type constexpr[7], but the then block redefines it as int32[constexpr[8]]')",
+    "status": "fail"
+   },
+   {
+    "case": {
+     "batch": 4,
+     "ctx": 7000,
+     "kv_scale": 0.015625,
+     "layer": "sliding",
+     "page": 1,
+     "q_len": 8,
+     "seed": 7995579555410944272
+    },
+    "event": "test",
+    "index": 9,
+    "message": "update relative L2 error 7.473e-02 (worst row 1.057e-01) [bound 0.150]; attention input relative L2 error 5.112e-02 (worst row 7.054e-02) [bound 0.127]",
+    "status": "pass"
+   },
+   {
+    "case": {
+     "batch": 1,
+     "ctx": 80000,
+     "dist": "soft",
+     "layer": "full",
+     "page": 1,
+     "seed": 7995171896335734669
+    },
+    "event": "test",
+    "index": 10,
+    "message": "CompilationError: at 19:4:\n    pid_k = tl.program_id(1)\n    BLOCK_K: tl.constexpr = K // SPLIT_K\n    rows = pid_n * BLOCK_N + tl.arange(0, BLOCK_N)\n    k = pid_k * BLOCK_K + tl.arange(0, BLOCK_K)\n    w = tl.load(w_ptr + rows[:, None] * K + k[None, :])\n    for t in tl.static_range(TP):\n        if t < T:\n            x = tl.load(x_ptr + t * stride_x + k)\n            tl.atomic_add(acc_ptr + t * N + rows, tl.sum(w * x[None, :], axis=1), sem=\"relaxed\")\n    tl.debug_barrier()\n    arrived = tl.atomic_add(cnt_ptr + pid_n, 1, sem=\"acq_rel\")\n    if arrived == SPLIT_K - 1:\n    ^\nAssertionError('initial value for `t` is of type constexpr[1], but the then block redefines it as int32[constexpr[2]]')",
+    "status": "fail"
+   },
+   {
+    "case": {
+     "batch": 4,
+     "ctx": 6000,
+     "dist": "soft",
+     "layer": "sliding",
+     "q_len": 8,
+     "seed": 7995307782694137869
+    },
+    "event": "test",
+    "index": 11,
+    "message": "update relative L2 error 6.002e-02 (worst row 8.351e-02) [bound 0.143]; attention input relative L2 error 3.959e-02 (worst row 5.567e-02) [bound 0.094]",
+    "status": "pass"
+   },
+   {
+    "case": {
+     "batch": 16,
+     "ctx": 20000,
+     "dist": "soft",
+     "layer": "full",
+     "page": 1,
+     "seed": 7995443669052541070,
+     "spread": "mixed"
+    },
+    "event": "test",
+    "index": 12,
+    "message": "update relative L2 error 5.482e-02 (worst row 7.767e-02) [bound 0.135]; attention input relative L2 error 3.538e-02 (worst row 5.337e-02) [bound 0.087]",
+    "status": "pass"
+   }
+  ],
+  "returncode": 112,
+  "score_us": null,
+  "speedup": null,
+  "speedup_ci": null,
+  "status": "ok"
+ },
+ "started_at": 1792932960.5121722,
+ "status": "done",
+ "team": "nicorosaless"
+}

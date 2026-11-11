@@ -1,0 +1,270 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261027-164122-muse_decode_layer-9da8c2/problem",
+  "submission": "‹scratch›/okc/bench/running/20261027-164122-muse_decode_layer-9da8c2/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261027-164122-muse_decode_layer-9da8c2/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": true,
+  "keep_going": false
+ },
+ "start": "2026-10-27T16:41:26+0100",
+ "submission_sha256": "d1027ff2b96aa6f211be32daa222603d26c30b26f84b737e03b40d62224d2315",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_decode_layer",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 9.08,
+  "base": 0.11
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 37.7,
+ "within_limit": true,
+ "graph_overhead_us": 4.000000189989805,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, layer sliding, page 1, dist soft",
+   "weight": 46,
+   "floor_us": 40.0,
+   "base_us": 254.7199954278767,
+   "sub_us": 138.34479523624196,
+   "speedup": 1.8411968082565648,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.45866308243635734,
+   "check_ok": false,
+   "check_msg": "routing: token 0 routed to an expert whose biased score is 4.91e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "decode 1",
+   "shape": "batch 1, ctx 80000, layer full, page 1, dist soft",
+   "weight": 16,
+   "floor_us": 44.2,
+   "base_us": 284.1759999282658,
+   "sub_us": 162.22787322711952,
+   "speedup": 1.7517088418610935,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.26736676978896656,
+   "check_ok": false,
+   "check_msg": "routing: token 0 routed to an expert whose biased score is 5.77e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, layer sliding, page 1, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 76.7,
+   "base_us": 401.93600254133344,
+   "sub_us": 191.083278384976,
+   "speedup": 2.103459841899676,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.08148807496744537,
+   "check_ok": false,
+   "check_msg": "routing: token 10 routed to an expert whose biased score is 6.45e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, layer full, page 1, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 137.5,
+   "base_us": 678.9119918830693,
+   "sub_us": 392.0169994560455,
+   "speedup": 1.7318432435968676,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.24057371771620195,
+   "check_ok": false,
+   "check_msg": "routing: token 4 routed to an expert whose biased score is 6.36e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, layer sliding, page 1, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 84.5,
+   "base_us": 437.20000283792615,
+   "sub_us": 208.57907694313528,
+   "speedup": 2.096087533061236,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.26177885733815076,
+   "check_ok": false,
+   "check_msg": "routing: token 0 routed to an expert whose biased score is 6.84e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, layer full, page 1, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 208.1,
+   "base_us": 933.4240038879216,
+   "sub_us": 678.0577364141292,
+   "speedup": 1.3766143408735114,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.028739963627180343,
+   "check_ok": false,
+   "check_msg": "routing: token 0 routed to an expert whose biased score is 6.59e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer sliding, page 1, q_len 8, dist soft",
+   "weight": 46,
+   "floor_us": 62.3,
+   "base_us": 376.20800035074353,
+   "sub_us": 135.26605923174262,
+   "speedup": 2.7812446262385055,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.515448765176302,
+   "check_ok": false,
+   "check_msg": "routing: token 5 routed to an expert whose biased score is 5.92e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer full, page 1, q_len 8, dist soft",
+   "weight": 16,
+   "floor_us": 66.4,
+   "base_us": 424.41599862650037,
+   "sub_us": 163.95345388043808,
+   "speedup": 2.5886371319508936,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.48278777313815713,
+   "check_ok": false,
+   "check_msg": "routing: token 5 routed to an expert whose biased score is 5.38e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, layer sliding, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 126.6,
+   "base_us": 660.7520063407719,
+   "sub_us": 277.91338585564176,
+   "speedup": 2.3775465305726238,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.12807395336466687,
+   "check_ok": false,
+   "check_msg": "routing: token 45 routed to an expert whose biased score is 6.35e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, layer full, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 188.7,
+   "base_us": 943.9840097911656,
+   "sub_us": 593.3048114203139,
+   "speedup": 1.591060769474227,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.180636943795639,
+   "check_ok": false,
+   "check_msg": "routing: token 64 routed to an expert whose biased score is 6.62e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "verify 32",
+   "shape": "batch 32, ctx 80000, layer sliding, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 143.8,
+   "base_us": 831.6000183112919,
+   "sub_us": 361.7781891681199,
+   "speedup": 2.29864608539141,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.03599560282194414,
+   "check_ok": false,
+   "check_msg": "routing: token 184 routed to an expert whose biased score is 7.21e-01 below its 8th best (> 0.05)"
+  },
+  {
+   "load": "verify 32",
+   "shape": "batch 32, ctx 80000, layer full, page 1, q_len 8, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 267.2,
+   "base_us": 1313.3920510299504,
+   "sub_us": 984.5369556954424,
+   "speedup": 1.3340200623573508,
+   "reps": 60,
+   "copies": 2,
+   "ratio_iqr": 0.04375012424492142,
+   "check_ok": false,
+   "check_msg": "routing: token 184 routed to an expert whose biased score is 6.69e-01 below its 8th best (> 0.05)"
+  }
+ ],
+ "speedup": 1.9879917916573089,
+ "ci95": [
+  1.9581719147824492,
+  2.0178116685321683
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 16263.935788534582,
+   "sub_us": 8959.506552501043,
+   "speedup": 1.815271376077571
+  },
+  {
+   "load": "decode 16",
+   "base_us": 29351.647987030447,
+   "sub_us": 15062.102797005624,
+   "speedup": 1.9487085158431938
+  },
+  {
+   "load": "decode 32",
+   "base_us": 35045.98419275135,
+   "sub_us": 20443.56132201029,
+   "speedup": 1.7142797989418581
+  },
+  {
+   "load": "verify 1",
+   "base_us": 24096.22399415821,
+   "sub_us": 8845.49398674717,
+   "speedup": 2.7241241733090957
+  },
+  {
+   "load": "verify 16",
+   "base_us": 45498.33644833416,
+   "sub_us": 22276.89273208454,
+   "speedup": 2.0424004817693753
+  },
+  {
+   "load": "verify 32",
+   "base_us": 59267.873658798635,
+   "sub_us": 32394.387992860597,
+   "speedup": 1.8295722602279347
+  }
+ ],
+ "step_base_us": 32065.895753089568,
+ "step_sub_us": 16129.792832976196,
+ "timing_checks_ok": false,
+ "complete": true,
+ "status": "timing_checks_failed",
+ "worker_end": {
+  "rc": 0,
+  "s": 41,
+  "job": "48140706",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261027-164122-muse_decode_layer-9da8c2",
+  "problem": "muse_decode_layer",
+  "submission": "‹tmp›/okc-dl/abl/sin_finishes/submission.py",
+  "cwd": "‹local›",
+  "git": "382ad19beea9f3fe6896473320b992ed70113584",
+  "submitted": "2026-10-27T15:41:22.145846+00:00",
+  "ncu": null
+ }
+}

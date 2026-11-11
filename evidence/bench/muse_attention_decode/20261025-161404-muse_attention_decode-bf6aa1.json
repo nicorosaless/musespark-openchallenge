@@ -1,0 +1,87 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-161404-muse_attention_decode-bf6aa1/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-161404-muse_attention_decode-bf6aa1/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-161404-muse_attention_decode-bf6aa1/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": 4,
+  "copies": 16,
+  "filter": "batch 16, ctx 80000, heads tp8, layer full, page 1, q_len 8",
+  "no_profile": true,
+  "keep_going": false
+ },
+ "start": "2026-10-25T16:14:21+0100",
+ "submission_sha256": "9291d626456ed1db563d77d98802518fa7ec009fd3f86df0e56c3f3597f744f2",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_attention_decode",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 0.0,
+  "base": 0.0
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 31.5,
+ "within_limit": true,
+ "graph_overhead_us": 3.040000330656767,
+ "shapes": [
+  {
+   "load": "verify 16",
+   "shape": "batch 16, ctx 80000, heads tp8, layer full, page 1, q_len 8, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 63.4,
+   "base_us": 292.81599866226315,
+   "sub_us": 261.76812845543276,
+   "speedup": 1.118608290436383,
+   "reps": 4,
+   "copies": 5,
+   "ratio_iqr": 0.01256203574086645,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.963e-02 (worst row 5.807e-02) [bound 0.089: 2.5 x the reference's 0.030 with FP8 E4M3 queries + 0.015]"
+  }
+ ],
+ "speedup": 1.118608290436383,
+ "ci95": [
+  1.1018291660798372,
+  1.1414318751718864
+ ],
+ "loads": [
+  {
+   "load": "verify 16",
+   "base_us": 4685.0559785962105,
+   "sub_us": 4188.290055286924,
+   "speedup": 1.118608290436383
+  }
+ ],
+ "step_base_us": 4685.055978596209,
+ "step_sub_us": 4188.290055286922,
+ "timing_checks_ok": true,
+ "complete": false,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 36,
+  "job": "48016569",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261025-161404-muse_attention_decode-bf6aa1",
+  "problem": "muse_attention_decode",
+  "submission": "muse_attention_decode/variantes/r12_d.py",
+  "cwd": "‹local›",
+  "git": "83b637a008391a770b612bda39042c0d2228f100",
+  "submitted": "2026-10-25T15:14:04.831823+00:00",
+  "ncu": "_attn_kernel"
+ },
+ "warning": "run under Nsight Compute: the timings are not comparable"
+}

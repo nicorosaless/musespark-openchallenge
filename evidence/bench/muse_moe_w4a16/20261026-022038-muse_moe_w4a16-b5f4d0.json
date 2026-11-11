@@ -1,0 +1,109 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261026-022038-muse_moe_w4a16-b5f4d0/problem",
+  "submission": "‹scratch›/okc/bench/running/20261026-022038-muse_moe_w4a16-b5f4d0/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261026-022038-muse_moe_w4a16-b5f4d0/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "decode 1",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-26T02:20:46+0100",
+ "submission_sha256": "2a5c2034516adeadd5b615baa5b5b75d8270fc355ea5ad5db06b7d90192faa65",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_moe_w4a16",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 1.12,
+  "base": 0.25
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 34.1,
+ "within_limit": true,
+ "graph_overhead_us": 3.1680003739893436,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "bs 1, sharding ep8",
+   "weight": 60,
+   "floor_us": 11.4,
+   "base_us": 601.6000076197088,
+   "sub_us": 62.15545747320421,
+   "speedup": 9.678957119397989,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 2.416546835083638,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.587e-03 (worst row 2.587e-03)",
+   "profile": ""
+  },
+  {
+   "load": "decode 16",
+   "shape": "bs 16, sharding ep8",
+   "weight": 60,
+   "floor_us": 52.5,
+   "base_us": 653.8399918936193,
+   "sub_us": 239.0002552859274,
+   "speedup": 2.7357292615081072,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.7137364482718578,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.280e-03 (worst row 3.554e-03)",
+   "profile": ""
+  }
+ ],
+ "speedup": 5.145775569573483,
+ "ci95": [
+  5.06858893602988,
+  5.26224791369034
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 36096.00045718253,
+   "sub_us": 3729.3274483922523,
+   "speedup": 9.678957119397989
+  },
+  {
+   "load": "decode 16",
+   "base_us": 39230.39951361716,
+   "sub_us": 14340.015317155645,
+   "speedup": 2.7357292615081072
+  }
+ ],
+ "step_base_us": 37630.57957006478,
+ "step_sub_us": 7312.907269522417,
+ "timing_checks_ok": true,
+ "complete": false,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 39,
+  "job": "48046442",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261026-022038-muse_moe_w4a16-b5f4d0",
+  "problem": "muse_moe_w4a16",
+  "submission": "muse_moe_w4a16/enviados/v3/submission.py",
+  "cwd": "‹local›",
+  "git": "bd06e6b09afe51cbf392e6612b3d356d17181966",
+  "submitted": "2026-10-26T01:20:38.803515+00:00",
+  "ncu": "moe_gemm1"
+ },
+ "warning": "run under Nsight Compute: the timings are not comparable"
+}

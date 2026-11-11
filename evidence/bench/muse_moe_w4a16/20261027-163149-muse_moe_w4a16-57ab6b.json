@@ -1,0 +1,223 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261027-163149-muse_moe_w4a16-57ab6b/problem",
+  "submission": "‹scratch›/okc/bench/running/20261027-163149-muse_moe_w4a16-57ab6b/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261027-163149-muse_moe_w4a16-57ab6b/result.json",
+  "no_tests": false,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-27T16:31:56+0100",
+ "submission_sha256": "b6c8d4a3c9169f6881b4eb28b1750c46bcd5fd17d95a0537a8d9277152f0cb26",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_moe_w4a16",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 30.68,
+  "base": 0.11
+ },
+ "tests": [
+  {
+   "shape": "bs 4, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 2.525e-03 (worst row 2.585e-03)",
+   "s": 3.47
+  },
+  {
+   "shape": "bs 33, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 2.544e-03 (worst row 2.774e-03)",
+   "s": 0.3
+  },
+  {
+   "shape": "bs 257, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 3.242e-03 (worst row 3.476e-03)",
+   "s": 0.24
+  },
+  {
+   "shape": "bs 128, sharding ep8, dist skewed",
+   "ok": true,
+   "msg": "relative L2 error 3.227e-03 (worst row 3.438e-03)",
+   "s": 0.19
+  },
+  {
+   "shape": "bs 1, sharding ep8",
+   "ok": true,
+   "msg": "relative L2 error 2.473e-03 (worst row 2.473e-03)",
+   "s": 0.46
+  }
+ ],
+ "tests_ok": true,
+ "duration_s": 58.2,
+ "within_limit": true,
+ "graph_overhead_us": 3.9680004119873047,
+ "shapes": [
+  {
+   "load": "decode 1",
+   "shape": "bs 1, sharding ep8",
+   "weight": 60,
+   "floor_us": 11.4,
+   "base_us": 99.2799960076809,
+   "sub_us": 54.85119384948096,
+   "speedup": 1.8099878788439598,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.2694436597137071,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.587e-03 (worst row 2.587e-03)",
+   "profile": "    39.22 µs/rep  56.2%  x1   moe_gemm1\n    21.32 µs/rep  30.5%  x1   moe_gemm2\n     4.96 µs/rep   7.1%  x1   _combine\n     2.26 µs/rep   3.2%  x1   _swiglu_reduce\n     2.05 µs/rep   2.9%  x1   _route_prep"
+  },
+  {
+   "load": "decode 16",
+   "shape": "bs 16, sharding ep8",
+   "weight": 60,
+   "floor_us": 52.5,
+   "base_us": 302.96000838279724,
+   "sub_us": 239.63968181047719,
+   "speedup": 1.2642313914537657,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.06081397113474951,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.574e-03 (worst row 2.741e-03)",
+   "profile": "   146.38 µs/rep  62.3%  x1   moe_gemm1\n    78.22 µs/rep  33.3%  x1   moe_gemm2\n     4.04 µs/rep   1.7%  x1   _combine\n     3.88 µs/rep   1.7%  x1   moe_route\n     2.40 µs/rep   1.0%  x1   _swiglu_reduce"
+  },
+  {
+   "load": "decode 32",
+   "shape": "bs 32, sharding ep8",
+   "weight": 60,
+   "floor_us": 70.8,
+   "base_us": 347.56800532341003,
+   "sub_us": 326.41952595324784,
+   "speedup": 1.0647892594917598,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.0366464903370507,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.581e-03 (worst row 2.744e-03)",
+   "profile": "   197.05 µs/rep  62.8%  x1   moe_gemm1\n   106.07 µs/rep  33.8%  x1   moe_gemm2\n     3.98 µs/rep   1.3%  x1   _combine\n     3.97 µs/rep   1.3%  x1   moe_route\n     2.79 µs/rep   0.9%  x1   _swiglu_reduce"
+  },
+  {
+   "load": "verify 1",
+   "shape": "bs 8, sharding ep8",
+   "weight": 60,
+   "floor_us": 37.3,
+   "base_us": 239.887997508049,
+   "sub_us": 185.89450231373485,
+   "speedup": 1.290452350781139,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.0962104198912519,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.588e-03 (worst row 2.702e-03)",
+   "profile": "    87.09 µs/rep  61.2%  x1   moe_gemm1\n    46.01 µs/rep  32.3%  x1   moe_gemm2\n     3.97 µs/rep   2.8%  x1   _combine\n     3.26 µs/rep   2.3%  x1   _route_prep\n     1.91 µs/rep   1.3%  x1   _swiglu_reduce"
+  },
+  {
+   "load": "verify 16",
+   "shape": "bs 128, sharding ep8",
+   "weight": 60,
+   "floor_us": 101.3,
+   "base_us": 508.08000564575195,
+   "sub_us": 551.204764633577,
+   "speedup": 0.921762724572069,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.04545148702002422,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.238e-03 (worst row 3.554e-03)",
+   "profile": "   321.11 µs/rep  52.8%  x1   moe_gemm1_wg\n   279.07 µs/rep  45.9%  x1   moe_gemm2_wg\n     4.20 µs/rep   0.7%  x1   moe_route\n     3.64 µs/rep   0.6%  x1   _combine"
+  },
+  {
+   "load": "verify 32",
+   "shape": "bs 256, sharding ep8",
+   "weight": 60,
+   "floor_us": 108.9,
+   "base_us": 638.9920115470886,
+   "sub_us": 637.9854348018705,
+   "speedup": 1.0015777425162233,
+   "reps": 100,
+   "copies": 16,
+   "ratio_iqr": 0.05731131192866845,
+   "check_ok": true,
+   "check_msg": "relative L2 error 3.230e-03 (worst row 3.554e-03)",
+   "profile": "   333.62 µs/rep  54.5%  x1   moe_gemm1_wg\n   269.30 µs/rep  44.0%  x1   moe_gemm2_wg\n     4.89 µs/rep   0.8%  x1   moe_route\n     4.63 µs/rep   0.8%  x1   _combine"
+  }
+ ],
+ "speedup": 1.1943600811268347,
+ "ci95": [
+  1.1764446799099322,
+  1.2122754823437372
+ ],
+ "loads": [
+  {
+   "load": "decode 1",
+   "base_us": 5956.799760460854,
+   "sub_us": 3291.0716309688573,
+   "speedup": 1.8099878788439598
+  },
+  {
+   "load": "decode 16",
+   "base_us": 18177.600502967834,
+   "sub_us": 14378.380908628631,
+   "speedup": 1.2642313914537657
+  },
+  {
+   "load": "decode 32",
+   "base_us": 20854.080319404602,
+   "sub_us": 19585.17155719487,
+   "speedup": 1.0647892594917598
+  },
+  {
+   "load": "verify 1",
+   "base_us": 14393.27985048294,
+   "sub_us": 11153.67013882409,
+   "speedup": 1.290452350781139
+  },
+  {
+   "load": "verify 16",
+   "base_us": 30484.800338745117,
+   "sub_us": 33072.28587801462,
+   "speedup": 0.921762724572069
+  },
+  {
+   "load": "verify 32",
+   "base_us": 38339.52069282532,
+   "sub_us": 38279.12608811223,
+   "speedup": 1.0015777425162233
+  }
+ ],
+ "step_base_us": 18334.612413371768,
+ "step_sub_us": 15350.992303823263,
+ "timing_checks_ok": true,
+ "complete": true,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 62,
+  "job": "48140706",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261027-163149-muse_moe_w4a16-57ab6b",
+  "problem": "muse_moe_w4a16",
+  "submission": "‹tmp›/okc-moe/bq_v42/submission.py",
+  "cwd": "muse_moe_w4a16",
+  "git": "6261e1880e2f337e47954d5c6f1697dcb0bb0a1b",
+  "submitted": "2026-10-27T15:31:49.634356+00:00",
+  "ncu": null
+ }
+}

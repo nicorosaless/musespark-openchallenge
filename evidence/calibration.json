@@ -1,0 +1,553 @@
+{
+ "muse_bf16_proj": {
+  "okc_job": "c3615258387a4a7d",
+  "bench_run": "evidence/bench/calibration-muse_bf16_proj.json",
+  "judge_gpu": "H200",
+  "bench_gpu": "NVIDIA H100",
+  "bench_driver": "595.91.07",
+  "matched_shapes": "30/30",
+  "factor_geomean": 0.5564,
+  "factor_min": 0.4017,
+  "factor_max": 0.9647,
+  "speedup_okc_baseline": 0.9975792125240786,
+  "speedup_bench_baseline": 1.0010077246785731,
+  "shapes": [
+   {
+    "shape": "decode 1 | layer qkv_gate, m 1",
+    "weight": 62,
+    "sglang_h200_us": 14.0,
+    "sglang_h100_us": 29.376,
+    "factor_h200_h100": 0.4766
+   },
+   {
+    "shape": "decode 1 | layer o, m 1",
+    "weight": 62,
+    "sglang_h200_us": 6.912,
+    "sglang_h100_us": 13.408,
+    "factor_h200_h100": 0.5155
+   },
+   {
+    "shape": "decode 1 | layer pooler, m 1",
+    "weight": 62,
+    "sglang_h200_us": 21.12,
+    "sglang_h100_us": 47.872,
+    "factor_h200_h100": 0.4412
+   },
+   {
+    "shape": "decode 1 | layer unpooler, m 1",
+    "weight": 62,
+    "sglang_h200_us": 6.912,
+    "sglang_h100_us": 10.784,
+    "factor_h200_h100": 0.6409
+   },
+   {
+    "shape": "decode 1 | layer router, m 1",
+    "weight": 62,
+    "sglang_h200_us": 10.496,
+    "sglang_h100_us": 14.128,
+    "factor_h200_h100": 0.7429
+   },
+   {
+    "shape": "decode 16 | layer qkv_gate, m 16",
+    "weight": 62,
+    "sglang_h200_us": 14.384,
+    "sglang_h100_us": 29.472,
+    "factor_h200_h100": 0.4881
+   },
+   {
+    "shape": "decode 16 | layer o, m 16",
+    "weight": 62,
+    "sglang_h200_us": 6.976,
+    "sglang_h100_us": 13.344,
+    "factor_h200_h100": 0.5228
+   },
+   {
+    "shape": "decode 16 | layer pooler, m 16",
+    "weight": 62,
+    "sglang_h200_us": 21.504,
+    "sglang_h100_us": 47.936,
+    "factor_h200_h100": 0.4486
+   },
+   {
+    "shape": "decode 16 | layer unpooler, m 16",
+    "weight": 62,
+    "sglang_h200_us": 18.448,
+    "sglang_h100_us": 45.92,
+    "factor_h200_h100": 0.4017
+   },
+   {
+    "shape": "decode 16 | layer router, m 16",
+    "weight": 62,
+    "sglang_h200_us": 14.784,
+    "sglang_h100_us": 19.2,
+    "factor_h200_h100": 0.77
+   },
+   {
+    "shape": "decode 32 | layer qkv_gate, m 32",
+    "weight": 62,
+    "sglang_h200_us": 14.336,
+    "sglang_h100_us": 29.824,
+    "factor_h200_h100": 0.4807
+   },
+   {
+    "shape": "decode 32 | layer o, m 32",
+    "weight": 62,
+    "sglang_h200_us": 6.944,
+    "sglang_h100_us": 13.408,
+    "factor_h200_h100": 0.5179
+   },
+   {
+    "shape": "decode 32 | layer pooler, m 32",
+    "weight": 62,
+    "sglang_h200_us": 22.032,
+    "sglang_h100_us": 48.096,
+    "factor_h200_h100": 0.4581
+   },
+   {
+    "shape": "decode 32 | layer unpooler, m 32",
+    "weight": 62,
+    "sglang_h200_us": 18.72,
+    "sglang_h100_us": 46.176,
+    "factor_h200_h100": 0.4054
+   },
+   {
+    "shape": "decode 32 | layer router, m 32",
+    "weight": 62,
+    "sglang_h200_us": 15.344,
+    "sglang_h100_us": 19.456,
+    "factor_h200_h100": 0.7887
+   },
+   {
+    "shape": "verify 1 | layer qkv_gate, m 8",
+    "weight": 62,
+    "sglang_h200_us": 14.96,
+    "sglang_h100_us": 29.216,
+    "factor_h200_h100": 0.512
+   },
+   {
+    "shape": "verify 1 | layer o, m 8",
+    "weight": 62,
+    "sglang_h200_us": 6.72,
+    "sglang_h100_us": 13.376,
+    "factor_h200_h100": 0.5024
+   },
+   {
+    "shape": "verify 1 | layer pooler, m 8",
+    "weight": 62,
+    "sglang_h200_us": 21.36,
+    "sglang_h100_us": 47.904,
+    "factor_h200_h100": 0.4459
+   },
+   {
+    "shape": "verify 1 | layer unpooler, m 8",
+    "weight": 62,
+    "sglang_h200_us": 7.12,
+    "sglang_h100_us": 10.8,
+    "factor_h200_h100": 0.6593
+   },
+   {
+    "shape": "verify 1 | layer router, m 8",
+    "weight": 62,
+    "sglang_h200_us": 26.272,
+    "sglang_h100_us": 27.232,
+    "factor_h200_h100": 0.9647
+   },
+   {
+    "shape": "verify 16 | layer qkv_gate, m 128",
+    "weight": 62,
+    "sglang_h200_us": 16.864,
+    "sglang_h100_us": 32.032,
+    "factor_h200_h100": 0.5265
+   },
+   {
+    "shape": "verify 16 | layer o, m 128",
+    "weight": 62,
+    "sglang_h200_us": 7.584,
+    "sglang_h100_us": 13.76,
+    "factor_h200_h100": 0.5512
+   },
+   {
+    "shape": "verify 16 | layer pooler, m 128",
+    "weight": 62,
+    "sglang_h200_us": 25.104,
+    "sglang_h100_us": 48.272,
+    "factor_h200_h100": 0.5201
+   },
+   {
+    "shape": "verify 16 | layer unpooler, m 128",
+    "weight": 62,
+    "sglang_h200_us": 19.728,
+    "sglang_h100_us": 46.944,
+    "factor_h200_h100": 0.4202
+   },
+   {
+    "shape": "verify 16 | layer router, m 128",
+    "weight": 62,
+    "sglang_h200_us": 16.528,
+    "sglang_h100_us": 20.16,
+    "factor_h200_h100": 0.8198
+   },
+   {
+    "shape": "verify 32 | layer qkv_gate, m 256",
+    "weight": 62,
+    "sglang_h200_us": 19.712,
+    "sglang_h100_us": 29.824,
+    "factor_h200_h100": 0.6609
+   },
+   {
+    "shape": "verify 32 | layer o, m 256",
+    "weight": 62,
+    "sglang_h200_us": 9.408,
+    "sglang_h100_us": 14.912,
+    "factor_h200_h100": 0.6309
+   },
+   {
+    "shape": "verify 32 | layer pooler, m 256",
+    "weight": 62,
+    "sglang_h200_us": 30.272,
+    "sglang_h100_us": 50.96,
+    "factor_h200_h100": 0.594
+   },
+   {
+    "shape": "verify 32 | layer unpooler, m 256",
+    "weight": 62,
+    "sglang_h200_us": 24.32,
+    "sglang_h100_us": 51.184,
+    "factor_h200_h100": 0.4751
+   },
+   {
+    "shape": "verify 32 | layer router, m 256",
+    "weight": 62,
+    "sglang_h200_us": 17.376,
+    "sglang_h100_us": 22.464,
+    "factor_h200_h100": 0.7735
+   }
+  ]
+ },
+ "muse_attention_decode": {
+  "okc_job": "c7c531d66d5544b1",
+  "bench_run": "evidence/bench/calibration-muse_attention_decode.json",
+  "judge_gpu": "H200",
+  "bench_gpu": "NVIDIA H100",
+  "bench_driver": "595.91.07",
+  "matched_shapes": "12/12",
+  "factor_geomean": 0.7896,
+  "factor_min": 0.7139,
+  "factor_max": 0.8784,
+  "speedup_okc_baseline": 0.9942686322104736,
+  "speedup_bench_baseline": 0.9993658807641175,
+  "shapes": [
+   {
+    "shape": "decode 1 | batch 1, ctx 80000, dist soft, heads tp8, layer sliding, page 1",
+    "weight": 46,
+    "sglang_h200_us": 20.448,
+    "sglang_h100_us": 24.0,
+    "factor_h200_h100": 0.852
+   },
+   {
+    "shape": "decode 1 | batch 1, ctx 80000, dist coherent, heads tp8, layer full, page 1",
+    "weight": 16,
+    "sglang_h200_us": 31.52,
+    "sglang_h100_us": 39.728,
+    "factor_h200_h100": 0.7934
+   },
+   {
+    "shape": "decode 16 | batch 16, ctx 80000, dist soft, heads tp8, layer sliding, page 1, spread agentic",
+    "weight": 46,
+    "sglang_h200_us": 26.64,
+    "sglang_h100_us": 32.064,
+    "factor_h200_h100": 0.8308
+   },
+   {
+    "shape": "decode 16 | batch 16, ctx 80000, dist coherent, heads tp8, layer full, page 1, spread agentic",
+    "weight": 16,
+    "sglang_h200_us": 200.704,
+    "sglang_h100_us": 277.552,
+    "factor_h200_h100": 0.7231
+   },
+   {
+    "shape": "decode 32 | batch 32, ctx 80000, dist soft, heads tp8, layer sliding, page 1, spread agentic",
+    "weight": 46,
+    "sglang_h200_us": 31.056,
+    "sglang_h100_us": 39.12,
+    "factor_h200_h100": 0.7939
+   },
+   {
+    "shape": "decode 32 | batch 32, ctx 80000, dist coherent, heads tp8, layer full, page 1, spread agentic",
+    "weight": 16,
+    "sglang_h200_us": 384.608,
+    "sglang_h100_us": 537.168,
+    "factor_h200_h100": 0.716
+   },
+   {
+    "shape": "verify 1 | batch 1, ctx 80000, dist soft, heads tp8, layer sliding, page 1, q_len 8",
+    "weight": 46,
+    "sglang_h200_us": 22.656,
+    "sglang_h100_us": 25.792,
+    "factor_h200_h100": 0.8784
+   },
+   {
+    "shape": "verify 1 | batch 1, ctx 80000, dist coherent, heads tp8, layer full, page 1, q_len 8",
+    "weight": 16,
+    "sglang_h200_us": 36.272,
+    "sglang_h100_us": 44.864,
+    "factor_h200_h100": 0.8085
+   },
+   {
+    "shape": "verify 16 | batch 16, ctx 80000, dist soft, heads tp8, layer sliding, page 1, q_len 8, spread agentic",
+    "weight": 46,
+    "sglang_h200_us": 29.392,
+    "sglang_h100_us": 34.256,
+    "factor_h200_h100": 0.858
+   },
+   {
+    "shape": "verify 16 | batch 16, ctx 80000, dist coherent, heads tp8, layer full, page 1, q_len 8, spread agentic",
+    "weight": 16,
+    "sglang_h200_us": 205.536,
+    "sglang_h100_us": 282.768,
+    "factor_h200_h100": 0.7269
+   },
+   {
+    "shape": "verify 32 | batch 32, ctx 80000, dist soft, heads tp8, layer sliding, page 1, q_len 8, spread agentic",
+    "weight": 46,
+    "sglang_h200_us": 34.32,
+    "sglang_h100_us": 42.624,
+    "factor_h200_h100": 0.8052
+   },
+   {
+    "shape": "verify 32 | batch 32, ctx 80000, dist coherent, heads tp8, layer full, page 1, q_len 8, spread agentic",
+    "weight": 16,
+    "sglang_h200_us": 389.472,
+    "sglang_h100_us": 545.52,
+    "factor_h200_h100": 0.7139
+   }
+  ]
+ },
+ "muse_moe_w4a16": {
+  "okc_job": "7dfc8fcd610540a8",
+  "bench_run": "evidence/bench/calibration-muse_moe_w4a16.json",
+  "judge_gpu": "H200",
+  "bench_gpu": "NVIDIA H100",
+  "bench_driver": "595.91.07",
+  "matched_shapes": "6/6",
+  "factor_geomean": 0.7269,
+  "factor_min": 0.566,
+  "factor_max": 0.969,
+  "speedup_okc_baseline": 0.9996511217804384,
+  "speedup_bench_baseline": 0.9982366399197491,
+  "shapes": [
+   {
+    "shape": "decode 1 | bs 1, sharding ep8",
+    "weight": 60,
+    "sglang_h200_us": 78.8,
+    "sglang_h100_us": 99.472,
+    "factor_h200_h100": 0.7922
+   },
+   {
+    "shape": "decode 16 | bs 16, sharding ep8",
+    "weight": 60,
+    "sglang_h200_us": 184.88,
+    "sglang_h100_us": 302.8,
+    "factor_h200_h100": 0.6106
+   },
+   {
+    "shape": "decode 32 | bs 32, sharding ep8",
+    "weight": 60,
+    "sglang_h200_us": 203.616,
+    "sglang_h100_us": 359.776,
+    "factor_h200_h100": 0.566
+   },
+   {
+    "shape": "verify 1 | bs 8, sharding ep8",
+    "weight": 60,
+    "sglang_h200_us": 147.6,
+    "sglang_h100_us": 239.76,
+    "factor_h200_h100": 0.6156
+   },
+   {
+    "shape": "verify 16 | bs 128, sharding ep8",
+    "weight": 60,
+    "sglang_h200_us": 459.712,
+    "sglang_h100_us": 509.056,
+    "factor_h200_h100": 0.9031
+   },
+   {
+    "shape": "verify 32 | bs 256, sharding ep8",
+    "weight": 60,
+    "sglang_h200_us": 614.432,
+    "sglang_h100_us": 634.096,
+    "factor_h200_h100": 0.969
+   }
+  ]
+ },
+ "muse_decode_layer": {
+  "okc_job": "b201e9d9afa74aba",
+  "bench_run": "evidence/bench/calibration-muse_decode_layer.json",
+  "judge_gpu": "H200",
+  "bench_gpu": "NVIDIA H100",
+  "bench_driver": "595.91.07",
+  "matched_shapes": "12/12",
+  "factor_geomean": 0.6974,
+  "factor_min": 0.5946,
+  "factor_max": 0.8973,
+  "speedup_okc_baseline": 1.0005921256494525,
+  "speedup_bench_baseline": 0.9999717687504259,
+  "shapes": [
+   {
+    "shape": "decode 1 | batch 1, ctx 80000, dist soft, layer sliding, page 1",
+    "weight": 46,
+    "sglang_h200_us": 173.456,
+    "sglang_h100_us": 255.792,
+    "factor_h200_h100": 0.6781
+   },
+   {
+    "shape": "decode 1 | batch 1, ctx 80000, dist soft, layer full, page 1",
+    "weight": 16,
+    "sglang_h200_us": 180.128,
+    "sglang_h100_us": 283.504,
+    "factor_h200_h100": 0.6354
+   },
+   {
+    "shape": "decode 16 | batch 16, ctx 80000, dist soft, layer sliding, page 1, spread agentic",
+    "weight": 46,
+    "sglang_h200_us": 257.344,
+    "sglang_h100_us": 402.224,
+    "factor_h200_h100": 0.6398
+   },
+   {
+    "shape": "decode 16 | batch 16, ctx 80000, dist soft, layer full, page 1, spread agentic",
+    "weight": 16,
+    "sglang_h200_us": 430.928,
+    "sglang_h100_us": 681.264,
+    "factor_h200_h100": 0.6325
+   },
+   {
+    "shape": "decode 32 | batch 32, ctx 80000, dist soft, layer sliding, page 1, spread agentic",
+    "weight": 46,
+    "sglang_h200_us": 259.92,
+    "sglang_h100_us": 437.152,
+    "factor_h200_h100": 0.5946
+   },
+   {
+    "shape": "decode 32 | batch 32, ctx 80000, dist soft, layer full, page 1, spread agentic",
+    "weight": 16,
+    "sglang_h200_us": 609.056,
+    "sglang_h100_us": 937.072,
+    "factor_h200_h100": 0.65
+   },
+   {
+    "shape": "verify 1 | batch 1, ctx 80000, dist soft, layer sliding, page 1, q_len 8",
+    "weight": 46,
+    "sglang_h200_us": 251.84,
+    "sglang_h100_us": 375.824,
+    "factor_h200_h100": 0.6701
+   },
+   {
+    "shape": "verify 1 | batch 1, ctx 80000, dist soft, layer full, page 1, q_len 8",
+    "weight": 16,
+    "sglang_h200_us": 272.208,
+    "sglang_h100_us": 425.088,
+    "factor_h200_h100": 0.6404
+   },
+   {
+    "shape": "verify 16 | batch 16, ctx 80000, dist soft, layer sliding, page 1, q_len 8, spread agentic",
+    "weight": 46,
+    "sglang_h200_us": 547.152,
+    "sglang_h100_us": 660.928,
+    "factor_h200_h100": 0.8279
+   },
+   {
+    "shape": "verify 16 | batch 16, ctx 80000, dist soft, layer full, page 1, q_len 8, spread agentic",
+    "weight": 16,
+    "sglang_h200_us": 717.792,
+    "sglang_h100_us": 942.848,
+    "factor_h200_h100": 0.7613
+   },
+   {
+    "shape": "verify 32 | batch 32, ctx 80000, dist soft, layer sliding, page 1, q_len 8, spread agentic",
+    "weight": 46,
+    "sglang_h200_us": 746.064,
+    "sglang_h100_us": 831.424,
+    "factor_h200_h100": 0.8973
+   },
+   {
+    "shape": "verify 32 | batch 32, ctx 80000, dist soft, layer full, page 1, q_len 8, spread agentic",
+    "weight": 16,
+    "sglang_h200_us": 1067.376,
+    "sglang_h100_us": 1317.728,
+    "factor_h200_h100": 0.81
+   }
+  ]
+ },
+ "muse_prefill_layer": {
+  "okc_job": "dd5af742ac9144fe",
+  "bench_run": "evidence/bench/calibration-muse_prefill_layer.json",
+  "judge_gpu": "H200",
+  "bench_gpu": "NVIDIA H100",
+  "bench_driver": "595.91.07",
+  "matched_shapes": "8/8",
+  "factor_geomean": 0.7852,
+  "factor_min": 0.6266,
+  "factor_max": 1.0069,
+  "speedup_okc_baseline": 1.0023384123275576,
+  "speedup_bench_baseline": 1.0009722837533002,
+  "shapes": [
+   {
+    "shape": "turn 1 | batch 1, ctx 80000, dist soft, layer sliding, page 1, q_len 753",
+    "weight": 46,
+    "sglang_h200_us": 1072.736,
+    "sglang_h100_us": 1065.408,
+    "factor_h200_h100": 1.0069
+   },
+   {
+    "shape": "turn 1 | batch 1, ctx 80000, dist soft, layer full, page 1, q_len 753",
+    "weight": 16,
+    "sglang_h200_us": 1470.128,
+    "sglang_h100_us": 1508.224,
+    "factor_h200_h100": 0.9747
+   },
+   {
+    "shape": "turn 4 | batch 4, ctx 80000, dist soft, layer sliding, page 1, q_len 753",
+    "weight": 46,
+    "sglang_h200_us": 3367.296,
+    "sglang_h100_us": 4015.776,
+    "factor_h200_h100": 0.8385
+   },
+   {
+    "shape": "turn 4 | batch 4, ctx 80000, dist soft, layer full, page 1, q_len 753",
+    "weight": 16,
+    "sglang_h200_us": 5030.352,
+    "sglang_h100_us": 5612.096,
+    "factor_h200_h100": 0.8963
+   },
+   {
+    "shape": "first turn | batch 1, ctx 0, dist soft, layer full, page 1, q_len 16384",
+    "weight": 16,
+    "sglang_h200_us": 18074.897,
+    "sglang_h100_us": 26076.704,
+    "factor_h200_h100": 0.6931
+   },
+   {
+    "shape": "first turn | batch 1, ctx 32768, dist soft, layer sliding, page 1, q_len 16384",
+    "weight": 138,
+    "sglang_h200_us": 17122.816,
+    "sglang_h100_us": 27327.072,
+    "factor_h200_h100": 0.6266
+   },
+   {
+    "shape": "first turn | batch 1, ctx 32768, dist soft, layer full, page 1, q_len 16384",
+    "weight": 16,
+    "sglang_h200_us": 21306.785,
+    "sglang_h100_us": 31716.832,
+    "factor_h200_h100": 0.6718
+   },
+   {
+    "shape": "first turn | batch 1, ctx 65536, dist soft, layer full, page 1, q_len 16384",
+    "weight": 16,
+    "sglang_h200_us": 24939.248,
+    "sglang_h100_us": 37153.824,
+    "factor_h200_h100": 0.6712
+   }
+  ]
+ }
+}

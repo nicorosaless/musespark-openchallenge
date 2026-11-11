@@ -1,0 +1,86 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261026-060406-muse_decode_layer-484afc/problem",
+  "submission": "‹scratch›/okc/bench/running/20261026-060406-muse_decode_layer-484afc/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261026-060406-muse_decode_layer-484afc/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": 4,
+  "copies": 16,
+  "filter": "verify 1 | batch 1, ctx 80000, layer sliding",
+  "no_profile": true,
+  "keep_going": false
+ },
+ "start": "2026-10-26T06:04:15+0100",
+ "submission_sha256": "f9ea2531cf271541b35e8160ed3a85d5271c5e6592e1a6b5d1832dcb2a93a808",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_decode_layer",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 6.26,
+  "base": 0.02
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 29.1,
+ "within_limit": true,
+ "graph_overhead_us": 3.807999659329653,
+ "shapes": [
+  {
+   "load": "verify 1",
+   "shape": "batch 1, ctx 80000, layer sliding, page 1, q_len 8, dist soft",
+   "weight": 46,
+   "floor_us": 62.3,
+   "base_us": 372.49600095674396,
+   "sub_us": 267.1371236425951,
+   "speedup": 1.394399984088731,
+   "reps": 4,
+   "copies": 16,
+   "ratio_iqr": 0.07246134353168032,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 5.412e-02 (worst row 7.297e-02) [bound 0.139]; attention input relative L2 error 3.422e-02 (worst row 4.750e-02) [bound 0.088]"
+  }
+ ],
+ "speedup": 1.394399984088731,
+ "ci95": [
+  1.3280335900345506,
+  1.4322929881329987
+ ],
+ "loads": [
+  {
+   "load": "verify 1",
+   "base_us": 17134.816044010222,
+   "sub_us": 12288.307687559374,
+   "speedup": 1.394399984088731
+  }
+ ],
+ "step_base_us": 17134.816044010237,
+ "step_sub_us": 12288.307687559385,
+ "timing_checks_ok": true,
+ "complete": false,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 32,
+  "job": "48052615",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261026-060406-muse_decode_layer-484afc",
+  "problem": "muse_decode_layer",
+  "submission": "‹tmp›/okc-dl/v19.py",
+  "cwd": "‹local›",
+  "git": "95f6b13ab4302b68ba21367913e36c53f1418b88",
+  "submitted": "2026-10-26T05:04:06.628636+00:00",
+  "ncu": null
+ }
+}

@@ -1,0 +1,21 @@
+problem,change,bench_pct,h200_pct,metric,bench_run,h200_check
+muse_decode_layer,MoE v41 wgmma in the layer,-2.6,2.1,"layer score v37->v39: bench x1.217->x1.250, H200 1.6687->1.6339",eaaba8,2e7740f375e94834
+muse_decode_layer,c1 BF16 at 16-32 tokens (v43),-3.9,6.3,"decode 32 sliding vs v41: bench -15 us, H200 +12 us (text); base = v41 time in bench run 6f05da (385.9 us) and check 81bc3caa (190.4 us)",6f05da,798dd6904eda4d3a
+muse_decode_layer,fused finish + qkv stream-K (v41),-0.5,-0.4,"layer score v37->v41: bench x1.217->x1.223, H200 1.6687->1.6761",6f05da,81bc3caa8f734921
+muse_decode_layer,per-weight cap + MoE PDL (v45),-0.7,-0.6,"layer score v41->v45: bench x1.223->x1.232, H200 1.6761->1.6854",048249,c511c9ea2f82421f
+muse_moe_w4a16,v41 wgmma GEMMs,-18.1,7.7,verify 32 (bs 256): bench v35->v41 643.2->526.7 us; H200 v24->v41 speedup 1.980->1.839,,afe582d7
+muse_moe_w4a16,v51 warp specialization,0.2,126.4,verify 32 (bs 256) gemm1 us: bench v35->v51 450->451 (tie); H200 v24->v51 197->446,b9a7ea,bb8909ba
+muse_moe_w4a16,v3 CUDA GEMMs,0.8,-20.2,"problem score v2.7->v3: bench x1.164->x1.155, H200 0.977->1.225",654f74,d580b17d037f4385
+muse_moe_w4a16,v4 software pipeline,-0.6,3.6,"problem score v3->v4: bench x1.155->x1.162, H200 1.225->1.183",,b9b31529226841c3
+muse_moe_w4a16,v2.3 -> v2.7 Triton,-44.0,-59.8,"decode 1 speedup: bench 0.868->1.549, H200 0.547->1.360",82307b,d84ce2e350eb48c1
+muse_moe_w4a16,"MoE PDL chain, bs 1",-4.1,-6.2,"bs 1 (2 experts) us: bench v24->PDL 52.64->50.50, H200 33.82->31.71",,af6d1b9c
+muse_attention_decode,CLW: whole rows per cluster,-29.1,18.3,"verify 16 full us: bench 387.2->274.6, H200 169.7->200.7",25a730,127933f5a4994ed6
+muse_attention_decode,PVA at 3 CTAs/SM,-1.4,12.7,"verify 32 full us: bench 772.9->762.3, H200 322.1->363.0",c6fa37,aaf0450b2f8e4573
+muse_attention_decode,PV in FP8 wgmma (PVA=2),1.5,45.4,"verify 16 full us: bench 387.2->393.0, H200 169.7->246.7",c96186,b58fb252
+muse_attention_decode,wgmma KVP 2 (head pairs),-31.2,12.8,"verify 16 full us: bench 387.1->266.3, H200 181.8->205.1",5effa2,ed6b781295f8468e
+muse_attention_decode,KVEARLY + EPIW,-9.4,2.6,"decode 1 sliding us: bench 10.2->9.24, H200 9.06->9.3",d606d2,22bb24e8
+muse_attention_decode,coalesced ws producer,-24.0,-37.2,"verify 16 full us: bench 342.9->260.7, H200 319.6->200.6 (ws H3 857b76c1 -> I)",6fdc95,ae516eeec0924305
+muse_attention_decode,"cl, one head per CTA",-12.5,-10.7,"decode 1 sliding us: bench 10.2->8.93, H200 9.06->8.09",8332a2,f31f6572
+muse_attention_decode,"combine, 128 splits per pass",-8.0,-12.3,"verify 1 full us: bench 28.94->26.62, H200 20.90->18.33 (H200 submit also carries the one-head-per-CTA change, flat on this shape in the bench)",9c2c7c,f31f6572
+muse_bf16_proj,c1 compressed GEMV (v7.4),-8.3,11.9,"score v3->v7.4: bench x1.076->x1.173 (decode shapes only), H200 1.207->1.079 (all 30 shapes)",9ac3e3,b5a1c1c79d8e4b3c
+muse_bf16_proj,o without split-K,-2.3,10.3,"o m=1 us vs cuBLAS: bench 12.61->12.32, H200 5.63->6.21",506cb2,955704a6096a4d0d

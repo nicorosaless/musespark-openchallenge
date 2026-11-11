@@ -1,0 +1,100 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261027-144327-muse_decode_layer-7a240c/problem",
+  "submission": "‹scratch›/okc/bench/running/20261027-144327-muse_decode_layer-7a240c/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261027-144327-muse_decode_layer-7a240c/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "decode 16",
+  "no_profile": true,
+  "keep_going": false
+ },
+ "start": "2026-10-27T14:43:34+0100",
+ "submission_sha256": "95c5b39b81085270d8a137a772f461a76b35cc40b512768ce5e5d4ea3bda3883",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_decode_layer",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 4.3,
+  "base": 0.1
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 26.0,
+ "within_limit": true,
+ "graph_overhead_us": 3.871999680995941,
+ "shapes": [
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, layer sliding, page 1, spread agentic, dist soft",
+   "weight": 46,
+   "floor_us": 76.7,
+   "base_us": 403.0560031533241,
+   "sub_us": 299.1812167554465,
+   "speedup": 1.347196884631918,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.04991696732037054,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 8.157e-03 (worst row 1.159e-02) [bound 0.132]; attention input relative L2 error 5.784e-03 (worst row 7.074e-03) [bound 0.083]"
+  },
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, layer full, page 1, spread agentic, dist soft",
+   "weight": 16,
+   "floor_us": 137.5,
+   "base_us": 681.6000118851662,
+   "sub_us": 552.4505198493822,
+   "speedup": 1.2337756729254137,
+   "reps": 60,
+   "copies": 5,
+   "ratio_iqr": 0.046269779041809844,
+   "check_ok": true,
+   "check_msg": "update relative L2 error 6.268e-02 (worst row 8.098e-02) [bound 0.150]; attention input relative L2 error 3.824e-02 (worst row 4.926e-02) [bound 0.096]"
+  }
+ ],
+ "speedup": 1.3028391316785297,
+ "ci95": [
+  1.2832965447033517,
+  1.3223817186537075
+ ],
+ "loads": [
+  {
+   "load": "decode 16",
+   "base_us": 29446.17633521557,
+   "sub_us": 22601.544288340654,
+   "speedup": 1.3028391316785297
+  }
+ ],
+ "step_base_us": 29446.17633521556,
+ "step_sub_us": 22601.544288340647,
+ "timing_checks_ok": true,
+ "complete": false,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 29,
+  "job": "48135808",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261027-144327-muse_decode_layer-7a240c",
+  "problem": "muse_decode_layer",
+  "submission": "‹tmp›/okc-dl/v31/submission.py",
+  "cwd": "‹local›",
+  "git": "102084a1f03cb706327a79418c8cdaf310563cbf",
+  "submitted": "2026-10-27T13:43:27.914004+00:00",
+  "ncu": null
+ }
+}

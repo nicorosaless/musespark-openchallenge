@@ -1,0 +1,71 @@
+okc run bb8909bad47746c1 on muse_moe_w4a16
+submission  ‹tmp›/okc-moe/chk_v51_ws/submission.py
+status      ok
+passed      true
+speedup     1.497322395797841
+speedup_ci  [1.4748625598608733 1.5197822317348084]
+score_us    8981.69962443795
+tests       5/5 passed
+
+scored shapes (µs; speed of light is the reference's bound)
+case                                                         sglang      yours  speedup        sol  
+bs=1 load=decode 1 sharding=ep8                               77.23      37.35   2.068x      11.42  
+bs=16 load=decode 16 sharding=ep8                            187.57     108.76   1.725x      52.52  
+bs=32 load=decode 32 sharding=ep8                            206.18     140.60   1.466x      70.76  
+bs=8 load=verify 1 sharding=ep8                              150.53      86.85   1.733x      37.32  
+bs=128 load=verify 16 sharding=ep8                           470.54     437.99   1.074x     101.34  
+bs=256 load=verify 32 sharding=ep8                           629.38     543.85   1.157x     108.94  
+
+profile 0: bs=1 load=decode 1 sharding=ep8
+kernel                                                           GPU time  share  calls
+moe_gemm1                                                         18.5 µs  48.0%      1
+moe_gemm2                                                         11.6 µs  29.9%      1
+_combine                                                           4.5 µs  11.8%      1
+_swiglu_reduce                                                     2.2 µs   5.8%      1
+_route_prep                                                        1.7 µs   4.5%      1
+total                                                             38.6 µs
+
+profile 1: bs=16 load=decode 16 sharding=ep8
+kernel                                                           GPU time  share  calls
+moe_gemm1                                                         54.7 µs  56.5%      1
+moe_gemm2                                                         32.7 µs  33.8%      1
+moe_route                                                          3.6 µs   3.7%      1
+_combine                                                           3.6 µs   3.7%      1
+_swiglu_reduce                                                     2.2 µs   2.3%      1
+total                                                             96.8 µs
+
+profile 2: bs=32 load=decode 32 sharding=ep8
+kernel                                                           GPU time  share  calls
+moe_gemm1                                                         81.0 µs  60.6%      1
+moe_gemm2                                                         42.4 µs  31.8%      1
+_combine                                                           3.9 µs   2.9%      1
+moe_route                                                          3.8 µs   2.9%      1
+_swiglu_reduce                                                     2.5 µs   1.9%      1
+total                                                            133.6 µs
+
+profile 3: bs=8 load=verify 1 sharding=ep8
+kernel                                                           GPU time  share  calls
+moe_gemm1                                                         38.9 µs  57.1%      1
+moe_gemm2                                                         20.9 µs  30.7%      1
+_combine                                                           3.6 µs   5.2%      1
+_route_prep                                                        2.9 µs   4.3%      1
+_swiglu_reduce                                                     1.8 µs   2.7%      1
+total                                                             68.1 µs
+
+profile 4: bs=128 load=verify 16 sharding=ep8
+kernel                                                           GPU time  share  calls
+moe_gemm1_ws                                                     323.9 µs  73.4%      1
+moe_gemm2_q                                                      108.1 µs  24.5%      1
+moe_route                                                          4.1 µs   0.9%      1
+_combine                                                           3.3 µs   0.8%      1
+_perm_x                                                            1.9 µs   0.4%      1
+total                                                            441.3 µs
+
+profile 5: bs=256 load=verify 32 sharding=ep8
+kernel                                                           GPU time  share  calls
+moe_gemm1_ws                                                     446.1 µs  72.6%      1
+moe_gemm2_q                                                      157.3 µs  25.6%      1
+moe_route                                                          4.6 µs   0.8%      1
+_combine                                                           4.4 µs   0.7%      1
+_perm_x                                                            2.4 µs   0.4%      1
+total                                                            614.9 µs

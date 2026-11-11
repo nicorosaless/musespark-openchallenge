@@ -1,0 +1,108 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-143804-muse_attention_decode-67d49d/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-143804-muse_attention_decode-67d49d/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-143804-muse_attention_decode-67d49d/result.json",
+  "no_tests": true,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "layer full, page 1, spread agentic",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-25T14:38:11+0100",
+ "submission_sha256": "c95a371bad11cc02873eda8aec566b2b47a55cb5f507d32a31364394e2b423a2",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_attention_decode",
+ "limit_s": 900,
+ "prepare_s": {
+  "sub": 0.0,
+  "base": 0.0
+ },
+ "tests": [],
+ "tests_ok": true,
+ "duration_s": 19.7,
+ "within_limit": true,
+ "graph_overhead_us": 3.7759998813271523,
+ "shapes": [
+  {
+   "load": "decode 16",
+   "shape": "batch 16, ctx 80000, heads tp8, layer full, page 1, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 63.2,
+   "base_us": 280.6080123409629,
+   "sub_us": 283.503361517501,
+   "speedup": 0.9897872492197615,
+   "reps": 60,
+   "copies": 6,
+   "ratio_iqr": 0.016269381938500027,
+   "check_ok": true,
+   "check_msg": "relative L2 error 4.241e-02 (worst row 5.933e-02) [bound 0.121: 2.5 x the reference's 0.042 with FP8 E4M3 queries + 0.015]",
+   "profile": "   281.12 µs/rep  98.5%  x1   _attn_kernel\n     4.28 µs/rep   1.5%  x1   _combine_kernel"
+  },
+  {
+   "load": "decode 32",
+   "shape": "batch 32, ctx 80000, heads tp8, layer full, page 1, spread agentic, dist coherent",
+   "weight": 16,
+   "floor_us": 126.4,
+   "base_us": 539.1039988026023,
+   "sub_us": 544.8251684360615,
+   "speedup": 0.9894990724274321,
+   "reps": 60,
+   "copies": 3,
+   "ratio_iqr": 0.016984759665343963,
+   "check_ok": true,
+   "check_msg": "relative L2 error 4.105e-02 (worst row 5.908e-02) [bound 0.118: 2.5 x the reference's 0.041 with FP8 E4M3 queries + 0.015]",
+   "profile": "   539.72 µs/rep  99.3%  x1   _attn_kernel\n     3.78 µs/rep   0.7%  x1   _combine_kernel"
+  }
+ ],
+ "speedup": 0.989643150334227,
+ "ci95": [
+  0.9747985030792136,
+  1.0044877975892403
+ ],
+ "loads": [
+  {
+   "load": "decode 16",
+   "base_us": 4489.728197455406,
+   "sub_us": 4536.053784280016,
+   "speedup": 0.9897872492197615
+  },
+  {
+   "load": "decode 32",
+   "base_us": 8625.663980841637,
+   "sub_us": 8717.202694976984,
+   "speedup": 0.9894990724274321
+  }
+ ],
+ "step_base_us": 6223.093024900089,
+ "step_sub_us": 6288.219165462214,
+ "timing_checks_ok": true,
+ "complete": false,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 22,
+  "job": "48012040",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261025-143804-muse_attention_decode-67d49d",
+  "problem": "muse_attention_decode",
+  "submission": "muse_attention_decode/variantes/bis/5154d1f.py",
+  "cwd": "‹local›",
+  "git": "99e9a37cf9963ff7702431db7e0180048d131420",
+  "submitted": "2026-10-25T13:38:04.174457+00:00",
+  "ncu": null
+ }
+}

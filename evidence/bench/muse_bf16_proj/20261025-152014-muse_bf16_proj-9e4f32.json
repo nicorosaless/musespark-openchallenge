@@ -1,0 +1,202 @@
+{
+ "judge_version": 1,
+ "arguments": {
+  "problem": "‹scratch›/okc/bench/running/20261025-152014-muse_bf16_proj-9e4f32/problem",
+  "submission": "‹scratch›/okc/bench/running/20261025-152014-muse_bf16_proj-9e4f32/submission.py",
+  "baseline": null,
+  "output": "‹scratch›/okc/bench/running/20261025-152014-muse_bf16_proj-9e4f32/result.json",
+  "no_tests": false,
+  "no_timing": false,
+  "reps": null,
+  "copies": 16,
+  "filter": "verify 32",
+  "no_profile": false,
+  "keep_going": false
+ },
+ "start": "2026-10-25T15:20:50+0100",
+ "submission_sha256": "88ca292297b4f820da66dd0a3b4d55477ac6edc59e48538774b056171e21068c",
+ "environment": {
+  "host": "‹node›",
+  "gpu": "NVIDIA H100",
+  "torch": "2.14.1+cu130",
+  "cuda": "13.0",
+  "driver": "595.91.07",
+  "python": "3.12.3"
+ },
+ "problem": "muse_bf16_proj",
+ "limit_s": 600,
+ "prepare_s": {
+  "sub": 3.88,
+  "base": 0.0
+ },
+ "tests": [
+  {
+   "shape": "m 1, layer qkv_gate",
+   "ok": true,
+   "msg": "relative L2 error 8.063e-05 (worst row 8.063e-05)",
+   "s": 0.23
+  },
+  {
+   "shape": "m 7, layer pooler",
+   "ok": true,
+   "msg": "relative L2 error 9.779e-05 (worst row 1.515e-04)",
+   "s": 0.03
+  },
+  {
+   "shape": "m 33, layer o",
+   "ok": true,
+   "msg": "relative L2 error 4.373e-05 (worst row 1.765e-04); 7 probe rows exact to 0.0e+00",
+   "s": 0.03
+  },
+  {
+   "shape": "m 130, layer unpooler",
+   "ok": true,
+   "msg": "relative L2 error 1.467e-04 (worst row 3.984e-04); 11 probe rows exact to 0.0e+00",
+   "s": 0.0
+  },
+  {
+   "shape": "m 5, layer unpooler",
+   "ok": true,
+   "msg": "relative L2 error 1.232e-04 (worst row 2.381e-04); 1 probe rows exact to 0.0e+00",
+   "s": 0.0
+  },
+  {
+   "shape": "m 8, layer router",
+   "ok": true,
+   "msg": "relative L2 error 1.687e-05 (worst row 3.039e-05); 2 probe rows exact to 2.7e-06",
+   "s": 0.0
+  },
+  {
+   "shape": "m 9, layer router, dist outliers",
+   "ok": true,
+   "msg": "relative L2 error 3.812e-06 (worst row 6.258e-06); 3 probe rows exact to 2.6e-06",
+   "s": 0.01
+  },
+  {
+   "shape": "m 512, layer qkv_gate, dist outliers",
+   "ok": true,
+   "msg": "relative L2 error 2.235e-04 (worst row 5.298e-04); 55 probe rows exact to 0.0e+00",
+   "s": 0.0
+  },
+  {
+   "shape": "m 1000, layer unpooler, dist outliers",
+   "ok": true,
+   "msg": "relative L2 error 1.562e-04 (worst row 4.752e-04); 106 probe rows exact to 0.0e+00",
+   "s": 0.0
+  }
+ ],
+ "tests_ok": true,
+ "duration_s": 19.3,
+ "within_limit": true,
+ "graph_overhead_us": 3.9679999463260174,
+ "shapes": [
+  {
+   "load": "verify 32",
+   "shape": "m 256, layer qkv_gate",
+   "weight": 62,
+   "floor_us": 9.8,
+   "base_us": 29.808000195771456,
+   "sub_us": 29.727602535705692,
+   "speedup": 1.0027044784378154,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.013187760309637753,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.125e-04 (worst row 6.171e-04); 37 probe rows exact to 0.0e+00",
+   "profile": "    29.96 µs/rep 100.0%  x1   nvjet_sm90_tst_96x64_64x10_2x4_h_bz_TNN"
+  },
+  {
+   "load": "verify 32",
+   "shape": "m 256, layer o",
+   "weight": 62,
+   "floor_us": 4.5,
+   "base_us": 14.976000878959894,
+   "sub_us": 15.007932895275607,
+   "speedup": 0.9978723241542635,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.015569676550817979,
+   "check_ok": true,
+   "check_msg": "relative L2 error 6.162e-05 (worst row 2.092e-04); 34 probe rows exact to 0.0e+00",
+   "profile": "    14.53 µs/rep 100.0%  x1   nvjet_sm90_tst_128x128_64x6_2x1_v_bz_TNT"
+  },
+  {
+   "load": "verify 32",
+   "shape": "m 256, layer pooler",
+   "weight": 62,
+   "floor_us": 17.4,
+   "base_us": 52.32000024989247,
+   "sub_us": 50.69057696485088,
+   "speedup": 1.032144500666691,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.030806558315904065,
+   "check_ok": true,
+   "check_msg": "relative L2 error 2.150e-04 (worst row 5.020e-04); 37 probe rows exact to 0.0e+00",
+   "profile": "    50.37 µs/rep 100.0%  x1   nvjet_sm90_tst_128x64_64x8_1x2_h_bz_TNT"
+  },
+  {
+   "load": "verify 32",
+   "shape": "m 256, layer unpooler",
+   "weight": 62,
+   "floor_us": 17.4,
+   "base_us": 49.791999626904726,
+   "sub_us": 51.036819661357136,
+   "speedup": 0.9756093729446286,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.015709047438032697,
+   "check_ok": true,
+   "check_msg": "relative L2 error 1.462e-04 (worst row 3.029e-04); 34 probe rows exact to 0.0e+00",
+   "profile": "    50.70 µs/rep 100.0%  x1   nvjet_sm90_tst_128x128_64x6_2x1_v_bz_TNT"
+  },
+  {
+   "load": "verify 32",
+   "shape": "m 256, layer router",
+   "weight": 62,
+   "floor_us": 2.7,
+   "base_us": 22.431999910622835,
+   "sub_us": 13.88648202601837,
+   "speedup": 1.6153839301122614,
+   "reps": 60,
+   "copies": 16,
+   "ratio_iqr": 0.03719473138125573,
+   "check_ok": true,
+   "check_msg": "relative L2 error 1.910e-05 (worst row 1.075e-04); 37 probe rows exact to 2.8e-06",
+   "profile": "    13.28 µs/rep 100.0%  x1   _proj_kernel"
+  }
+ ],
+ "speedup": 1.0559938857917162,
+ "ci95": [
+  1.0401539775048405,
+  1.0718337940785918
+ ],
+ "loads": [
+  {
+   "load": "verify 32",
+   "base_us": 10498.336053453386,
+   "sub_us": 9941.663673158875,
+   "speedup": 1.0559938857917162
+  }
+ ],
+ "step_base_us": 10498.336053453382,
+ "step_sub_us": 9941.663673158871,
+ "timing_checks_ok": true,
+ "complete": false,
+ "status": "ok",
+ "worker_end": {
+  "rc": 0,
+  "s": 22,
+  "job": "48016569",
+  "node": "‹node›"
+ },
+ "meta": {
+  "id": "20261025-152014-muse_bf16_proj-9e4f32",
+  "problem": "muse_bf16_proj",
+  "submission": "‹tmp›/bf16v3/submission.py",
+  "cwd": "‹local›",
+  "git": "9ac952202fa73157873a6c59ece3c0a08cee18fd",
+  "submitted": "2026-10-25T14:20:14.527527+00:00",
+  "ncu": null
+ }
+}
